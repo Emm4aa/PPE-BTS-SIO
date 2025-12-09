@@ -16,6 +16,18 @@ create table proprietaire(
     primary key (id_p)
 );
 
+create table habitation(
+    ref_hab int(5) not null,
+    type_hab varchar(20) not null,
+    adr_hab varchar(120) not null,
+    cp_hab int(5) not null,
+    ville_hab varchar(50) not null,
+    tarif_hab_bas float(5) not null,
+    tarif_hab_moy float(5) not null,
+    tarif_hab_hau float(5) not null,
+    primary key (ref_hab)
+);
+
 create table contrat(
     id_p int(5) not null,
     ref_hab int(5) not null,
@@ -41,6 +53,12 @@ create table client(
     primary key (id_c)
 );
 
+create table region(
+    code_reg int(5) not null,
+    nom_reg varchar(50) not null,
+    primary key (code_reg)
+);
+
 create table reservation(
     id_c int(5) not null,
     ref_hab int(5) not null,
@@ -55,18 +73,6 @@ create table reservation(
     foreign key (id_c) references client(id_c),
     foreign key (ref_hab) references habitation(ref_hab),
     foreign key (code_reg) references region(code_reg)
-);
-
-create table habitation(
-    ref_hab int(5) not null,
-    type_hab varchar(20) not null,
-    adr_hab varchar(120) not null,
-    cp_hab int(5) not null,
-    ville_hab varchar(50) not null,
-    tarif_hab_bas float(5) not null,
-    tarif_hab_moy float(5) not null,
-    tarif_hab_hau float(5) not null,
-    primary key (ref_hab)
 );
 
 create table appartement(
@@ -92,11 +98,6 @@ create table image(
     foreign key (ref_hab) references habitation(ref_hab)
 );
 
-create table region(
-    code_reg int(5) not null,
-    nom_reg varchar(50) not null,
-    primary key (code_reg)
-);
 
 create table station(
     code_reg int(5) not null,
@@ -108,6 +109,7 @@ create table station(
 
 create table activite(
     num_sta int(5) not null,
+    num_acti int(5) not null,
     nom_acti varchar(50) not null,
     tarif_acti float(5) not null,
     primary key (num_sta,num_acti),
