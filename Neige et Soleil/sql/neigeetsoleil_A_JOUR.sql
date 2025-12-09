@@ -53,7 +53,7 @@ create table reservation(
     etat_res varchar(30) not null,
     primary key (ref_res),
     foreign key (id_c) references client(id_c),
-    foreign key (ref_hab) references habiation(ref_hab),
+    foreign key (ref_hab) references habitation(ref_hab),
     foreign key (code_reg) references region(code_reg)
 );
 
