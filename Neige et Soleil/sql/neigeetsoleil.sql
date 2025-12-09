@@ -3,7 +3,7 @@ create database neigeetsoleil;
 use neigeetsoleil;
 
 create table proprietaire(
-    id_p int(5) not null,
+    id_p int(5) not null auto_increment,
     nom_p varchar(20) not null,
     prenom_p varchar(20) not null,
     email_p varchar(70) not null,
@@ -17,7 +17,7 @@ create table proprietaire(
 );
 
 create table habitation(
-    ref_hab int(5) not null,
+    ref_hab int(5) not null auto_increment,
     type_hab varchar(20) not null,
     adr_hab varchar(120) not null,
     cp_hab int(5) not null,
@@ -31,7 +31,7 @@ create table habitation(
 create table contrat(
     id_p int(5) not null,
     ref_hab int(5) not null,
-    ref_c int(20) not null,
+    ref_c int(20) not null auto_increment,
     status_c varchar(30) not null,
     annee_c int(4) not null,
     primary key (ref_c),
@@ -40,7 +40,7 @@ create table contrat(
 );
 
 create table client(
-    id_c int(5) not null,
+    id_c int(5) not null auto_increment,
     nom_c varchar(25) not null,
     prenom_c varchar(25) not null,
     email_c varchar(70) not null,
@@ -63,7 +63,7 @@ create table reservation(
     id_c int(5) not null,
     ref_hab int(5) not null,
     code_reg int(5) not null,
-    ref_res int(5) not null,
+    ref_res int(5) not null auto_increment,
     date_res date not null,
     nb_perso int(2) not null,
     date_debut date not null,
@@ -92,7 +92,7 @@ create table maison(
 
 create table image(
     ref_hab int(5) not null,
-    ref_image int(5) not null,
+    ref_image int(5) not null auto_increment,
     url_image varchar(200) not null,
     primary key (ref_image),
     foreign key (ref_hab) references habitation(ref_hab)
@@ -101,7 +101,7 @@ create table image(
 
 create table station(
     code_reg int(5) not null,
-    num_sta int(5) not null,
+    num_sta int(5) not null auto_increment,
     nom_sta varchar(50) not null,
     primary key (num_sta),
     foreign key (code_reg) references region(code_reg)
@@ -109,7 +109,7 @@ create table station(
 
 create table activite(
     num_sta int(5) not null,
-    num_acti int(5) not null,
+    num_acti int(5) not null auto_increment,
     nom_acti varchar(50) not null,
     tarif_acti float(5) not null,
     primary key (num_sta,num_acti),
