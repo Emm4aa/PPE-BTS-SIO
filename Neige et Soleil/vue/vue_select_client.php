@@ -11,7 +11,9 @@
 		<td> Nom Client </td>
 		<td> Prénom Client </td>
 		<td> Email Contact </td> 
-		<td> Adresse Postale </td>
+		<td> Adresse </td>
+		<td> Code postal </td>
+		<td> Ville </td>
 		<td> Téléphone </td>
 		<?php 
 			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
@@ -23,18 +25,20 @@
 	if (isset($lesClients)){
 		foreach ($lesClients as $unClient) {
 			echo "<tr>"; 
-			echo "<td>".$unClient['idclient']."</td>";
-			echo "<td>".$unClient['nom']     ."</td>";
-			echo "<td>".$unClient['prenom']  ."</td>";
-			echo "<td>".$unClient['email']   ."</td>";
-			echo "<td>".$unClient['adresse'] ."</td>";
-			echo "<td>".$unClient['tel']     ."</td>"; 
+			echo "<td>".$unClient['id_c']."</td>";
+			echo "<td>".$unClient['nom_c']     ."</td>";
+			echo "<td>".$unClient['prenom_c']  ."</td>";
+			echo "<td>".$unClient['email_c']   ."</td>";
+			echo "<td>".$unClient['adr_c'] ."</td>";
+			echo "<td>".$unClient['cp_c'] ."</td>";
+			echo "<td>".$unClient['ville_c'] ."</td>";
+			echo "<td>".$unClient['tel_c']     ."</td>"; 
 			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 				echo "<td>"; 
-				echo "<a href='index.php?page=2&action=sup&idclient=".$unClient['idclient']."'>"; 
+				echo "<a href='index.php?page=2&action=sup&id_c=".$unClient['id_c']."'>"; 
 				echo "<img src='images/supprimer.png' width='30' height='30' > </a>";
 
-				echo "<a href='index.php?page=2&action=edit&idclient=".$unClient['idclient']."'>"; 
+				echo "<a href='index.php?page=2&action=edit&id_c=".$unClient['id_c']."'>"; 
 				echo "<img src='images/modifier.png' width='30' height='30' > </a>";
 
 				echo "</td>";

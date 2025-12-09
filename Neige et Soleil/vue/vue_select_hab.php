@@ -6,13 +6,15 @@
 
 <table border="1">
     <tr>
-        <th>ref</th>
-        <th>adresse</th>
-        <th>type_hab</th>
-        <th>tarif</th>
+        <th>Référence</th>
+        <th>Type d'habitation</th>
+        <th>Adresse</th>
+        <th>Code postal</th>
+        <th>Ville</th>
+        <th>Tarif + bas</th>
+        <th>Tarif moyen</th>
+        <th>Tarif + haut</th>
         <th>surface</th>
-        <th>id_proprio</th>
-        <th>Actions</th>
     </tr>
 
     <?php

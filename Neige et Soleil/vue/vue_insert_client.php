@@ -17,7 +17,7 @@
 		<tr>
 			<td> Email Contact</td>
 			<td><input type="text" name="email_c"
-		value="<?= ($leClient==null)? '':$leClient['email'] ?>" 
+		value="<?= ($leClient==null)? '':$leClient['email_c'] ?>" 
 				></td>
 		</tr>
 		<tr>

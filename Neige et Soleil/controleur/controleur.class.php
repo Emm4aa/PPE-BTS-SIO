@@ -21,18 +21,18 @@ class Controleur {
     return $this->unModele->selectLikeClient($filtre);
     }
 
-    public function deleteClient($id_client){
-        $this->unModele->deleteClient($id_client);
+    public function deleteClient($id_c){
+        $this->unModele->deleteClient($id_c);
     }
 
-    public function selectWhereClient($id_client){
-    return $this->unModele->selectWhereClient($id_client);
+    public function selectWhereClient($id_c){
+    return $this->unModele->selectWhereClient($id_c);
     }
 
      
 
-    public function updateClient($id_client) {
-        return $this->unModele->updateClient($id_client);
+    public function updateClient($id_c) {
+        return $this->unModele->updateClient($id_c);
     }
 
 
@@ -51,11 +51,11 @@ class Controleur {
             return $this->unModele->selectLikeProprietaire($filtre);
         }
 
-        public function deleteProprietaire($id_client){
-            $this->unModele->deleteProprietaire($id_client);
+        public function deleteProprietaire($id_p){
+            $this->unModele->deleteProprietaire($id_p);
         }
-        public function selectWhereIDProprietaire($id_client){
-            return $this->unModele->selectWhereIDProprietaire($id_client);
+        public function selectWhereIDProprietaire($id_p){
+            return $this->unModele->selectWhereIDProprietaire($id_p);
         }
         //public function selectWhereIDProprietaire($email, $mdp){
             //controler l'email et le mdp

@@ -23,18 +23,20 @@
 	if (isset($lesProprietaires)){
 		foreach ($lesProprietaires as $unProprietaire) {
 			echo "<tr>"; 
-			echo "<td>".$unProprietaire['idProprietaire']."</td>";
-			echo "<td>".$unProprietaire['nom']     ."</td>";
-			echo "<td>".$unProprietaire['prenom']  ."</td>";
-			echo "<td>".$unProprietaire['email']   ."</td>";
-			echo "<td>".$unProprietaire['adresse'] ."</td>";
+			echo "<td>".$unProprietaire['id_p']."</td>";
+			echo "<td>".$unProprietaire['nom_p']     ."</td>";
+			echo "<td>".$unProprietaire['prenom_p']  ."</td>";
+			echo "<td>".$unProprietaire['email_p']   ."</td>";
+			echo "<td>".$unProprietaire['adr_p'] ."</td>";
+			echo "<td>".$unProprietaire['cp_p'] ."</td>";
+			echo "<td>".$unProprietaire['ville_p'] ."</td>";
 			echo "<td>".$unProprietaire['tel']     ."</td>"; 
 			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 				echo "<td>"; 
-				echo "<a href='index.php?page=2&action=sup&idProprietaire=".$unProprietaire['idProprietaire']."'>"; 
+				echo "<a href='index.php?page=2&action=sup&id_p=".$unProprietaire['id_p']."'>"; 
 				echo "<img src='images/supprimer.png' width='30' height='30' > </a>";
 
-				echo "<a href='index.php?page=2&action=edit&idProprietaire=".$unProprietaire['idProprietaire']."'>"; 
+				echo "<a href='index.php?page=2&action=edit&id_p=".$unProprietaire['id_p']."'>"; 
 				echo "<img src='images/modifier.png' width='30' height='30' > </a>";
 
 				echo "</td>";

@@ -19,21 +19,21 @@
 if (isset($unereservation)){
     foreach ($unereservation as $unereservation){
         echo "<tr>";
-        echo "<td>".$unereservation['id_resa']."</td>";
-        echo "<td>".$unereservation['date_resa']."</td>";
-        echo "<td>".$unereservation['capacite']."</td>";
-        echo "<td>".$unereservation['date_deb']."</td>";
+        echo "<td>".$unereservation['ref_res']."</td>";
+        echo "<td>".$unereservation['date_res']."</td>";
+        echo "<td>".$unereservation['nb_perso']."</td>";
+        echo "<td>".$unereservation['date_debut']."</td>";
         echo "<td>".$unereservation['date_fin']."</td>";
-        echo "<td>".$unereservation['etat']."</td>";
+        echo "<td>".$unereservation['etat_res']."</td>";
         echo "<td>".$unereservation['id_client']."</td>";
         echo "<td>";
-        echo "<a href='index.php?page=2&action=sip&id_resa=".$unereservation['id_resa']."'>";
+        echo "<a href='index.php?page=2&action=sip&id_ref_resresa=".$unereservation['ref_res']."'>";
         echo "<img src='image/supprimer.png' width='30' height='30'> </a>";
 
-        echo "<a href='index.php?page=2&action=sup&id_resa=".$unereservation['id_resa']."'>";
+        echo "<a href='index.php?page=2&action=sup&ref_res=".$unereservation['ref_res']."'>";
         echo "<img src='image/supprimer.png' width='30' height='30'> </a>";
 
-        echo "<a href='index.php?page=2&action=edit&id_resa=".$unereservation['id_resa']."'>";
+        echo "<a href='index.php?page=2&action=edit&ref_res=".$unereservation['ref_res']."'>";
         echo "<img src='image/modifier.png' width='30' height='30'> </a>";
 
         echo "</td>";

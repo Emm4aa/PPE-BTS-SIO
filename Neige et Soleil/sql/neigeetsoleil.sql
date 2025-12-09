@@ -109,7 +109,7 @@ create table station(
 
 create table activite(
     num_sta int(5) not null,
-    num_acti int(5) not null auto_increment,
+    num_acti int(5) not null,
     nom_acti varchar(50) not null,
     tarif_acti float(5) not null,
     primary key (num_sta,num_acti),

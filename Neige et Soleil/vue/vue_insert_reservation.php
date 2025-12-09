@@ -8,16 +8,17 @@
 		</tr>
 		 
 		<tr>
-			<td> Date réservation</td>
-			<td><input type="date" name="dateres"></td>
+			<td> Date début de séjour</td>
+			<td><input type="date" name="date_debut"></td>
 		</tr>
 		<tr>
-			<td> Prix réservation</td>
-			<td><input type="float" name="prixres"></td>
+			<td> Date fin de séjour</td>
+			<td><input type="date" name="date_fin"></td>
 		</tr>
+		
 		<tr>
 			<td> Le Propriétaire </td>
-			<td><select name="id_proprio">
+			<td><select name="id_p">
 				<option value=""> Sélectionner un Propriétaire </option>
 				<?php
 

@@ -24,9 +24,9 @@ class Modele{
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereClient($id_client){
+    public function selectWhereClient($id_c){
         $requete = "SELECT * FROM client where id_c = :id_c;";
-        $data = array(":id_c"=>$id_client);
+        $data = array(":id_c"=>$id_c);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
@@ -43,10 +43,10 @@ class Modele{
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
-    public function deleteClient($id_client){
+    public function deleteClient($id_c){
         $requete = "DELETE FROM client where id_c = :id_c;";
         $exe = $this->unPdo->prepare($requete);
-        $data = array(":id_c"=>$id_client);
+        $data = array(":id_c"=>$id_c);
         $exe->execute($data);    
     }
     public function selectLikeClient($filtre){
@@ -67,9 +67,9 @@ class Modele{
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereProprietaire($id_proprio){
+    public function selectWhereProprietaire($id_p){
         $requete = "SELECT * FROM proprietaire where id_p = :id_p;";
-        $data = array(":id_p"=>$id_proprio);
+        $data = array(":id_p"=>$id_p);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
@@ -86,10 +86,10 @@ class Modele{
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
-    public function deleteProprietaire($id_proprio){
+    public function deleteProprietaire($id_p){
         $requete = "DELETE FROM proprietaire where id_p = :id_p;";
         $exe = $this->unPdo->prepare($requete);
-        $data = array(":id_p"=>$id_proprio);
+        $data = array(":id_p"=>$id_p);
         $exe->execute($data);    
     }
     public function selectLikeProprietaire($filtre){
@@ -109,7 +109,7 @@ class Modele{
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereHabitation($ref){
+    public function selectWhereHabitation($ref_hab){
         $requete = "SELECT * FROM habitation where ref_hab = :ref_hab;";
         $data = array(":ref_hab"=>$ref_hab);
         $exe = $this->unPdo->prepare($requete);
@@ -128,7 +128,7 @@ class Modele{
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
-    public function deleteHabitation($ref){
+    public function deleteHabitation($ref_hab){
         $requete = "DELETE FROM habitation where ref_hab = :ref_hab;";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":ref_hab"=>$ref_hab);
@@ -150,7 +150,7 @@ class Modele{
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereReservation($id_resa){
+    public function selectWhereReservation($ref_res){
         $requete = "SELECT * FROM reservation where ref_res = :ref_res;";
         $data = array(":ref_res"=>$ref_res);
         $exe = $this->unPdo->prepare($requete);
@@ -169,7 +169,7 @@ class Modele{
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
-    public function deleteReservation($id_resa){
+    public function deleteReservation($ref_res){
         $requete = "DELETE FROM reservation where ref_res = :ref_res;";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":ref_res"=>$ref_res);

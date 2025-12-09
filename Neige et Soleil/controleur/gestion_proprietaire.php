@@ -3,14 +3,14 @@
 <?php
 	if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 		$leProprietaire = null;
-		if(isset($_GET['action']) && isset($_GET['idProprietaire']))
+		if(isset($_GET['action']) && isset($_GET['id_p']))
 		{
 			$action = $_GET['action']; 
-			$idProprietaire = $_GET['idProprietaire'];
+			$id_p = $_GET['id_p'];
 
 			switch($action){
-				case "sup"  : $unControleur->deleteProprietaire($idProprietaire); break;
-				case "edit" : $leProprietaire = $unControleur->selectWhereProprietaire($idProprietaire);break;
+				case "sup"  : $unControleur->deleteProprietaire($id_p); break;
+				case "edit" : $leProprietaire = $unControleur->selectWhereProprietaire($id_p);break;
 			}
 		}
 

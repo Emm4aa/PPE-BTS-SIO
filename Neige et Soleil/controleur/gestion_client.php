@@ -3,14 +3,14 @@
 <?php
 	if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 		$leClient = null;
-		if(isset($_GET['action']) && isset($_GET['idclient']))
+		if(isset($_GET['action']) && isset($_GET['id_c']))
 		{
 			$action = $_GET['action']; 
-			$idclient = $_GET['idclient'];
+			$id_c = $_GET['id_c'];
 
 			switch($action){
-				case "sup"  : $unControleur->deleteClient($idclient); break;
-				case "edit" : $leClient = $unControleur->selectWhereClient($idclient);break;
+				case "sup"  : $unControleur->deleteClient($id_c); break;
+				case "edit" : $leClient = $unControleur->selectWhereClient($id_c);break;
 			}
 		}
 
