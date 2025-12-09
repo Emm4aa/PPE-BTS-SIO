@@ -23,7 +23,7 @@ create table contrat(
     status_c varchar(30) not null,
     annee_c int(4) not null,
     primary key (ref_c),
-    foreign key (id_p) references proprietaires(id_p),
+    foreign key (id_p) references proprietaire(id_p),
     foreign key (ref_hab) references habitation(ref_hab)
 );
 
