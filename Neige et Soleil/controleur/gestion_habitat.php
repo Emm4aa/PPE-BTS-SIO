@@ -2,6 +2,6 @@
 
 <?php
 
-$lesclients = $unControleur->selectAllClients();
+$lesclients = $unControleur->selectAllClient();
 	require_once ("vue_insert_hab.php");
 ?>

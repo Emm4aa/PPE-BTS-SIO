@@ -14,11 +14,11 @@ class Controleur {
         //appel du modele pour realiser l'insertion
         $this->unModele->insertClient($tab);
     }
-    public function selectAllClients(){
-        return $this->unModele->selectAllClients();
+    public function selectAllClient(){
+        return $this->unModele->selectAllClient();
     }
-    public function selectLikeClients($filtre){
-    return $this->unModele->selectLikeClients($filtre);
+    public function selectLikeClient($filtre){
+    return $this->unModele->selectLikeClient($filtre);
     }
 
     public function deleteClient($id_client){
@@ -36,33 +36,33 @@ class Controleur {
     }
 
 
-         public function insertProprio($tab){
+         public function insertProprietaire($tab){
             //contrôle des données des proprio
 
             //appel du modele pour realiser l'insertion
-            $this->unModele->insertProprio($tab);
+            $this->unModele->insertProprietaire($tab);
         }
 
-        public function selectAllProprio(){
-            return $this->unModele->selectAllProprio();
+        public function selectAllProprietaire(){
+            return $this->unModele->selectAllProprietaire();
         }
 
-        public function selectLikeProprio($filtre){
-            return $this->unModele->selectLikeProprio($filtre);
+        public function selectLikeProprietaire($filtre){
+            return $this->unModele->selectLikeProprietaire($filtre);
         }
 
-        public function deleteProprio($id_client){
-            $this->unModele->deleteProprio($id_client);
+        public function deleteProprietaire($id_client){
+            $this->unModele->deleteProprietaire($id_client);
         }
-        public function selectWhereIDProprio($id_client){
-            return $this->unModele->selectWhereIDProprio($id_client);
+        public function selectWhereIDProprietaire($id_client){
+            return $this->unModele->selectWhereIDProprietaire($id_client);
         }
-        //public function selectWhereIDProprio($email, $mdp){
+        //public function selectWhereIDProprietaire($email, $mdp){
             //controler l'email et le mdp
-           // return $this->unModele->selectWhereIDProprio($email, $mdp);
+           // return $this->unModele->selectWhereIDProprietaire($email, $mdp);
         //}
-        public function updateProprio($tab){
-            $this->unModele->updateProprio($tab);
+        public function updateProprietaire($tab){
+            $this->unModele->updateProprietaire($tab);
         }
 
 }

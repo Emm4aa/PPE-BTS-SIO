@@ -7,13 +7,13 @@
 <br>
 <table border="1">
     <tr>
-        <td id_resa </td>
-        <td date_resa </td>
-        <td capacite </td>
-        <td date_deb </td>
-        <td date_fin </td>
-        <td etat </td>
-        <td id_client </td>
+        <td> id_resa </td>
+        <td> date_resa </td>
+        <td> capacite </td>
+        <td> date_deb </td>
+        <td> date_fin </td>
+        <td> etat </td>
+        <td> id_client </td>
 </tr>
 <?php
 if (isset($unereservation)){

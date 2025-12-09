@@ -31,10 +31,10 @@
 
 	if (isset($_POST['Filtrer'])){
 		$filtre = $_POST['filtre']; 
-		$lesClients = $unControleur->selectLikeClients($filtre); 
+		$lesClients = $unControleur->selectLikeClient($filtre); 
 	} else {
-		$lesClients = $unControleur->selectAllClients(); 
+		$lesClients = $unControleur->selectAllClient(); 
 	}
 
-	require_once("vue/vue_select_clients.php");
+	require_once("vue/vue_select_client.php");
 ?>

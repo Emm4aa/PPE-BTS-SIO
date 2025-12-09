@@ -61,38 +61,38 @@ class Modele{
 
 
     //Propriétaires
-        public function selectAllProprio(){
+        public function selectAllProprietaire(){
         $requete = "SELECT * FROM proprietaire;";
         $exe = $this->unPdo->prepare($requete);
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereProprio($id_proprio){
+    public function selectWhereProprietaire($id_proprio){
         $requete = "SELECT * FROM proprietaire where id_p = :id_p;";
         $data = array(":id_p"=>$id_proprio);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
     }
-    public function insertProprio($tab){
+    public function insertProprietaire($tab){
         $requete = "INSERT into proprietaire values (null,:nom_p,:prenom_p,:email_p,null,:adr_p,:cp_p,:ville_p,:tel_p,:rib_p);";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":nom_p"=>$tab['nom_p'],":prenom_p"=>$tab['prenom_p'],":email_p"=>$tab['email_p'],":adr_p"=>$tab['adr_p'],":cp_p"=>$tab['cp_p'],":ville_p"=>$tab['ville_p'],":tel_p"=>$tab['tel_p'],":rib_p"=>$tab['rib_p']);
         $exe->execute($data);
     }
-    public function updateProprio($tab){
+    public function updateProprietaire($tab){
         $requete = "UPDATE proprietaire SET nom_p = :nom_p, prenom_p = :prenom_p, email_p = :email_p, mdp_p = :mdp_p, adr_p = :adr_p, cp_p = :cp_p, ville_p = :ville_p, tel_p = :tel_p, rib_p = :rib_p where id_p = :id_p;";
         $data = array(":nom_p"=>$tab['nom_p'],":prenom_p"=>$tab['prenom_p'],":email_p"=>$tab['email_p'],":mdp_p"=>$tab['mdp_p'],":adr_p"=>$tab['adr_p'],":cp_p"=>$tab['cp_p'],":ville_p"=>$tab['ville_p'],":tel_p"=>$tab['tel_p'],":rib_p"=>$tab['rib_p'],":id_p"=>$tab['id_p']);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
-    public function deleteProprio($id_proprio){
+    public function deleteProprietaire($id_proprio){
         $requete = "DELETE FROM proprietaire where id_p = :id_p;";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":id_p"=>$id_proprio);
         $exe->execute($data);    
     }
-    public function selectLikeProprio($filtre){
+    public function selectLikeProprietaire($filtre){
         $requete = "select * from proprietaire where nom_p like :filtre or prenom_p like :filtre or email_p like :filtre or tel_p like :filtre;";
         $data = array(":filtre"=>"%".$filtre."%");
         $exe = $this->unPdo->prepare($requete);
