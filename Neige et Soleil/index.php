@@ -65,10 +65,10 @@
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
     switch($page){
         case 1 : require_once ("controleur/home.php"); break;
-        case 2 : require_once ("controleur/gestion_clients.php"); break;
-        case 3 : require_once ("controleur/gestion_proprietaires.php"); break;
-        case 4 : require_once ("controleur/gestion_habitations.php"); break;
-        case 5 : require_once ("controleur/gestion_reservations.php"); break;
+        case 2 : require_once ("controleur/gestion_client.php"); break;
+        case 3 : require_once ("controleur/gestion_proprietaire.php"); break;
+        case 4 : require_once ("controleur/gestion_habitation.php"); break;
+        case 5 : require_once ("controleur/gestion_reservation.php"); break;
         case 6 : session_destroy(); unset($_SESSION['email']);
         //recharger la page index pour aller au formulaire
         header("Location: index.php");
