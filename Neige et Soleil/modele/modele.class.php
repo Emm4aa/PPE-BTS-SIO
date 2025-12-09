@@ -4,7 +4,7 @@ class Modele{
     private $unPdo;
 
     public function __construct(){
-        $url = "mysql:host=localhost;dbname=neigeSoleilTP";
+        $url = "mysql:host=localhost;dbname=neigeetsoleil";
         $user = "root";
         $mdp = "";
 
@@ -39,7 +39,7 @@ class Modele{
     }
     public function updateClient($tab){
         $requete = "UPDATE client SET nom_c = :nom_c, prenom_c = :prenom_c, email_c = :email_c, mdp_c = :mdp_c, adr_c = :adr_c, cp_c = :cp_c, ville_c = :ville_c mdp = :mdp, tel = :tel where id_c = :id_c ";
-        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":mdp_c"=>$tab['mdp_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'], ":ville_c"=>$tab['ville_c'], ":tel_c"=>$tab['tel_c'] ":rib_c"=>$tab['rib_c'], ":id_c"=>$tab['id_c']);
+        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":mdp_c"=>$tab['mdp_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'], ":ville_c"=>$tab['ville_c'], ":tel_c"=>$tab['tel_c'], ":rib_c"=>$tab['rib_c'], ":id_c"=>$tab['id_c']);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
