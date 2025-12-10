@@ -11,7 +11,9 @@
 		<td> Nom Proprietaire </td>
 		<td> Prénom Proprietaire </td>
 		<td> Email Contact </td> 
-		<td> Adresse Postale </td>
+		<td> Adresse </td>
+		<td> Code Postal </td>
+		<td> Ville </td>
 		<td> Téléphone </td>
 		<?php 
 			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
@@ -30,7 +32,7 @@
 			echo "<td>".$unProprietaire['adr_p'] ."</td>";
 			echo "<td>".$unProprietaire['cp_p'] ."</td>";
 			echo "<td>".$unProprietaire['ville_p'] ."</td>";
-			echo "<td>".$unProprietaire['tel']     ."</td>"; 
+			echo "<td>".$unProprietaire['tel_p']     ."</td>"; 
 			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 				echo "<td>"; 
 				echo "<a href='index.php?page=2&action=sup&id_p=".$unProprietaire['id_p']."'>"; 

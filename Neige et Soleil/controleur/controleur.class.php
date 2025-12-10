@@ -54,15 +54,43 @@ class Controleur {
         public function deleteProprietaire($id_p){
             $this->unModele->deleteProprietaire($id_p);
         }
-        public function selectWhereIDProprietaire($id_p){
-            return $this->unModele->selectWhereIDProprietaire($id_p);
+        public function selectWhereProprietaire($id_p){
+            return $this->unModele->selectWhereProprietaire($id_p);
         }
-        //public function selectWhereIDProprietaire($email, $mdp){
+        //public function selectWhereProprietaire($email, $mdp){
             //controler l'email et le mdp
-           // return $this->unModele->selectWhereIDProprietaire($email, $mdp);
+           // return $this->unModele->selectWhereProprietaire($email, $mdp);
         //}
         public function updateProprietaire($tab){
             $this->unModele->updateProprietaire($tab);
         }
+
+    //gestion des habitations
+    public function insertHabitation($tab){
+        //controle des donnees du clients
+
+        //appel du modele pour realiser l'insertion
+        $this->unModele->insertHabitation($tab);
+    }
+    public function selectAllHabitation(){
+        return $this->unModele->selectAllHabitation();
+    }
+    public function selectLikeHabitation($filtre){
+    return $this->unModele->selectLikeHabitation($filtre);
+    }
+
+    public function deleteHabitation($id_c){
+        $this->unModele->deleteHabitation($id_c);
+    }
+
+    public function selectWhereHabitation($id_c){
+    return $this->unModele->selectWhselectWhereHabitationereClient($id_c);
+    }
+
+     
+
+    public function updateHabitation($id_c) {
+        return $this->unModele->updateHabitation($id_c);
+    }
 
 }

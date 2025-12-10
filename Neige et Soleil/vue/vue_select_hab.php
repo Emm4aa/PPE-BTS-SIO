@@ -15,6 +15,11 @@
         <th>Tarif moyen</th>
         <th>Tarif + haut</th>
         <th>surface</th>
+        <?php 
+			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+				echo "<td> Opération </td>";
+			}
+		?>
     </tr>
 
     <?php
