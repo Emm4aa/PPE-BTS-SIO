@@ -56,7 +56,7 @@
     if (isset($_SESSION['email'])){
     echo'
     <h1> Neige et Soleil </h1>
-    <a href="index.php?page=1"> <img src="images/maison.png" width="90" height="70"></a>
+    <a href="index.php?page=1"> <img src="images/home.png" width="90" height="70"></a>
     <a href="index.php?page=2"> <img src="images/clients.png" width="70" height="70"></a>
     <a href="index.php?page=3"> <img src="images/proprietaire.png" width="70" height="70"></a>
     <a href="index.php?page=4"> <img src="images/habitation.png" width="70" height="70"></a>
