@@ -29,7 +29,7 @@ if(isset($_POST['Modifier'])){
 }
 
 if(isset($_POST['Filtrer'])){
-	$fimtre = $_POST['filtre'];
+	$filtre = $_POST['filtre'];
 	$lesHabitations = $unControleur->selectLikeHabitation($filtre);
 }else{
 	$lesHabitations = $unControleur->selectAllHabitation();

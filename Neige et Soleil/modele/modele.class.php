@@ -32,14 +32,14 @@ class Modele{
         return $exe->fetch();
     }
     public function insertClient($tab){
-        $requete = "INSERT into cliens values (null,:nom_c,:prenom_c,:email_c,null,:adr_c,:cp_c,:ville_c,:tel_c,:rib_c);";
+        $requete = "INSERT into cliens values (null,:nom_c,:prenom_c,:email_c,null,:adr_c,:cp_c,:ville_c,:tel_c,:rib_c,:role_c);";
         $exe = $this->unPdo->prepare($requete);
-        $data = array(":nom"=>$tab['nom'],":prenom"=>$tab['prenom'],":email_c"=>$tab['email_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'],":ville_c"=>$tab['ville_c'],":tel_c"=>$tab['tel_c'],":rib_c"=>$tab['rib_c']);
+        $data = array(":nom"=>$tab['nom'],":prenom"=>$tab['prenom'],":email_c"=>$tab['email_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'],":ville_c"=>$tab['ville_c'],":tel_c"=>$tab['tel_c'],":rib_c"=>$tab['rib_c'],":role_c"=>$tab['role_c']);
         $exe->execute($data);
     }
     public function updateClient($tab){
-        $requete = "UPDATE client SET nom_c = :nom_c, prenom_c = :prenom_c, email_c = :email_c, mdp_c = :mdp_c, adr_c = :adr_c, cp_c = :cp_c, ville_c = :ville_c mdp = :mdp, tel = :tel where id_c = :id_c ";
-        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":mdp_c"=>$tab['mdp_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'], ":ville_c"=>$tab['ville_c'], ":tel_c"=>$tab['tel_c'], ":rib_c"=>$tab['rib_c'], ":id_c"=>$tab['id_c']);
+        $requete = "UPDATE client SET nom_c = :nom_c, prenom_c = :prenom_c, email_c = :email_c, mdp_c = :mdp_c, adr_c = :adr_c, cp_c = :cp_c, ville_c = :ville_c, tel_p = :tel_p, rib_c = :rib_c, role_c = :role_c where id_c = :id_c ";
+        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":mdp_c"=>$tab['mdp_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'], ":ville_c"=>$tab['ville_c'], ":tel_c"=>$tab['tel_c'], ":rib_c"=>$tab['rib_c'], ":role_c"=>$tab['role_c'], ":id_c"=>$tab['id_c']);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
@@ -75,14 +75,14 @@ class Modele{
         return $exe->fetch();
     }
     public function insertProprietaire($tab){
-        $requete = "INSERT into proprietaire values (null,:nom_p,:prenom_p,:email_p,null,:adr_p,:cp_p,:ville_p,:tel_p,:rib_p);";
+        $requete = "INSERT into proprietaire values (null,:nom_p,:prenom_p,:email_p,null,:adr_p,:cp_p,:ville_p,:tel_p,:rib_p,:role_p);";
         $exe = $this->unPdo->prepare($requete);
-        $data = array(":nom_p"=>$tab['nom_p'],":prenom_p"=>$tab['prenom_p'],":email_p"=>$tab['email_p'],":adr_p"=>$tab['adr_p'],":cp_p"=>$tab['cp_p'],":ville_p"=>$tab['ville_p'],":tel_p"=>$tab['tel_p'],":rib_p"=>$tab['rib_p']);
+        $data = array(":nom_p"=>$tab['nom_p'],":prenom_p"=>$tab['prenom_p'],":email_p"=>$tab['email_p'],":adr_p"=>$tab['adr_p'],":cp_p"=>$tab['cp_p'],":ville_p"=>$tab['ville_p'],":tel_p"=>$tab['tel_p'],":rib_p"=>$tab['rib_p'],":role_p"=>$tab['role_p']);
         $exe->execute($data);
     }
     public function updateProprietaire($tab){
-        $requete = "UPDATE proprietaire SET nom_p = :nom_p, prenom_p = :prenom_p, email_p = :email_p, mdp_p = :mdp_p, adr_p = :adr_p, cp_p = :cp_p, ville_p = :ville_p, tel_p = :tel_p, rib_p = :rib_p where id_p = :id_p;";
-        $data = array(":nom_p"=>$tab['nom_p'],":prenom_p"=>$tab['prenom_p'],":email_p"=>$tab['email_p'],":mdp_p"=>$tab['mdp_p'],":adr_p"=>$tab['adr_p'],":cp_p"=>$tab['cp_p'],":ville_p"=>$tab['ville_p'],":tel_p"=>$tab['tel_p'],":rib_p"=>$tab['rib_p'],":id_p"=>$tab['id_p']);
+        $requete = "UPDATE proprietaire SET nom_p = :nom_p, prenom_p = :prenom_p, email_p = :email_p, mdp_p = :mdp_p, adr_p = :adr_p, cp_p = :cp_p, ville_p = :ville_p, tel_p = :tel_p, rib_p = :rib_p, role_p = :role_p where id_p = :id_p;";
+        $data = array(":nom_p"=>$tab['nom_p'],":prenom_p"=>$tab['prenom_p'],":email_p"=>$tab['email_p'],":mdp_p"=>$tab['mdp_p'],":adr_p"=>$tab['adr_p'],":cp_p"=>$tab['cp_p'],":ville_p"=>$tab['ville_p'],":tel_p"=>$tab['tel_p'],":rib_p"=>$tab['rib_p'], ":role_p"=>$tab['role_p'],":id_p"=>$tab['id_p']);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
