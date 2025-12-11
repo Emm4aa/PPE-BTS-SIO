@@ -38,5 +38,5 @@ if(isset($_POST['Filtrer'])){
 }
 
 
-	require_once ("vue/vue_insert_reservation.php");
+	require_once ("vue/vue_select_reservation.php");
 ?>

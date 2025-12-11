@@ -13,6 +13,7 @@
 				case "edit" : $leProprietaire = $unControleur->selectWhereProprietaire($id_p);break;
 			}
 		}
+	}
 
 		require_once ("vue/vue_insert_Proprietaire.php");
 		
@@ -27,7 +28,6 @@
 			//recharger la page 
 			header("Location: index.php?page=2");
 		}
-	}
 
 	if (isset($_POST['Filtrer'])){
 		$filtre = $_POST['filtre']; 

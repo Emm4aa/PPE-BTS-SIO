@@ -1,6 +1,11 @@
 <h3> Gestion des clients </h3>
 
 <?php
+
+$lesHabitations = $unControleur->selectAllHabitation();
+$lesclients = $unControleur->selectAllClient();
+$lesProprietaires = $unControleur->selectAllProprietaire();
+
 	if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 		$leClient = null;
 		if(isset($_GET['action']) && isset($_GET['id_c']))
@@ -13,6 +18,7 @@
 				case "edit" : $leClient = $unControleur->selectWhereClient($id_c);break;
 			}
 		}
+	}
 
 		require_once ("vue/vue_insert_client.php");
 		
@@ -27,7 +33,7 @@
 			//recharger la page 
 			header("Location: index.php?page=2");
 		}
-	}
+	
 
 	if (isset($_POST['Filtrer'])){
 		$filtre = $_POST['filtre']; 

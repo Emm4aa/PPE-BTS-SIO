@@ -1,20 +1,21 @@
 <h3>Liste des réservations</h3>
 
-<form method="post">
-    Filtrer par : <input type="text" name="filtre">
-    <input type="submit" name="Filtrer" value="Filtrer">
+<form class="listes" method="post">
+    <label for="filtre">Filtrer par : </label>
+    <input type="text" name="filtre">
+    <button type="submit" name="Filtrer" value="Filtrer">Filter</button>
 </form>
 <br>
-<table border="1">
+<table>
     <tr>
-        <td> id_resa </td>
-        <td> date_resa </td>
-        <td> capacite </td>
-        <td> date_deb </td>
-        <td> date_fin </td>
-        <td> etat </td>
-        <td> id_client </td>
-</tr>
+        <th>id_resa</th>
+        <th>date_resa</th>
+        <th>capacite</th>
+        <th>date_deb</th>
+        <th>date_fin</th>
+        <th>état</th>
+        <th>id_client</th>
+    </tr>
 <?php
 if (isset($unereservation)){
     foreach ($unereservation as $unereservation){
@@ -40,3 +41,5 @@ if (isset($unereservation)){
         echo "</tr>";
     }
 }
+?>
+</table>

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+    margin: 0;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}
+main{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    font-family: "Roboto", sans-serif;
+}
+
+header{
+    background-color: #112c50;
+    padding: 1rem 5rem 1rem 1rem;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    align-items: center;
+}
+header ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 1rem;
+    cursor: pointer;
+}
+header a{
+    text-decoration: none;
+    color: white;
+}
+header a:hover{
+    color: #f1dd18;
+}
+#logo{
+    width: 20rem;
+    height: auto;
+    cursor: pointer;
+}
+
+footer{
+    background-color: #112c50;
+    padding: 2rem;
+    color: white;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+}
+h1{
+    font-family: "Montserrat", sans-serif;
+    margin: 1rem 0 1rem 0;
+}
+h3{
+    margin-top: 1rem;
+}
+
+
+#formConnexion{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 20px;
+}
+#formConnexion table{
+    border: none;
+}
+#formConnexion td{
+    padding: 0.1rem;
+    border: none;
+}
+.btnForm{
+    margin-top: 1rem;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 0.3rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.btnForm:hover{
+    opacity: 0.6;
+}
+
+table{
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+td{
+    padding: 0.3rem;
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+th{
+    padding: 0.3rem;
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+
+.listes{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 20px;
+    gap: 0.5rem;
+    align-items: center;
+}
+.insert{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 20px;
+    gap: 0.5rem;
+}
+.insert td{
+    border: none;
+}
+.insert table{
+    border: none;
+}
+
+form button{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+form button:hover{
+    opacity: 0.7;
+}

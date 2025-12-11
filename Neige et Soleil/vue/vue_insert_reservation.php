@@ -1,7 +1,7 @@
 <h3> Ajout d'une réservation </h3>
 
-<form method="post">
-	<table border="0">
+<form class="insert" method="post">
+	<table>
 		<tr>
 			<td> Désignation réservation</td>
 			<td><input type="text" name="designation"></td>
@@ -36,9 +36,9 @@
 				</select>
 				</td>
 		</tr>
-		<tr>
-			<td> <input type="reset" name="Annuler" value="Annuler"></td>
-			<td><input type="submit" name="Valider" value="Valider"></td>
-		</tr>
-	</table>
+	</table><br>
+	<div>
+		<button type="reset" name="Annuler" value="Annuler">Annuler</button>
+		<button type="submit" name="Valider" value="Valider">Valider</button>
+	</div>
 </form>
