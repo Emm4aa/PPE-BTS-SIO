@@ -2,19 +2,26 @@
     session_start();
     require_once("controleur/controleur.class.php");
     $unControleur = new Controleur();
-
 ?>
+<?php require_once __DIR__ . "/parametres.php";?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Neige et Soleil</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neige et Soleil</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<center>
+<!-- Header -->
+<?php require_once __DIR__ . "/header.php";?>
+
+<!-- Main -->
+ <main>
     <?php
-    if (! isset($_SESSION['email'])){
+    /* 
+    if (!isset($_SESSION['email'])){
         require_once('vue/vue_connexion.php');
     }
     require_once("vue/vue_connexion.php");
@@ -54,14 +61,19 @@
         }
     }
     if (isset($_SESSION['email'])){
+    */
+    
+    
     echo'
     <h1> Neige et Soleil </h1>
+    <div>
     <a href="index.php?page=1"> <img src="images/home.png" width="90" height="70"></a>
     <a href="index.php?page=2"> <img src="images/clients.png" width="70" height="70"></a>
     <a href="index.php?page=3"> <img src="images/proprietaire.png" width="70" height="70"></a>
     <a href="index.php?page=4"> <img src="images/habitation.png" width="70" height="70"></a>
     <a href="index.php?page=5"> <img src="images/reservation.png" width="70" height="70"></a>
-    <a href="index.php?page=6"> <img src="images/deconnexion.png" width="70" height="70"></a>';
+    <a href="index.php?page=6"> <img src="images/deconnexion.png" width="70" height="70"></a>
+    </div>';
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
     switch($page){
         case 1 : require_once ("controleur/home.php"); break;
@@ -75,8 +87,12 @@
          break;
         default : require_once ("controleur/erreur.php"); break;
     }
-}
+//}
     ?>
-</center>
+</main>
+
+<!-- Footer -->
+<?php require_once __DIR__ . "/footer.php";?>
+
 </body>
 </html>

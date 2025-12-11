@@ -1,20 +1,21 @@
 <h3> Liste des Proprietaires </h3>
 
-<form method="post">
-	Filtrer par : <input type="text" name="filtre">
-	<input type="submit" name="Filtrer" value="Filtrer">
+<form class="listes" method="post">
+	<label for="filtre">Filtrer par : </label>
+	<input type="text" name="filtre">
+	<button type="submit" name="Filtrer" value="Filtrer">Filtrer</button>
 </form>
 <br>
-<table border="1">
+<table>
 	<tr>
-		<td> Id Proprietaire </td>
-		<td> Nom Proprietaire </td>
-		<td> Prénom Proprietaire </td>
-		<td> Email Contact </td> 
-		<td> Adresse </td>
-		<td> Code Postal </td>
-		<td> Ville </td>
-		<td> Téléphone </td>
+		<th>Id Proprietaire</th>
+		<th>Nom Proprietaire</th>
+		<th>Prénom Proprietaire</th>
+		<th>Email Contact</th> 
+		<th>Adresse</th>
+		<th>Code Postal</th>
+		<th>Ville</th>
+		<th>Téléphone</th>
 		<?php 
 			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 				echo "<td> Opérations </td>";

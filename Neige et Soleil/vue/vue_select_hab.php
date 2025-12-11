@@ -1,10 +1,11 @@
 <h3>Liste des habitations</h3>
-<form method="post">
-    Filtrer par : <input type="text" name="filtre">
-    <input type="submit" name="Filtrer" value="Filtrer">
-</form>
+<form class="listes" method="post">
+    <label for="filtre">Filtrer par :</label> 
+    <input type="text" name="filtre">
+    <button type="submit" name="Filtrer" value="Filtrer">Filtrer</button>
+</form><br>
 
-<table border="1">
+<table>
     <tr>
         <th>Référence</th>
         <th>Type d'habitation</th>
