@@ -6,7 +6,7 @@ $lesHabitations = $unControleur->selectAllHabitation();
 $lesclients = $unControleur->selectAllClient();
 $lesProprietaires = $unControleur->selectAllProprietaire();
 
-	if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+	/*if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){*/
 		$leClient = null;
 		if(isset($_GET['action']) && isset($_GET['id_c']))
 		{
@@ -18,7 +18,7 @@ $lesProprietaires = $unControleur->selectAllProprietaire();
 				case "edit" : $leClient = $unControleur->selectWhereClient($id_c);break;
 			}
 		}
-	}
+	/*}*/
 
 		require_once ("vue/vue_insert_client.php");
 		

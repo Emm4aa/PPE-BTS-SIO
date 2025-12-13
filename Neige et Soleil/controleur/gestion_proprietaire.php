@@ -1,7 +1,7 @@
 <h3> Gestion des Proprietaires </h3>
 
 <?php
-	if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+	/*if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){*/
 		$leProprietaire = null;
 		if(isset($_GET['action']) && isset($_GET['id_p']))
 		{
@@ -13,7 +13,7 @@
 				case "edit" : $leProprietaire = $unControleur->selectWhereProprietaire($id_p);break;
 			}
 		}
-	}
+	/*}*/
 
 		require_once ("vue/vue_insert_Proprietaire.php");
 		
