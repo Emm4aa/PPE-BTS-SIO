@@ -40,10 +40,10 @@
                 echo "<td>" . $uneHabitation['id_p'] . "</td>";
                 /*if(isset($_SESSION['role']) && $_SESSION['role'] == 'proprietaire'){*/
 				echo "<td>"; 
-				echo "<a href='index.php?page=2&action=sup&ref_hab=".$hab['ref_hab']."'>"; 
+				echo "<a href='index.php?page=4&action=sup&ref_hab=".$uneHabitation['ref_hab']."'>"; 
 				echo "<img src='images/supprimer.png' width='30' height='30' > </a>";
 
-				echo "<a href='index.php?page=2&action=edit&ref_hab=".$hab['ref_hab']."'>"; 
+				echo "<a href='index.php?page=4&action=edit&ref_hab=".$uneHabitation['ref_hab']."'>"; 
 				echo "<img src='images/modifier.png' width='30' height='30' > </a>";
 
 				echo "</td>";

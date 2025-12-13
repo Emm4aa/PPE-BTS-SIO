@@ -30,13 +30,11 @@ if (isset($lesReservations)){
         echo "<td>".$uneReservation['id_c']."</td>";
         echo "<td>".$uneReservation['ref_hab']."</td>";
         echo "<td>";
-        echo "<a href='index.php?page=2&action=sip&ref_res=".$uneReservation['ref_res']."'>";
+
+        echo "<a href='index.php?page=5&action=sup&ref_res=".$uneReservation['ref_res']."'>";
         echo "<img src='image/supprimer.png' width='30' height='30'> </a>";
 
-        echo "<a href='index.php?page=2&action=sup&ref_res=".$uneReservation['ref_res']."'>";
-        echo "<img src='image/supprimer.png' width='30' height='30'> </a>";
-
-        echo "<a href='index.php?page=2&action=edit&ref_res=".$uneReservation['ref_res']."'>";
+        echo "<a href='index.php?page=5&action=edit&ref_res=".$uneReservation['ref_res']."'>";
         echo "<img src='image/modifier.png' width='30' height='30'> </a>";
 
         echo "</td>";
