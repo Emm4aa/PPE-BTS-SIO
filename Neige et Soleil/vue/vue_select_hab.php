@@ -16,28 +16,29 @@
         <th>Tarif moyen</th>
         <th>Tarif + haut</th>
         <th>Surface</th>
+        <th>ID du proprietaire </th>
         <?php 
-			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+			if(isset($_SESSION['role']) && $_SESSION['role'] == 'proprietaire'){
 				echo "<td> Opération </td>";
 			}
 		?>
     </tr>
 
     <?php
-    if (isset($unehab)) {
-        foreach ($unehab as $hab) {
+    if (isset($lesHabitations)) {
+        foreach ($lesHabitations as $uneHabitation) {
             echo "<tr>";
-                echo "<td>" . $hab['ref_hab'] . "</td>";
-                echo "<td>" . $hab['type_hab'] . "</td>";
-                echo "<td>" . $hab['adr_hab'] . "</td>";
-                echo "<td>" . $hab['cp_hab'] . "</td>";
-                echo "<td>" . $hab['ville_hab'] . "</td>";
-                echo "<td>" . $hab['tarif_hab_bas'] . "</td>";
-                echo "<td>" . $hab['tarif_hab_moy'] . "</td>";
-                echo "<td>" . $hab['tarif_hab_hau'] . "</td>";
-                echo "<td>" . $hab['surface'] . "</td>";
-                echo "<td>" . $hab['id_p'] . "</td>";
-                if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+                echo "<td>" . $uneHabitation['ref_hab'] . "</td>";
+                echo "<td>" . $uneHabitation['type_hab'] . "</td>";
+                echo "<td>" . $uneHabitation['adr_hab'] . "</td>";
+                echo "<td>" . $uneHabitation['cp_hab'] . "</td>";
+                echo "<td>" . $uneHabitation['ville_hab'] . "</td>";
+                echo "<td>" . $uneHabitation['tarif_hab_bas'] . "</td>";
+                echo "<td>" . $uneHabitation['tarif_hab_moy'] . "</td>";
+                echo "<td>" . $uneHabitation['tarif_hab_hau'] . "</td>";
+                echo "<td>" . $uneHabitation['surface'] . "</td>";
+                echo "<td>" . $uneHabitation['id_p'] . "</td>";
+                if(isset($_SESSION['role']) && $_SESSION['role'] == 'proprietaire'){
 				echo "<td>"; 
 				echo "<a href='index.php?page=2&action=sup&ref_hab=".$hab['ref_hab']."'>"; 
 				echo "<img src='images/supprimer.png' width='30' height='30' > </a>";
@@ -52,3 +53,5 @@
     }
     ?>
 </table>
+<br>
+<?= (isset($lesHabitations)) ? "Nombre de d'habitation : " . count($lesHabitations) : "" ?>

@@ -74,11 +74,9 @@ create table reservation(
     etat_res varchar(30) not null,
     id_c int(5) not null,
     ref_hab int(5) not null,
-    code_reg int(5) not null,
     primary key (ref_res),
     foreign key (id_c) references client(id_c),
-    foreign key (ref_hab) references habitation(ref_hab),
-    foreign key (code_reg) references region(code_reg)
+    foreign key (ref_hab) references habitation(ref_hab)
 );
 
 create table appartement(

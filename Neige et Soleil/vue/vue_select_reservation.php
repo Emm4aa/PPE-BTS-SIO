@@ -8,33 +8,35 @@
 <br>
 <table>
     <tr>
-        <th>id_resa</th>
-        <th>date_resa</th>
-        <th>capacite</th>
-        <th>date_deb</th>
-        <th>date_fin</th>
-        <th>état</th>
-        <th>id_client</th>
+        <th>ID de la réservation</th>
+        <th>Date de la réservation</th>
+        <th>Nombre de personne</th>
+        <th>Date du début</th>
+        <th>Date de la fin</th>
+        <th>Etat</th>
+        <th>ID du client</th>
+        <th>ID l'habitation</th>
     </tr>
 <?php
-if (isset($unereservation)){
-    foreach ($unereservation as $unereservation){
+if (isset($lesReservations)){
+    foreach ($lesReservations as $uneReservation){
         echo "<tr>";
-        echo "<td>".$unereservation['ref_res']."</td>";
-        echo "<td>".$unereservation['date_res']."</td>";
-        echo "<td>".$unereservation['nb_perso']."</td>";
-        echo "<td>".$unereservation['date_debut']."</td>";
-        echo "<td>".$unereservation['date_fin']."</td>";
-        echo "<td>".$unereservation['etat_res']."</td>";
-        echo "<td>".$unereservation['id_client']."</td>";
+        echo "<td>".$uneReservation['ref_res']."</td>";
+        echo "<td>".$uneReservation['date_res']."</td>";
+        echo "<td>".$uneReservation['nb_perso']."</td>";
+        echo "<td>".$uneReservation['date_debut']."</td>";
+        echo "<td>".$uneReservation['date_fin']."</td>";
+        echo "<td>".$uneReservation['etat_res']."</td>";
+        echo "<td>".$uneReservation['id_c']."</td>";
+        echo "<td>".$uneReservation['ref_hab']."</td>";
         echo "<td>";
-        echo "<a href='index.php?page=2&action=sip&id_ref_resresa=".$unereservation['ref_res']."'>";
+        echo "<a href='index.php?page=2&action=sip&ref_res=".$uneReservation['ref_res']."'>";
         echo "<img src='image/supprimer.png' width='30' height='30'> </a>";
 
-        echo "<a href='index.php?page=2&action=sup&ref_res=".$unereservation['ref_res']."'>";
+        echo "<a href='index.php?page=2&action=sup&ref_res=".$uneReservation['ref_res']."'>";
         echo "<img src='image/supprimer.png' width='30' height='30'> </a>";
 
-        echo "<a href='index.php?page=2&action=edit&ref_res=".$unereservation['ref_res']."'>";
+        echo "<a href='index.php?page=2&action=edit&ref_res=".$uneReservation['ref_res']."'>";
         echo "<img src='image/modifier.png' width='30' height='30'> </a>";
 
         echo "</td>";
