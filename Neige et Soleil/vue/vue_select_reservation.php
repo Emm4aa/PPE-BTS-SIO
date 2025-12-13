@@ -32,10 +32,10 @@ if (isset($lesReservations)){
         echo "<td>";
 
         echo "<a href='index.php?page=5&action=sup&ref_res=".$uneReservation['ref_res']."'>";
-        echo "<img src='image/supprimer.png' width='30' height='30'> </a>";
+        echo "<img src='images/supprimer.png' width='30' height='30'> </a>";
 
         echo "<a href='index.php?page=5&action=edit&ref_res=".$uneReservation['ref_res']."'>";
-        echo "<img src='image/modifier.png' width='30' height='30'> </a>";
+        echo "<img src='images/modifier.png' width='30' height='30'> </a>";
 
         echo "</td>";
         echo "</tr>";
