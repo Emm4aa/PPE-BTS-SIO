@@ -3,31 +3,45 @@
 <form class="insert" method="post">
 	<table>
 		<tr>
-			<td> Désignation habitation </td>
-			<td><input type="text" name="designation"></td>
+			<td> Type d'habitation </td>
+			<td><input type="text" name="type_hab"></td>
 		</tr>
 		<tr>
-			<td> Etat de l'habitation </td>
-			<td><select name="etat">
-				<option value="Excellent"> Excellent </option>
-				<option value="Moyen"> Moyen </option>
-				<option value="Mauvais"> Mauvais </option>
-				<option value="inconnu"> inconnu </option>
-				</select>	
-			</td>
+			<td> Adresse postale</td>
+			<td><input type="text" name="adr_hab"></td>
 		</tr>
 		<tr>
-			<td> Date d'achat </td>
-			<td><input type="date" name="dateAchat"></td>
+			<td> Code postal</td>
+			<td><input type="text" name="cp_hab"></td>
 		</tr>
 		<tr>
-			<td> Client </td>
-			<td><select name="id_client">
-				<option value=""> Sélectionner un client </option>
+			<td> Ville</td>
+			<td><input type="text" name="ville_hab"></td>
+		</tr>
+		<tr>
+			<td> Tarif le plus bas </td>
+			<td><input type="text" name="tarif_hab_bas"></td>
+		</tr>
+		<tr>
+			<td> Tarif moyen </td>
+			<td><input type="text" name="tarif_hab_moy"></td>
+		</tr>
+		<tr>
+			<td> Tarif le plus haut </td>
+			<td><input type="text" name="tarif_hab_hau"></td>
+		</tr>
+		<tr>
+			<td> Surface </td>
+			<td><input type="text" name="surface"></td>
+		</tr>
+		<tr>
+			<td> Proprietaire </td>
+			<td><select name="id_p">
+				<option value=""> Sélectionner un proprietaire </option>
 				<?php
-				foreach ($lesClients as $unClient) {
-					echo "<option value='".$unClient['id_client']."'>";
-					echo $unClient['id_client']."-".$unClient['nom']." ".$unClient['prenom'];
+				foreach ($lesProprietaires as $unProprietaire) {
+					echo "<option value='".$unProprietaire['id_p']."'>";
+					echo $unProprietaire['id_p']."-".$unProprietaire['nom_p']." ".$unProprietaire['prenom_p'];
 					echo "</option>";
 				}
 				?>

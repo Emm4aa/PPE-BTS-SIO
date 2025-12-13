@@ -4,7 +4,7 @@
 	<table>
 		<tr>
 			<td> Désignation réservation</td>
-			<td><input type="text" name="designation"></td>
+			<td><input type="text" name="ref_res"></td>
 		</tr>
 		 
 		<tr>

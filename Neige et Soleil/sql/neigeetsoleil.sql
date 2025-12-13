@@ -26,15 +26,18 @@ create table habitation(
     tarif_hab_bas float(5) not null,
     tarif_hab_moy float(5) not null,
     tarif_hab_hau float(5) not null,
-    primary key (ref_hab)
+    surface varchar(10) not null,
+    id_p int(5) not null,
+    primary key (ref_hab),
+    foreign key (id_p) references proprietaire(id_p)
 );
 
 create table contrat(
-    id_p int(5) not null,
-    ref_hab int(5) not null,
     ref_c int(20) not null auto_increment,
     status_c varchar(30) not null,
     annee_c int(4) not null,
+    id_p int(5) not null,
+    ref_hab int(5) not null,
     primary key (ref_c),
     foreign key (id_p) references proprietaire(id_p),
     foreign key (ref_hab) references habitation(ref_hab)
@@ -51,7 +54,7 @@ create table client(
     ville_c varchar(50) not null,
     tel_c int(10) not null,
     rib_c int(30) not null,
-    role_c varchar(20) not null,
+    role_ce varchar(20) not null,
     primary key (id_c)
 );
 
@@ -62,15 +65,16 @@ create table region(
 );
 
 create table reservation(
-    id_c int(5) not null,
-    ref_hab int(5) not null,
-    code_reg int(5) not null,
+    
     ref_res int(5) not null auto_increment,
     date_res date not null,
     nb_perso int(2) not null,
     date_debut date not null,
     date_fin date not null,
     etat_res varchar(30) not null,
+    id_c int(5) not null,
+    ref_hab int(5) not null,
+    code_reg int(5) not null,
     primary key (ref_res),
     foreign key (id_c) references client(id_c),
     foreign key (ref_hab) references habitation(ref_hab),
@@ -93,18 +97,18 @@ create table maison(
 );
 
 create table image(
-    ref_hab int(5) not null,
     ref_image int(5) not null auto_increment,
     url_image varchar(200) not null,
+    ref_hab int(5) not null,
     primary key (ref_image),
     foreign key (ref_hab) references habitation(ref_hab)
 );
 
 
 create table station(
-    code_reg int(5) not null,
     num_sta int(5) not null auto_increment,
     nom_sta varchar(50) not null,
+    code_reg int(5) not null,
     primary key (num_sta),
     foreign key (code_reg) references region(code_reg)
 );

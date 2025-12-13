@@ -30,6 +30,10 @@
 			<td> Téléphone</td>
 			<td><input type="text" name="tel_p"></td>
 		</tr>
+		<tr>
+			<td> Rib</td>
+			<td><input type="text" name="rib_p"></td>
+		</tr>
 	</table><br>
 	<div>
 		<button type="reset" name="Annuler" value="Annuler">Annuler</button>
