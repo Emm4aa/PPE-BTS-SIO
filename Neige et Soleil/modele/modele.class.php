@@ -38,8 +38,8 @@ class Modele{
         $exe->execute($data);
     }
     public function updateClient($tab){
-        $requete = "UPDATE client SET nom_c = :nom_c, prenom_c = :prenom_c, email_c = :email_c, mdp_c = :mdp_c, adr_c = :adr_c, cp_c = :cp_c, ville_c = :ville_c, tel_p = :tel_p, rib_c = :rib_c, role_c = :role_c where id_c = :id_c ";
-        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":mdp_c"=>$tab['mdp_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'], ":ville_c"=>$tab['ville_c'], ":tel_c"=>$tab['tel_c'], ":rib_c"=>$tab['rib_c'], ":role_c"=>$tab['role_c'], ":id_c"=>$tab['id_c']);
+        $requete = "UPDATE client SET nom_c = :nom_c, prenom_c = :prenom_c, email_c = :email_c, adr_c = :adr_c, cp_c = :cp_c, ville_c = :ville_c, tel_p = :tel_p, rib_c = :rib_c where id_c = :id_c ";
+        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'], ":ville_c"=>$tab['ville_c'], ":tel_c"=>$tab['tel_c'], ":rib_c"=>$tab['rib_c'], ":id_c"=>$tab['id_c']);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
