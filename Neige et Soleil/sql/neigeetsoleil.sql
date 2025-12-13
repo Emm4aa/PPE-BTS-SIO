@@ -54,7 +54,7 @@ create table client(
     ville_c varchar(50) not null,
     tel_c int(10) not null,
     rib_c int(30) not null,
-    role_ce varchar(20) not null,
+    role_c varchar(20) not null,
     primary key (id_c)
 );
 
