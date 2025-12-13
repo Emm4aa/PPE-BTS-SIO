@@ -34,7 +34,7 @@
 			echo "<td>".$unProprietaire['cp_p'] ."</td>";
 			echo "<td>".$unProprietaire['ville_p'] ."</td>";
 			echo "<td>".$unProprietaire['tel_p']     ."</td>"; 
-			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+			/*if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){*/
 				echo "<td>"; 
 				echo "<a href='index.php?page=2&action=sup&id_p=".$unProprietaire['id_p']."'>"; 
 				echo "<img src='images/supprimer.png' width='30' height='30' > </a>";
@@ -46,7 +46,7 @@
 			}
 			echo "</tr>";
 		}
-	}
+	/*}*/
 ?>
 </table>
 <br>
