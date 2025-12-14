@@ -37,8 +37,7 @@
 	</table><br>
 	<div>
 		<button type="reset" name="Annuler" value="Annuler">Annuler</button>
-		<button type="submit" 
-		<?= ($leClient==null)? 'name="Valider" value="Valider"':'name="Modifier" value="Modifier"' ?>></button>
+		<button type="submit" name="Valider" value="Valider">Valider</button>
 	</div> 
 	<!-- <?= ($leClient==null)? '' : ' <input type="hidden" name="id_c" value="'.$leClient['id_c'].'">' ?> -->
 </form>
