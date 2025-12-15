@@ -11,8 +11,8 @@ create table proprietaire(
     adr_p varchar(120) not null,
     cp_p int(5) not null,
     ville_p varchar(50) not null,
-    tel_p int(10) not null,
-    rib_p int(30) not null,
+    tel_p varchar(10) not null,
+    rib_p varchar(30) not null,
     role_p varchar(20) not null,
     primary key (id_p)
 );
@@ -52,8 +52,8 @@ create table client(
     adr_c varchar(120) not null,
     cp_c int(5) not null,
     ville_c varchar(50) not null,
-    tel_c int(10) not null,
-    rib_c int(30) not null,
+    tel_c varchar(10) not null,
+    rib_c varchar(30) not null,
     role_c varchar(20) not null,
     primary key (id_c)
 );
