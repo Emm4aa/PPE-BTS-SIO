@@ -1,7 +1,9 @@
-<h3> Gestion des clients </h3>
+<section>
 
+<h1> Gestion des clients </h1>
+
+<div class="conteneurGestion">
 <?php
-
 $lesHabitations = $unControleur->selectAllHabitation();
 $lesclients = $unControleur->selectAllClient();
 $lesProprietaires = $unControleur->selectAllProprietaire();
@@ -44,3 +46,6 @@ $lesProprietaires = $unControleur->selectAllProprietaire();
 
 	require_once("vue/vue_select_client.php");
 ?>
+</div>
+
+</section>

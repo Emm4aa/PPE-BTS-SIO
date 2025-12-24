@@ -1,20 +1,5 @@
-<?php require_once __DIR__ . '/../parametres.php';?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="<?php echo BASE_URL?>/styles.css">
-</head>
-<body>
-<!-- Header -->
-<?php require_once BASE_PATH . "/header.php";?>
-
-<main>
-    <h1>Identifiez-vous !</h1>
-    <form id="formConnexion" method="post">
+    <form id="formConnexion" method="post" action="<?= BASE_URL ?>/index.php?page=8">
         <table>
             <tr>
                 <td></td>
@@ -23,6 +8,7 @@
                         <option value="">Sélectionner un status </option>
                         <option value="client">Client</option>
                         <option value="proprietaire">Proprietaire</option>
+                        <option value="admin">Administrateur</option>
                     </select>
                 </td>
             </tr>
@@ -40,11 +26,5 @@
             <button class="btnForm" type="submit" name="Connexion" value="Connexion">Connexion</button>
         </div>
     </form>
-</main>
 
-<!-- Footer -->
-<?php require_once BASE_PATH . "/footer.php";?>
-
-</body>
-</html>
 

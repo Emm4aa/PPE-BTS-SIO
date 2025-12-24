@@ -1,7 +1,10 @@
-<h3> Gestion des reservation </h3>
+<section>
+
+<h1> Gestion des reservation </h1>
+
+<div class="conteneurGestion">
 
 <?php
-
 $lesReservations = $unControleur->selectAllReservation();
 $lesClients = $unControleur->selectAllClient();
 $lesProprietaires = $unControleur->selectAllProprietaire();
@@ -36,6 +39,8 @@ if(isset($_POST['Filtrer'])){
 	$lesReservations = $unControleur->selectAllReservation();
 }
 
-
-	require_once ("vue/vue_select_reservation.php");
+require_once ("vue/vue_select_reservation.php");
 ?>
+
+</div>
+</section>

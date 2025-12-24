@@ -24,17 +24,17 @@ class Modele{
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereClient($id_c){
-        $requete = "SELECT * FROM client where id_c = :id_c;";
-        $data = array(":id_c"=>$id_c);
+    public function selectWhereClient($email,$mdp){
+        $requete = "SELECT * FROM client where email_c = :email and mdp_c = :mdp;";
+        $data = array(":email"=>$email,":mdp"=>$mdp);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
     }
     public function insertClient($tab){
-        $requete = "INSERT into client values (null,:nom_c,:prenom_c,:email_c,'',:adr_c,:cp_c,:ville_c,:tel_c,:rib_c,'client');";
+        $requete = "INSERT into client values (null,:nom_c,:prenom_c,:email_c,:mdp_c,:adr_c,:cp_c,:ville_c,:tel_c,'rib_c','client');";
         $exe = $this->unPdo->prepare($requete);
-        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'],":ville_c"=>$tab['ville_c'],":tel_c"=>$tab['tel_c'],":rib_c"=>$tab['rib_c']);
+        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":mdp_c"=>$tab['mdp_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'],":ville_c"=>$tab['ville_c'],":tel_c"=>$tab['tel_c']);
         $exe->execute($data);
     }
     public function updateClient($tab){
@@ -67,9 +67,9 @@ class Modele{
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereProprietaire($id_p){
-        $requete = "SELECT * FROM proprietaire where id_p = :id_p;";
-        $data = array(":id_p"=>$id_p);
+    public function selectWhereProprietaire($email,$mdp){
+        $requete = "SELECT * FROM proprietaire where email_p = :email and mdp_p = :mdp;";
+        $data = array(":email"=>$email, ":mdp"=>$mdp);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
@@ -116,6 +116,13 @@ class Modele{
         $exe->execute($data);
         return $exe->fetch();
     }
+    public function selectHabitationWhereProprietaire($id_p){
+        $requete = "SELECT * FROM habitation WHERE id_p = :id_p;";
+        $data = array(":id_p"=>$id_p);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
     public function insertHabitation($tab){
         $requete = "INSERT into habitation values (null,:type_hab,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,:tarif_hab_moy,:tarif_hab_hau,:surface,:id_p);";
         $exe = $this->unPdo->prepare($requete);
@@ -157,6 +164,13 @@ class Modele{
         $exe->execute($data);
         return $exe->fetch();
     }
+    public function selectReservationWhereClient($id_c){
+        $requete = "SELECT * FROM reservation WHERE id_c = :id_c";
+        $data = array(":id_c"=>$id_c);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll(); 
+    }
     public function insertReservation($tab){
         $requete = "INSERT into reservation values (null,curdate(),:nb_perso,:date_debut,:date_fin,:etat_res,:id_c,:ref_hab);";
         $exe = $this->unPdo->prepare($requete);
@@ -181,6 +195,18 @@ class Modele{
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetchAll();
+    }
+
+
+
+
+    //admins
+    public function selectWhereAdmin($email,$mdp){
+        $requete = "SELECT * FROM admin where email_a = :email and mdp_a = :mdp;";
+        $data = array(":email"=>$email,":mdp"=>$mdp);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetch();
     }
 }
 ?>

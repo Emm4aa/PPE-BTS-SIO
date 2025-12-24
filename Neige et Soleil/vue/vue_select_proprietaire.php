@@ -1,17 +1,18 @@
-<h3> Liste des Proprietaires </h3>
+<div class="vueSelect">
 
+<h3>Liste des Propriétaires</h3>
 <form class="listes" method="post">
 	<label for="filtre">Filtrer par : </label>
 	<input type="text" name="filtre">
 	<button type="submit" name="Filtrer" value="Filtrer">Filtrer</button>
-</form>
-<br>
+</form><br>
+
 <table>
 	<tr>
-		<th>Id Proprietaire</th>
-		<th>Nom Proprietaire</th>
-		<th>Prénom Proprietaire</th>
-		<th>Email Contact</th> 
+		<th>ID</th>
+		<th>Nom</th>
+		<th>Prénom</th>
+		<th>Email</th> 
 		<th>Adresse</th>
 		<th>Code Postal</th>
 		<th>Ville</th>
@@ -52,7 +53,7 @@
 <br>
 <?= (isset($lesProprietaires)) ? "Nombre de Proprietaires : " . count($lesProprietaires) : "" ?>
 
-
+</div>
 
 
 

@@ -1,7 +1,9 @@
-<h3> Gestion des habitations </h3>
+<section>
 
+<h1> Gestion des habitations </h1>
+
+<div class="conteneurGestion">
 <?php
-
 $lesHabitations = $unControleur->selectAllHabitation();
 $lesclients = $unControleur->selectAllClient();
 $lesProprietaires = $unControleur->selectAllProprietaire();
@@ -35,6 +37,8 @@ if(isset($_POST['Filtrer'])){
 	$lesHabitations = $unControleur->selectAllHabitation();
 }
 
-
 require_once ("vue/vue_select_hab.php");
 ?>
+
+</div>
+</section>

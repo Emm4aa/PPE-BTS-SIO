@@ -1,5 +1,8 @@
-<h3> Gestion des Proprietaires </h3>
+<section>
 
+<h1> Gestion des Propriétaires </h1>
+
+<div class="conteneurGestion">
 <?php
 	/*if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){*/
 		$leProprietaire = null;
@@ -38,3 +41,7 @@
 
 	require_once("vue/vue_select_Proprietaire.php");
 ?>
+
+</div>
+
+</section>

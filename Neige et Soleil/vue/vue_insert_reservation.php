@@ -1,5 +1,6 @@
-<h3> Ajout d'une réservation </h3>
+<div class="vueInsert">
 
+<h3> Ajout d'une réservation </h3>
 <form class="insert" method="post">
 	<table>
 		<tr>
@@ -64,3 +65,5 @@
 		<button type="submit" name="Valider" value="Valider">Valider</button>
 	</div>
 </form>
+
+</div>

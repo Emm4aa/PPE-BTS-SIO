@@ -1,3 +1,5 @@
+<div class="vueSelect">
+
 <h3>Liste des habitations</h3>
 <form class="listes" method="post">
     <label for="filtre">Filtrer par :</label> 
@@ -55,3 +57,5 @@
 </table>
 <br>
 <?= (isset($lesHabitations)) ? "Nombre de d'habitation : " . count($lesHabitations) : "" ?>
+
+</div>

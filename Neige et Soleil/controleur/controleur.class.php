@@ -7,12 +7,53 @@ class Controleur {
         $this->unModele= new Modele();
 
     }
-    //gestion des clients
+
+    public function verifierMotDePasse($mdp) {
+    $erreurs = [];
+    // Longueur minimale
+    if (strlen($mdp) < 12) {
+        $erreurs[] = "Le mot de passe doit contenir au moins 12 caractères.";
+    }
+    // Comptage des types de caractères
+    $nbMaj = preg_match_all('/[A-Z]/', $mdp);
+    $nbMin = preg_match_all('/[a-z]/', $mdp);
+    $nbChiffres = preg_match_all('/[0-9]/', $mdp);
+    $nbSpeciaux = preg_match_all('/[\W_]/', $mdp); // \W = non alphanumérique, _ inclus
+
+    if ($nbMaj < 4) {
+        $erreurs[] = "Le mot de passe doit contenir au moins 4 lettres majuscules.";
+    }
+    if ($nbMin < 4) {
+        $erreurs[] = "Le mot de passe doit contenir au moins 4 lettres minuscules.";
+    }
+    if ($nbChiffres < 2) {
+        $erreurs[] = "Le mot de passe doit contenir au moins 2 chiffres.";
+    }
+    if ($nbSpeciaux < 2) {
+        $erreurs[] = "Le mot de passe doit contenir au moins 2 caractères spéciaux.";
+    }
+
+    return $erreurs;
+}
+
     public function insertClient($tab){
         //controle des donnees du clients
+        if (isset($_POST['valider'])) {
 
-        //appel du modele pour realiser l'insertion
-        $this->unModele->insertClient($tab);
+        $mdp = $_POST['mdp_c'];
+        $erreurs = $this->verifierMotDePasse($mdp);
+
+        if (!empty($erreurs)) {
+            // On passe les erreurs à la vue
+            echo 'mot de passe non valide';
+        }else{
+            //appel du modele pour realiser l'insertion
+            $this->unModele->insertClient($tab);
+        }
+    }
+    
+
+        
     }
     public function selectAllClient(){
         return $this->unModele->selectAllClient();
@@ -25,8 +66,8 @@ class Controleur {
         $this->unModele->deleteClient($id_c);
     }
 
-    public function selectWhereClient($id_c){
-    return $this->unModele->selectWhereClient($id_c);
+    public function selectWhereClient($email,$mdp){
+    return $this->unModele->selectWhereClient($email,$mdp);
     }
 
     public function updateClient($id_c) {
@@ -52,8 +93,8 @@ class Controleur {
      public function deleteProprietaire($id_p){
         $this->unModele->deleteProprietaire($id_p);
     }
-    public function selectWhereProprietaire($id_p){
-        return $this->unModele->selectWhereProprietaire($id_p);
+    public function selectWhereProprietaire($email,$mdp){
+        return $this->unModele->selectWhereProprietaire($email,$mdp);
     }
     //public function selectWhereProprietaire($email, $mdp){
         //controler l'email et le mdp
@@ -85,6 +126,10 @@ class Controleur {
     return $this->unModele->selectWhereHabitation($ref_hab);
     }
 
+    public function selectHabitationWhereProprietaire($id_p){
+        return $this->unModele->selectHabitationWhereProprietaire($id_p);
+    }
+
     public function updateHabitation($ref_hab) {
         return $this->unModele->updateHabitation($ref_hab);
     }
@@ -111,9 +156,19 @@ class Controleur {
     public function selectWhereReservation($ref_res){
     return $this->unModele->selectWhereReservation($ref_res);
     }
-
+    public function selectReservationWhereClient($id_c){
+        return $this->unModele->selectReservationWhereClient($id_c);
+    }
     public function updateReservation($ref_res) {
         return $this->unModele->updateReservation($ref_res);
+    }
+
+
+
+
+    //admins
+    public function selectWhereAdmin($email,$mdp){
+        return $this->unModele->selectWhereAdmin($email,$mdp);
     }
 
 }

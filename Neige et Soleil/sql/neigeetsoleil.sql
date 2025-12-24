@@ -119,3 +119,13 @@ create table activite(
     primary key (num_sta,num_acti),
     foreign key (num_sta) references station(num_sta)
 );
+
+create table admin (
+    Id_a int(5) not null auto_increment,
+    nom_a varchar(50) not null,
+    prenom_a varchar(50) not null,
+    email_a varchar(100) not null,
+    mdp_a varchar(200) not null, 
+    role_a varchar(50) not null,
+    primary key(Id_a)
+);

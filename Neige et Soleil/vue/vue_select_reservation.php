@@ -1,11 +1,12 @@
-<h3>Liste des réservations</h3>
+<div class="vueSelect">
 
+<h3>Liste des réservations</h3>
 <form class="listes" method="post">
     <label for="filtre">Filtrer par : </label>
     <input type="text" name="filtre">
     <button type="submit" name="Filtrer" value="Filtrer">Filter</button>
-</form>
-<br>
+</form><br>
+
 <table>
     <tr>
         <th>ID de la réservation</th>
@@ -42,4 +43,6 @@ if (isset($lesReservations)){
     }
 }
 ?>
+
+</div>
 </table>
