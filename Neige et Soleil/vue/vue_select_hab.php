@@ -4,7 +4,8 @@
 <form class="listes" method="post">
     <label for="filtre">Filtrer par :</label> 
     <input type="text" name="filtre">
-    <button type="submit" name="Filtrer" value="Filtrer">Filtrer</button>
+    <input class="btnForm" type="submit" name="filtrer" value="filtrer">
+    <input class="btnForm" type="submit" name="effacer" value="effacer">
 </form><br>
 
 <table>

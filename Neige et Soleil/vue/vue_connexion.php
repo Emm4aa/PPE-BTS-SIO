@@ -23,7 +23,7 @@
         </table>
         <div>
             <!-- <button class="btnForm" type="reset" name="Annuler" value="Annuler">Annuler</button> -->
-            <button class="btnForm" type="submit" name="Connexion" value="Connexion">Connexion</button>
+            <button class="btnForm" type="submit" name="Connexion" value="Connexion" id="Connexion">Connexion</button>
         </div>
     </form>
 

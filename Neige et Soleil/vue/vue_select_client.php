@@ -3,7 +3,8 @@
 <form class="listes" method="post">
 	<label for="filtre">Filtrer par :</label> 
 	<input type="text" name="filtre">
-	<button type="submit" name="Filtrer" value="Filtrer">Filtrer</button>
+	<input class="btnForm" type="submit" name="filtrer" value="filtrer">
+	<input class="btnForm" type="submit" name="effacer" value="effacer">
 </form><br>
 
 <table>
@@ -16,9 +17,10 @@
 		<th>Code postal</th>
 		<th>Ville</th>
 		<th>Téléphone</th>
+		<th>RIB</th>
 		<?php 
 			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
-				echo "<td> Opérations </td>";
+				echo "<th> Opérations </th>";
 			}
 		?>
 	</tr>
@@ -27,13 +29,14 @@
 		foreach ($lesClients as $unClient) {
 			echo "<tr>"; 
 			echo "<td>".$unClient['id_c']."</td>";
-			echo "<td>".$unClient['nom_c']     ."</td>";
-			echo "<td>".$unClient['prenom_c']  ."</td>";
-			echo "<td>".$unClient['email_c']   ."</td>";
-			echo "<td>".$unClient['adr_c'] ."</td>";
-			echo "<td>".$unClient['cp_c'] ."</td>";
-			echo "<td>".$unClient['ville_c'] ."</td>";
-			echo "<td>".$unClient['tel_c']     ."</td>"; 
+			echo "<td>".$unClient['nom_c']."</td>";
+			echo "<td>".$unClient['prenom_c']."</td>";
+			echo "<td>".$unClient['email_c']."</td>";
+			echo "<td>".$unClient['adr_c']."</td>";
+			echo "<td>".$unClient['cp_c']."</td>";
+			echo "<td>".$unClient['ville_c']."</td>";
+			echo "<td>".$unClient['tel_c']."</td>"; 
+			echo "<td>".$unClient['rib_c']."</td>"; 
 
 			echo "<td>"; 
 			echo "<a href='index.php?page=2&action=sup&id_c=".$unClient['id_c']."'>"; 

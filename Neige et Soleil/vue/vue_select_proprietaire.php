@@ -4,7 +4,8 @@
 <form class="listes" method="post">
 	<label for="filtre">Filtrer par : </label>
 	<input type="text" name="filtre">
-	<button type="submit" name="Filtrer" value="Filtrer">Filtrer</button>
+	<input class="btnForm" type="submit" name="filtrer" value="filtrer">
+	<input class="btnForm" type="submit" name="effacer" value="effacer">
 </form><br>
 
 <table>
@@ -17,9 +18,10 @@
 		<th>Code Postal</th>
 		<th>Ville</th>
 		<th>Téléphone</th>
+		<th>RIB</th>
 		<?php 
 			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
-				echo "<td> Opérations </td>";
+				echo "<th> Opérations </th>";
 			}
 		?>
 	</tr>
@@ -28,14 +30,15 @@
 		foreach ($lesProprietaires as $unProprietaire) {
 			echo "<tr>"; 
 			echo "<td>".$unProprietaire['id_p']."</td>";
-			echo "<td>".$unProprietaire['nom_p']     ."</td>";
-			echo "<td>".$unProprietaire['prenom_p']  ."</td>";
-			echo "<td>".$unProprietaire['email_p']   ."</td>";
-			echo "<td>".$unProprietaire['adr_p'] ."</td>";
-			echo "<td>".$unProprietaire['cp_p'] ."</td>";
-			echo "<td>".$unProprietaire['ville_p'] ."</td>";
-			echo "<td>".$unProprietaire['tel_p']     ."</td>"; 
-			/*if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){*/
+			echo "<td>".$unProprietaire['nom_p']."</td>";
+			echo "<td>".$unProprietaire['prenom_p']."</td>";
+			echo "<td>".$unProprietaire['email_p']."</td>";
+			echo "<td>".$unProprietaire['adr_p']."</td>";
+			echo "<td>".$unProprietaire['cp_p']."</td>";
+			echo "<td>".$unProprietaire['ville_p']."</td>";
+			echo "<td>".$unProprietaire['tel_p']."</td>";
+			echo "<td>".$unProprietaire['rib_p']."</td>";  
+			
 				echo "<td>"; 
 				echo "<a href='index.php?page=3&action=sup&id_p=".$unProprietaire['id_p']."'>"; 
 				echo "<img src='images/supprimer.png' width='30' height='30' > </a>";
@@ -47,7 +50,6 @@
 			}
 			echo "</tr>";
 		}
-	/*}*/
 ?>
 </table>
 <br>

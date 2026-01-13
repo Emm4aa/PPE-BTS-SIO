@@ -4,7 +4,8 @@
 <form class="listes" method="post">
     <label for="filtre">Filtrer par : </label>
     <input type="text" name="filtre">
-    <button type="submit" name="Filtrer" value="Filtrer">Filter</button>
+    <input class="btnForm" type="submit" name="filtrer" value="filtrer">
+    <input class="btnForm" type="submit" name="effacer" value="effacer">
 </form><br>
 
 <table>
@@ -17,6 +18,11 @@
         <th>Etat</th>
         <th>ID du client</th>
         <th>ID l'habitation</th>
+        <?php 
+			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+				echo "<th> Opérations </th>";
+			}
+		?>
     </tr>
 <?php
 if (isset($lesReservations)){
@@ -43,6 +49,8 @@ if (isset($lesReservations)){
     }
 }
 ?>
+</table>
+<br>
+<?= ($lesReservations==null)?"": "Nombre de reservations " . count($lesReservations);?>
 
 </div>
-</table>
