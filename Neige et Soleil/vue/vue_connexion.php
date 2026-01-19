@@ -1,5 +1,5 @@
 
-    <form id="formConnexion" method="post" action="<?= BASE_URL ?>/index.php?page=8">
+    <form id="formConnexion" method="post" action="index.php?page=8">
         <table>
             <tr>
                 <td></td>

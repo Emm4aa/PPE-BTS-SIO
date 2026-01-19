@@ -64,19 +64,21 @@ create table region(
     primary key (code_reg)
 );
 
+drop table reservation;
 create table reservation(
     ref_res int(5) not null auto_increment,
     date_res date not null,
     nb_perso int(2) not null,
     date_debut date not null,
     date_fin date not null,
-    etat_res varchar(30) not null,
+    etat_res enum("Validee","En attente","Annulee"),
     id_c int(5) not null,
     ref_hab int(5) not null,
     primary key (ref_res),
     foreign key (id_c) references client(id_c),
     foreign key (ref_hab) references habitation(ref_hab)
 );
+
 
 create table appartement(
     ref_hab int(5) not null auto_increment,
@@ -145,6 +147,13 @@ create table admin (
     primary key(Id_a)
 );
 
+create table archiveReservation as 
+select r.*, curdate() archiDate from reservation r 
+where 2=0;
+
+alter table archiveReservation
+add primary key (ref_res,archiDate);
+
 
 drop trigger if exists insert_maison;
 delimiter //
@@ -203,4 +212,22 @@ create trigger delete_appart
 before delete on appartement for each row BEGIN
     delete from habitation where habitation.ref_hab=old.ref_hab;
 end //
+delimiter ;
+
+
+delimiter //
+create or replace procedure archiRes ()
+begin
+insert into archiveReservation select r.* , curdate() from reservation r 
+where r.etat_res = "Validee";
+end //
+delimiter ;
+
+delimiter //
+create or replace trigger histoRes
+before insert on reservation
+for each row 
+begin 
+call archiRes();
+end // 
 delimiter ;

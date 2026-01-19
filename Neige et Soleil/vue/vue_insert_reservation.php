@@ -20,12 +20,9 @@
 			<td> Etat de la réservation</td>
 			<td><select name="etat_res">
 				<option value="<?= ($reservation==null)?"Choisir un etat":$reservation['etat_res'];?>"><?= ($reservation==null)?"Choisir un etat":$reservation['etat_res'];?></option>
-				<option value="en demande"> En demande </option>
-				<option value="acceptee"> Acceptée </option>
-				<option value="expiree"> Expirée </option>
-				<option value="refusee"> Refusée </option>
-				<option value="confirmee"> Confirmée </option>
-				<option value="annulee"> Annulée </option>
+				<option value="Validee"> En Validée </option>
+				<option value="En attente"> En attente </option>
+				<option value="Annulee"> Annulée </option>
 				</select>
 			</td>
 		</tr>
