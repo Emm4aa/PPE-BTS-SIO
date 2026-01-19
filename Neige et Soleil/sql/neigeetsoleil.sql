@@ -67,7 +67,6 @@ create table region(
 );
 
 create table reservation(
-    
     ref_res int(5) not null auto_increment,
     date_res date not null,
     nb_perso int(2) not null,
@@ -82,16 +81,32 @@ create table reservation(
 );
 
 create table appartement(
-    ref_hab int(5) not null,
+    ref_hab int(5) not null auto_increment,
+    type_hab varchar(20) not null,
+    adr_hab varchar(120) not null,
+    cp_hab int(5) not null,
+    ville_hab varchar(50) not null,
+    tarif_hab_bas float(5) not null,
+    tarif_hab_moy float(5) not null,
+    tarif_hab_hau float(5) not null,
+    surface varchar(10) not null,
+    id_p int(5) not null,
     etage_ap int(2) not null,
-    superficie_ap varchar(5),
     type_ap varchar(3),
     primary key (ref_hab)
 );
 
 create table maison(
-    ref_hab int(5) not null,
-    superficie_m varchar(5) not null,
+    ref_hab int(5) not null auto_increment,
+    type_hab varchar(20) not null,
+    adr_hab varchar(120) not null,
+    cp_hab int(5) not null,
+    ville_hab varchar(50) not null,
+    tarif_hab_bas float(5) not null,
+    tarif_hab_moy float(5) not null,
+    tarif_hab_hau float(5) not null,
+    surface varchar(10) not null,
+    id_p int(5) not null,
     carac_m varchar(50) not null,
     primary key (ref_hab)
 );
@@ -132,6 +147,7 @@ create table admin (
     primary key(Id_a)
 );
 
+<<<<<<< HEAD
 create table if not exists photos(
     id_photo int not null auto_increment,
     ref_hab int not null,
@@ -140,3 +156,64 @@ create table if not exists photos(
     primary key(id_photo),
     foreign key(ref_hab) references habitation(ref_hab) on delete cascade on update cascade
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+=======
+
+drop trigger if exists insert_maison;
+delimiter //
+create trigger insert_maison
+before insert on maison for each row BEGIN
+    if new.ref_hab is null or new.ref_hab in (select ref_hab from habitation) or new.ref_hab = 0 
+    then
+   set new.ref_hab = ifnull((select ref_hab from habitation where ref_hab >= all
+    (select ref_hab from habitation)), 0) +1 ;
+end if;
+insert into habitation values(new.ref_hab,new.type_hab,new.adr_hab,new.cp_hab,new.ville_hab,new.tarif_hab_bas,new.tarif_hab_moy,new.tarif_hab_hau,new.surface,new.id_p);
+end //
+delimiter ;
+
+drop trigger if exists insert_appart;
+delimiter //
+create trigger insert_appart
+before insert on appartement for each row BEGIN
+    if new.ref_hab is null or new.ref_hab in (select ref_hab from habitation) or new.ref_hab = 0 
+    then
+   set new.ref_hab = ifnull((select ref_hab from habitation where ref_hab >= all
+    (select ref_hab from habitation)), 0) +1 ;
+end if;
+insert into habitation values(new.ref_hab,new.type_hab,new.adr_hab,new.cp_hab,new.ville_hab,new.tarif_hab_bas,new.tarif_hab_moy,new.tarif_hab_hau,new.surface,new.id_p);
+end //
+delimiter ;
+
+drop trigger if exists update_maison;
+delimiter //
+create trigger update_maison
+before update on maison for each row BEGIN
+    update habitation set ref_hab=new.ref_hab,type_hab=new.type_hab,adr_hab=new.adr_hab,cp_hab=new.cp_hab,ville_hab=new.ville_hab,tarif_hab_bas=new.tarif_hab_bas,tarif_hab_moy=new.tarif_hab_moy,tarif_hab_hau=new.tarif_hab_hau,surface=new.surface,id_p=new.id_p where habitation.ref_hab=new.ref_hab;
+end //
+delimiter ;
+
+drop trigger if exists update_appart;
+delimiter //
+create trigger update_appart
+before update on appartement for each row BEGIN
+    update habitation set ref_hab=new.ref_hab,type_hab=new.type_hab,adr_hab=new.adr_hab,cp_hab=new.cp_hab,ville_hab=new.ville_hab,tarif_hab_bas=new.tarif_hab_bas,tarif_hab_moy=new.tarif_hab_moy,tarif_hab_hau=new.tarif_hab_hau,surface=new.surface,id_p=new.id_p where habitation.ref_hab=new.ref_hab;
+end //
+delimiter ;
+
+
+drop trigger if exists delete_maison;
+delimiter //
+create trigger delete_maison
+before delete on maison for each row BEGIN
+    delete from habitation where habitation.ref_hab=old.ref_hab;
+end //
+delimiter ;
+
+drop trigger if exists delete_appart;
+delimiter //
+create trigger delete_appart
+before delete on appartement for each row BEGIN
+    delete from habitation where habitation.ref_hab=old.ref_hab;
+end //
+delimiter ;
+>>>>>>> 57354505461910f1a9a8ff7269e80ffae3726cd3
