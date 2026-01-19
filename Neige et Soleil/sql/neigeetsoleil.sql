@@ -13,7 +13,6 @@ create table proprietaire(
     ville_p varchar(50) not null,
     tel_p varchar(10) not null,
     rib_p varchar(30) not null,
-    role_p varchar(20) not null,
     primary key (id_p)
 );
 
@@ -31,6 +30,10 @@ create table habitation(
     primary key (ref_hab),
     foreign key (id_p) references proprietaire(id_p)
 );
+/* 
+    Faire : "ALTER TABLE habitation ENGINE=InnoDB;" pour que la table photos supporte
+    ref_hab en clés etrangere
+ */
 
 create table contrat(
     ref_c int(20) not null auto_increment,
@@ -54,7 +57,6 @@ create table client(
     ville_c varchar(50) not null,
     tel_c varchar(10) not null,
     rib_c varchar(30) not null,
-    role_c varchar(20) not null,
     primary key (id_c)
 );
 
@@ -129,3 +131,12 @@ create table admin (
     role_a varchar(50) not null,
     primary key(Id_a)
 );
+
+create table if not exists photos(
+    id_photo int not null auto_increment,
+    ref_hab int not null,
+    url_photo varchar(255) not null,
+    is_principal boolean default false,
+    primary key(id_photo),
+    foreign key(ref_hab) references habitation(ref_hab) on delete cascade on update cascade
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
