@@ -130,6 +130,55 @@ class Modele{
         $exe->execute($data);
         return $exe->fetch();
     }
+    public function selectAllHabitationType($type){
+        $requete = "SELECT * FROM habitation where type_hab = :type_hab;";
+        $data = array(":type_hab"=>$type);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
+    public function selectAllHabitationTypePrixMin($type,$prixMin){
+        $requete = "SELECT * FROM habitation WHERE type_hab = :type_hab AND tarif_hab_moy >= :prixMin;";
+        $data = array(":type_hab"=>$type, ":prixMin"=>$prixMin);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
+    public function selectAllHabitationTypePrixMax($type,$prixMax){
+        $requete = "SELECT * FROM habitation WHERE type_hab = :type_hab AND tarif_hab_moy <= :prixMax;";
+        $data = array(":type_hab"=>$type, ":prixMax"=>$prixMax);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
+    public function selectAllHabitationTypePrixMinPrixMax($type,$prixMin,$prixMax){
+        $requete = "SELECT * FROM habitation WHERE type_hab = :type_hab AND tarif_hab_moy BETWEEN :prixMin AND :prixMax;";
+        $data = array(":type_hab"=>$type, ":prixMin"=>$prixMin, ":prixMax"=>$prixMax);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
+    public function selectAllHabitationPrixMin($prixMin){
+        $requete = "SELECT * FROM habitation where tarif_hab_moy >= :prixMin;";
+        $data = array(":prixMin"=>$prixMin);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
+    public function selectAllHabitationPrixMax($prixMax){
+        $requete = "SELECT * FROM habitation where tarif_hab_moy <= :prixMax;";
+        $data = array(":prixMax"=>$prixMax);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
+    public function selectAllHabitationPrixMinPrixMax($prixMin, $prixMax){
+        $requete = "SELECT * FROM habitation where tarif_hab_moy between :prixMin and :prixMax;";
+        $data = array(":prixMin"=>$prixMin, ":prixMax"=>$prixMax);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
     public function selectHabitationWhereProprietaire($id_p){
         $requete = "SELECT * FROM habitation WHERE id_p = :id_p;";
         $data = array(":id_p"=>$id_p);
@@ -218,6 +267,24 @@ class Modele{
     public function selectWhereAdmin($email,$mdp){
         $requete = "SELECT * FROM admin where email_a = :email and mdp_a = :mdp;";
         $data = array(":email"=>$email,":mdp"=>$mdp);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetch();
+    }
+
+
+
+
+
+    //Photos
+    public function selectAllPhotoPrincipal(){
+        $requete = "SELECT * FROM photos where is_principal = true;";
+        $exe = $this->unPdo->prepare($requete);
+        return $exe->fetchAll();
+    }
+    public function selectPhotoPrincipalHabitation($refHab){
+        $requete = "SELECT url_photo FROM photos where ref_hab = :ref_hab;";
+        $data = array(":ref_hab"=>$refHab);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();

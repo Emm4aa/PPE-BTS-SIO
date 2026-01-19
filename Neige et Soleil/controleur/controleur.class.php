@@ -71,6 +71,27 @@ class Controleur {
     public function selectAllHabitation(){
         return $this->unModele->selectAllHabitation();
     }
+    public function selectAllHabitationType($type){
+        return $this->unModele->selectAllHabitationType($type);
+    }
+    public function selectAllHabitationTypePrixMin($type,$prixMin){
+        return $this->unModele->selectAllHabitationTypePrixMin($type,$prixMin);
+    }
+    public function selectAllHabitationTypePrixMax($type,$prixMax){
+        return $this->unModele->selectAllHabitationTypePrixMax($type,$prixMax);
+    }
+    public function selectAllHabitationTypePrixMinMax($type,$prixMin,$prixMax){
+        return $this->unModele->selectAllHabitationTypePrixMinPrixMax($type,$prixMin,$prixMax);
+    }
+    public function selectAllHabitationPrixMin($prixMin){
+        return $this->unModele->selectAllHabitationPrixMin($prixMin);
+    }
+    public function selectAllHabitationPrixMax($prixMax){
+        return $this->unModele->selectAllHabitationPrixMax($prixMax);
+    }
+    public function selectAllHabitationPrixMinMax($prixMin,$prixMax){
+        return $this->unModele->selectAllHabitationPrixMinPrixMax($prixMin,$prixMax);
+    }
     public function selectLikeHabitation($filtre){
     return $this->unModele->selectLikeHabitation($filtre);
     }
@@ -120,6 +141,17 @@ class Controleur {
     //admins
     public function selectWhereAdmin($email,$mdp){
         return $this->unModele->selectWhereAdmin($email,$mdp);
+    }
+
+
+
+
+    //Photos
+    public function selectAllPhotoPrincipal(){
+        return $this->unModele->selectAllPhotoPrincipal();
+    }
+    public function selectPhotoPrincipalHabitation($refHab){
+        return $this->unModele->selectPhotoPrincipalHabitation($refHab);
     }
 
 }

@@ -73,11 +73,11 @@
 
     //routeur accés pages 
     switch($page){
-        case 1 : require_once ("controleur/home.php"); break;
-        case 2 : require_once ("controleur/gestion_client.php"); break;
-        case 3 : require_once ("controleur/gestion_proprietaire.php"); break;
-        case 4 : require_once ("controleur/gestion_habitat.php"); break;
-        case 5 : require_once ("controleur/gestion_reservation.php"); break;
+        case 1 : require_once("controleur/home.php"); break;
+        case 2 : require_once("controleur/gestion_client.php"); break;
+        case 3 : require_once("controleur/gestion_proprietaire.php"); break;
+        case 4 : require_once("controleur/gestion_habitat.php"); break;
+        case 5 : require_once("controleur/gestion_reservation.php"); break;
         case 6 : require_once("controleur/gestion_compte_client.php");break;
         case 7 : require_once("controleur/gestion_compte_proprietaire.php");break;
         case 8 : require_once("controleur/gestion_connexion.php");break;
@@ -86,6 +86,7 @@
             header("Location: index.php");
             exit;
         break;
+        case 10 : require_once("controleur/gestion_reservation_habitation.php");break;
         default : header("Location: controleur/erreur.php");break;
     }
 ?>
