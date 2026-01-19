@@ -41,7 +41,7 @@
                     <p><?= $uneHabitation['type_hab'];?></p>
                     <p>Proprietaire <?= $uneHabitation['id_p']; ?> </p>
                     <p><?= $uneHabitation['tarif_hab_moy'] ?>€ la nuit</p>
-                    <a id="btReserver" href="">
+                    <a id="btReserver" href="index.php?page=10&ref_hab=<?= $uneHabitation['ref_hab']?>"  target="_blank">
                         <span class="material-symbols-outlined">event_available</span>
                     </a>
                 </div>

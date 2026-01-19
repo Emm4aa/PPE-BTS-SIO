@@ -382,7 +382,7 @@ form button{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     margin: 2rem 0 2rem 0;
     background-color: #f2f2f2;
 }
@@ -396,4 +396,10 @@ form button{
     flex-direction: column;
 }
 
+.capacitePrixHab{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
 

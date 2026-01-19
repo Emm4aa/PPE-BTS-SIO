@@ -147,7 +147,6 @@ create table admin (
     primary key(Id_a)
 );
 
-<<<<<<< HEAD
 create table if not exists photos(
     id_photo int not null auto_increment,
     ref_hab int not null,
@@ -156,7 +155,6 @@ create table if not exists photos(
     primary key(id_photo),
     foreign key(ref_hab) references habitation(ref_hab) on delete cascade on update cascade
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-=======
 
 drop trigger if exists insert_maison;
 delimiter //
@@ -216,4 +214,3 @@ before delete on appartement for each row BEGIN
     delete from habitation where habitation.ref_hab=old.ref_hab;
 end //
 delimiter ;
->>>>>>> 57354505461910f1a9a8ff7269e80ffae3726cd3
