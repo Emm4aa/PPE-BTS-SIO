@@ -66,19 +66,21 @@ create table region(
     primary key (code_reg)
 );
 
+drop table reservation;
 create table reservation(
     ref_res int(5) not null auto_increment,
     date_res date not null,
     nb_perso int(2) not null,
     date_debut date not null,
     date_fin date not null,
-    etat_res varchar(30) not null,
+    etat_res enum("Validee","En attente","Annulee"),
     id_c int(5) not null,
     ref_hab int(5) not null,
     primary key (ref_res),
     foreign key (id_c) references client(id_c),
     foreign key (ref_hab) references habitation(ref_hab)
 );
+
 
 create table appartement(
     ref_hab int(5) not null auto_increment,
@@ -94,7 +96,7 @@ create table appartement(
     etage_ap int(2) not null,
     type_ap varchar(3),
     primary key (ref_hab)
-);
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 create table maison(
     ref_hab int(5) not null auto_increment,
@@ -109,7 +111,7 @@ create table maison(
     id_p int(5) not null,
     carac_m varchar(50) not null,
     primary key (ref_hab)
-);
+) ENGINE = InnoDB CHARSET = utf8mb4;
 
 create table image(
     ref_image int(5) not null auto_increment,
@@ -146,6 +148,15 @@ create table admin (
     role_a varchar(50) not null,
     primary key(Id_a)
 );
+
+
+
+create table archiveReservation as 
+select r.*, curdate() archiDate from reservation r 
+where 2=0;
+
+alter table archiveReservation
+add primary key (ref_res,archiDate);
 
 create table if not exists photos(
     id_photo int not null auto_increment,
@@ -213,4 +224,26 @@ create trigger delete_appart
 before delete on appartement for each row BEGIN
     delete from habitation where habitation.ref_hab=old.ref_hab;
 end //
+delimiter ;
+
+
+DROP PROCEDURE IF EXISTS archiRes;
+DELIMITER //
+CREATE PROCEDURE archiRes()
+BEGIN
+    INSERT INTO archiveReservation
+    SELECT r.*, CURDATE()
+    FROM reservation r
+    WHERE r.etat_res = 'Validee';
+END //
+DELIMITER ;
+
+drop trigger if exists histoRes;
+delimiter //
+create trigger histoRes
+before insert on reservation
+for each row 
+begin 
+call archiRes();
+end // 
 delimiter ;

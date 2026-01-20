@@ -22,10 +22,19 @@
             document.getElementById('prixTotal').textContent = prixParNuit+"€ la nuit";
         } 
     } 
-    document.addEventListener("DOMContentLoaded", ()=>{
-        document.getElementById('arrivee').addEventListener('change', calculPrix); 
-        document.getElementById('depart').addEventListener('change', calculPrix);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const arrivee = document.getElementById('arrivee');
+        const depart = document.getElementById('depart');
+
+        // 🔥 Ajout de la contrainte : la date de départ doit être ≥ date d'arrivée
+        arrivee.addEventListener('change', () => {
+            depart.min = arrivee.value;  
+            calculPrix();
+        });
+
+        depart.addEventListener('change', calculPrix);
 
         calculPrix();
-    })
+    });
 </script>
