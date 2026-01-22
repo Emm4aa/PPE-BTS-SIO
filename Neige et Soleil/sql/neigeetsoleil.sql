@@ -250,7 +250,7 @@ delimiter ;
 
 set global event_scheduler = on;
 
-drop event deleteRes;
+drop event if exists deleteRes;
 delimiter //
 create or replace event deleteRes
 on schedule every 1 minute
