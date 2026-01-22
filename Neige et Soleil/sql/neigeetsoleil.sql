@@ -156,7 +156,7 @@ select r.*, curdate() archiDate from reservation r
 where 2=0;
 
 alter table archiveReservation
-add primary key (ref_res,archiDate);
+add primary key (ref_res);
 
 create table if not exists photos(
     id_photo int not null auto_increment,
@@ -241,9 +241,23 @@ DELIMITER ;
 drop trigger if exists histoRes;
 delimiter //
 create trigger histoRes
-before insert on reservation
+after update on reservation
 for each row 
 begin 
-call archiRes();
+call archiRes;
 end // 
+delimiter ;
+
+set global event_scheduler = on;
+
+drop event deleteRes;
+delimiter //
+create or replace event deleteRes
+on schedule every 1 minute
+do 
+begin 
+delete from reservation
+where etat_res = 'Validee'
+and ref_res in (select ref_res from archivereservation);
+end//
 delimiter ;
