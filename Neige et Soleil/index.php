@@ -50,22 +50,22 @@
     <?php
     //protection accés pages sensibles
     $pageProtege = [
-        2 => 'admin',
-        3 => 'admin',
-        4 => 'admin',
-        5 => 'admin',
-        6 => 'client',
-        7 => 'proprietaire'
+        2 => ['admin'],
+        3 => ['admin'],
+        4 => ['admin','proprietaire'],
+        5 => ['admin'],
+        6 => ['client'],
+        7 => ['proprietaire']
     ];
 
     $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 
     if(isset($pageProtege[$page])){
-        if(!isset($_SESSION['email']) && !isset($_SESSION['role'])){
+        if(!isset($_SESSION['email']) || !isset($_SESSION['role'])){
             header("Location: index.php?page=1");
             exit;
         }
-        if($_SESSION['role'] !== $pageProtege[$page]){
+        if(!in_array($_SESSION['role'], $pageProtege[$page])){
             header("Location: index.php?page=1");
             exit;
         }
@@ -87,6 +87,15 @@
             exit;
         break;
         case 10 : require_once("controleur/gestion_reservation_habitation.php");break;
+        case 11 : require_once("controleur/gestion_confirmation_reservation.php");break;
+        case 12 : require_once("controleur/gestion_reservation_confirmee.php");break;
+        case 13 : require_once("controleur/gestion_creation_annonce.php");break;
+        case 14 : require_once("controleur/gestion_creation_annonce_confirmee.php");break;
+        case 15 : require_once("controleur/gestion_creation_compte.php");break;
+        case 16 : require_once("controleur/gestion_creation_compte_confirmee.php");break;
+        case 17 : require_once("controleur/gestion_mdp_oublie.php");break;
+        case 18 : require_once("controleur/gestion_confirmation_mdp_oublie.php");break;
+        case 19 : require_once("controleur/gestion_nouveau_mdp_valide.php");break;
         default : header("Location: controleur/erreur.php");break;
     }
 ?>

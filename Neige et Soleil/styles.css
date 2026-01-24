@@ -106,7 +106,6 @@ h3{
     margin-top: 1rem;
 }
 
-
 #formConnexion{
     display: flex;
     flex-direction: column;
@@ -123,19 +122,42 @@ h3{
     padding: 0.1rem;
     border: none;
 }
+#lienMdpOublie{
+    margin: 0.2rem 0 0 0;
+}
+#lienMdpOublie:hover{
+    text-decoration: underline;
+}
+#creerNouveauCompte{
+     margin: 2rem 0 0 0;
+     padding: 1rem;
+     background-color: #42b72a;
+     color:black;
+     border-radius: 20px;
+     transition: 0.2s ease;
+}
+#creerNouveauCompte:hover{
+    transform: translateY(10%);
+    color: white;
+}
 .btnForm{
+    all: unset;
+}
+.btnForm span {
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
     background-color: black;
     color: white;
-    border: none;
-    padding: 0.3rem;
-    border-radius: 20px;
-    cursor: pointer;
+    transition: 0.2s ease;     /* animation propre */
 }
-.btnForm:hover{
+.btnForm span:hover {
     color: black;
     background-color: #f1dd18;
+    cursor: pointer;
 }
-
 table{
     border: solid 1px black;
     border-collapse: collapse;
@@ -242,6 +264,53 @@ form button{
     gap: 0.5rem;
 }
 
+#btAnnulerReservation{
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: red;
+    color: white;
+    transition: 0.1s ease;
+   
+}
+#btAnnulerReservation:hover{
+    transform: scale(110%);
+}
+
+#btReservationValidee{
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: #42b72a;
+    color: white;
+}
+#btReservationValidee{
+    cursor:default;
+}
+
+#btAjouterHabitation{
+    all: unset;
+}
+#btAjouterHabitation span {
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: black;
+    color: white;
+    transition: 0.2s ease;     /* animation propre */
+}
+#btAjouterHabitation span:hover {
+    color: black;
+    background-color: #f1dd18;
+    cursor: pointer;
+}
+
 
 
 
@@ -277,7 +346,6 @@ form button{
     object-fit: cover;
     border-radius: 20px; /* optionnel */
 }
-
 #conteneurRechercheAnnonces{
     background-color: #f2f2f2;
     padding: 3rem;
@@ -312,7 +380,8 @@ form button{
     transition: 0.2s ease;     /* animation propre */
 }
 .btnRechercheAnnonces span:hover {
-    opacity: 0.7;
+    color: black;
+    background-color: #f1dd18;
     cursor: pointer;
 }
 
@@ -359,23 +428,22 @@ form button{
   grid-template-columns: 600px 300px ; /* grande colonne + petite colonne */
   grid-auto-rows: 200px; /* hauteur de base des lignes */
   gap: 12px;
-  margin: 2rem 0 2rem 0;
+  margin-top: 1rem;
 }
-
 .galleryReservation img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 6px;
 }
-
 /* Grande image */
 .galleryReservation .big {
   grid-row: span 2; /* occupe 2 lignes */
 }
-
-
-
+.typeVilleDescHabitation{
+    width: 900px;
+    margin-bottom: 1rem;
+}
 #formResa{
     padding: 1rem;
     border-radius: 20px;
@@ -383,7 +451,6 @@ form button{
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    margin: 2rem 0 2rem 0;
     background-color: #f2f2f2;
 }
 .formResaInputs{
@@ -395,7 +462,6 @@ form button{
     display: flex;
     flex-direction: column;
 }
-
 .capacitePrixHab{
     display: flex;
     flex-direction: row;
@@ -403,3 +469,215 @@ form button{
     width: 100%;
 }
 
+#reserver{
+    all: unset;
+}
+#reserver span {
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: black;
+    color: white;
+    transition: 0.2s ease;     /* animation propre */
+}
+#reserver span:hover {
+    color: black;
+    background-color: #f1dd18;
+    cursor: pointer;
+}
+
+#msg-login-resa{
+    color: red;
+    margin-bottom: 1rem;
+}
+
+
+
+/*Confirmation resa*/
+.conteneurPrincipalConfirmationResa{
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 20px;
+    width: 25%;
+    margin-bottom: 2rem;
+}
+.dataConfirmationResa{
+    padding: 0.5rem 0 0.5rem 0;
+    border-top: 1px solid black;
+}
+.dataAnnulationResa{
+    padding: 1rem 0 1rem 0;
+}
+#formBtConfirmationResa{
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+#btConfirmationResa{
+    all: unset;
+}
+#btConfirmationResa span {
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: black;
+    color: white;
+    transition: 0.2s ease;     /* animation propre */
+}
+#btConfirmationResa span:hover {
+    color: black;
+    background-color: #42b72a;
+    cursor: pointer;
+}
+.conteneurImgConfirmationResa{
+    flex: 1;
+    width: 150px;
+}
+.conteneurTitreDataHabitation{
+    flex: 1;
+}
+.imgConfirmationResa{
+    width: 100%;
+    height: 150px; /* ou ce que tu veux */
+    object-fit: cover;
+    border-radius: 20px; /* optionnel */
+}
+.cardTeteConfirmationResa{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+#titreConfirmationResa{
+    margin: 0 0 2rem 0;
+}
+
+
+
+
+/*resa confirmee*/
+.conteneurMsgResaConfirmee{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: auto;
+    padding: 2rem;
+    background-color: #f2f2f2;
+    border-radius: 20px;
+}
+
+.sectionMsgResaValidee{
+    height: 100%;
+}
+
+.prenomMsgResaConfirmee{
+    color:#f1dd18;
+    font-weight: bold;
+}
+
+#retourAccueil{
+    text-decoration: underline;
+}
+
+
+
+/*creation annonce*/
+#ajouter{
+    all: unset;
+}
+#ajouter span {
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: black;
+    color: white;
+    transition: 0.2s ease;     /* animation propre */
+    margin-top: 1rem;
+}
+#ajouter span:hover {
+    color: black;
+    background-color: #42b72a;
+    cursor: pointer;
+}
+
+
+#formAjouterHabitationProprietaire{
+    margin-top: 1rem;
+}
+#ajouterHabitationProprietaire:hover{
+    background-color: #f1dd18;
+    color: black;
+}
+
+#ajouterHabitationProprietaire{
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+
+
+
+/*vue creation compte*/
+#cree{
+    all: unset;
+}
+#cree span {
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: black;
+    color: white;
+    transition: 0.2s ease;     /* animation propre */
+    margin-top: 1rem;
+}
+#cree span:hover {
+    color: black;
+    background-color: #42b72a;
+    cursor: pointer;
+}
+
+
+/*vue mdp oublie*/
+#verifier{
+    all: unset;
+}
+#verifier span {
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: black;
+    color: white;
+    transition: 0.2s ease;     /* animation propre */
+    margin-top: 1rem;
+}
+#verifier span:hover {
+    color: black;
+    background-color: #42b72a;
+    cursor: pointer;
+}
+#msgNvMdpValide{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 20px;
+}

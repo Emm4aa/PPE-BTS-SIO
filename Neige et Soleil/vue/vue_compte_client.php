@@ -1,5 +1,6 @@
+<section>
+    <h1>Mon compte</h1>
 <div class="vue_compte">
-
 <div class="infos_perso">
     <h4>Mes informations</h4>
     <table>
@@ -43,6 +44,8 @@
                     <th>Nombre personnes</th>
                     <th>Début</th>
                     <th>Fin</th>
+                    <th>Etat</th>
+                    <th>Option</th>
                 </tr>
             <?php foreach($resaClient as $resa): ?>
                 <tr>
@@ -51,6 +54,17 @@
                     <td><?= htmlspecialchars($resa['nb_perso']);?></td>
                     <td><?= htmlspecialchars($resa['date_debut']);?></td>
                     <td><?= htmlspecialchars($resa['date_fin']);?></td>
+                    <td><?= htmlspecialchars($resa['etat_res']) ?></td>
+                    <td>
+                        <?php if ($resa['etat_res'] == 'en demande'):?>
+                        <a href="index.php?page=6&action=sup&ref_res=<?= $resa['ref_res'] ?>" id="btAnnulerReservation"
+                        onclick="return confirm('Voulez vous annuler cette réservation ?')">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
+                        <?php else: ?>
+                            <span class="material-symbols-outlined" id="btReservationValidee">check</span>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
@@ -58,5 +72,5 @@
         <?php endif; ?>
     </table>
 </div>
-
 </div>
+</section>

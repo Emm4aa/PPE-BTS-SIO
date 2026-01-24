@@ -7,7 +7,7 @@
 </section>
 <section id="sectionAnnonces">
     <div id="conteneurRechercheAnnonces">
-        <form id="formRecherheAnnonces" action="" method="post">
+        <form id="formRecherheAnnonces" action="index.php?page=1#formRecherheAnnonces" method="post">
             <div class="r">
                 <label for="type">Type</label>
                 <select name="type">
@@ -36,15 +36,14 @@
                     $refHab = $uneHabitation['ref_hab'];
                     $photoPcpl = $unControleur->selectPhotoPrincipalHabitation($refHab);
                 ?>
-                <div class="cardAnnonceHabitation">
-                    <img class="imgHabitation" src="<?= $photoPcpl['url_photo'] ?>" alt="">
-                    <p><?= $uneHabitation['type_hab'];?></p>
-                    <p>Proprietaire <?= $uneHabitation['id_p']; ?> </p>
-                    <p><?= $uneHabitation['tarif_hab_moy'] ?>€ la nuit</p>
-                    <a id="btReserver" href="index.php?page=10&ref_hab=<?= $uneHabitation['ref_hab']?>"  target="_blank">
-                        <span class="material-symbols-outlined">event_available</span>
-                    </a>
-                </div>
+                <a  href="index.php?page=10&ref_hab=<?= $uneHabitation['ref_hab']?>"  target="_blank">
+                    <div class="cardAnnonceHabitation">
+                        <img class="imgHabitation" src="<?= $photoPcpl['url_photo'] ?>" alt="">
+                        <p><?= $uneHabitation['type_hab'];?></p>
+                        <p><?= $uneHabitation['ville_hab'] ?></p>
+                        <p><?= $uneHabitation['tarif_hab_moy'] ?>€ la nuit</p>
+                    </div>
+                </a>
             <?php endforeach; ?>
         <?php endif; ?>
         <?php if(empty($lesHabitations)):?>

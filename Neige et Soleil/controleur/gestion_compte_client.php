@@ -1,6 +1,11 @@
-<?php $resaClient = $unControleur->selectReservationWhereClient($_SESSION['id']); ?>
+<?php 
+if(isset($_GET['action']) && isset($_GET['ref_res'])){
+    $refRes = $_GET['ref_res'];
+    $unControleur->deleteReservation($refRes);
+}
 
-<section>
-    <h1>Mon compte</h1>
-    <?php require_once("vue/vue_compte_client.php");?>
-</section>
+$resaClient = $unControleur->selectReservationWhereClient($_SESSION['id']);
+
+require_once("vue/vue_compte_client.php");
+
+?>

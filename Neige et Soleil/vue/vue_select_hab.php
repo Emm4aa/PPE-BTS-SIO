@@ -21,7 +21,7 @@
         <th>Surface</th>
         <th>ID du proprietaire </th>
         <?php 
-			if(isset($_SESSION['role']) && $_SESSION['role'] == 'proprietaire'){
+			if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 				echo "<td> Opération </td>";
 			}
 		?>

@@ -1,6 +1,15 @@
-<?php $habProprio = $unControleur->selectHabitationWhereProprietaire($_SESSION['id'])?>
+<?php 
+    if(isset($_POST['ajouter'])){
+            $habitation = null;
+            require_once("vue/vue_insert_hab.php");
+        }
 
-<section>
-    <h1>Mon compte</h1>
-    <?php require_once("vue/vue_compte_proprietaire.php");?>
-</section>
+    if(isset($_GET['action']) && isset($_GET['ref_hab'])){
+        $refHab = $_GET['ref_hab'];
+        $unControleur->deleteHabitation($refHab);
+    }
+
+    $habProprio = $unControleur->selectHabitationWhereProprietaire($_SESSION['id']);
+    
+    require_once("vue/vue_compte_proprietaire.php");
+?>

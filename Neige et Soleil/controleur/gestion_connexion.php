@@ -1,3 +1,4 @@
+<section>
 <?php 
 require_once("vue/vue_connexion.php");
 //recup infos formulaire
@@ -63,3 +64,4 @@ require_once("vue/vue_connexion.php");
         }
     }
 ?>
+</section>

@@ -8,6 +8,8 @@ $lesHabitations = $unControleur->selectAllHabitation();
 $lesclients = $unControleur->selectAllClient();
 $lesProprietaires = $unControleur->selectAllProprietaire();
 
+
+
 if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 	$habitation = null;
 	if(isset($_GET['action']) && isset($_GET['ref_hab'])){
@@ -20,6 +22,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
 		}
 	}
 }
+
 
 if(isset($_POST['valider'])){
 	$unControleur->insertHabitation($_POST);
@@ -41,9 +44,8 @@ if(isset($_POST['filtrer'])){
 }else{
 	$lesHabitations = $unControleur->selectAllHabitation();
 }
-
-require_once("vue/vue_insert_hab.php");
-require_once ("vue/vue_select_hab.php");
+	require_once("vue/vue_insert_hab.php");
+	require_once ("vue/vue_select_hab.php");
 ?>
 
 </div>
