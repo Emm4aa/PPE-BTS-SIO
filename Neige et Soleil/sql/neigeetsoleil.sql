@@ -297,7 +297,7 @@ on schedule every 1 minute
 do 
 begin 
 delete from contrat
-where etat_res = 'Annule' or 'Resilie'
+where status_c = 'Annule' or 'Resilie'
 and ref_c in (select ref_c from archiveContrat);
 end//
 delimiter ;
