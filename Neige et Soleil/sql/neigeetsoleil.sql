@@ -38,7 +38,7 @@ create table habitation(
 create table contrat(
     ref_c int(20) not null auto_increment,
     status_c enum("En validation","En cours","Annule","Resilie"),
-    annee_c int(4) not null,
+    deschabitation varchar(255),
     id_p int(5) not null,
     ref_hab int(5) not null,
     primary key (ref_c),
@@ -60,11 +60,6 @@ create table client(
     primary key (id_c)
 );
 
-create table region(
-    code_reg int(5) not null,
-    nom_reg varchar(50) not null,
-    primary key (code_reg)
-);
 
 drop table reservation;
 create table reservation(
