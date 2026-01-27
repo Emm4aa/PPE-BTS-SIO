@@ -38,7 +38,8 @@ create table habitation(
 create table contrat(
     ref_c int(20) not null auto_increment,
     status_c enum("En validation","En cours","Annule","Resilie"),
-    deschabitation varchar(255),
+    annee_signature date not null,
+    annee_fin date not null,
     id_p int(5) not null,
     ref_hab int(5) not null,
     primary key (ref_c),
