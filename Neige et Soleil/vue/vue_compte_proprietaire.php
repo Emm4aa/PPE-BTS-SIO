@@ -46,6 +46,7 @@
                 <th>Ville</th>
                 <th>Surface</th>
                 <th>Option</th>
+                <th>Contrat</th>
             </tr>
     <?php foreach($habProprio as $hab): ?>
         <tr>
@@ -62,6 +63,7 @@
                 </a>
 
             </td>
+            <td><a href="generateurContrat.php?ref_hab=<?= $hab['ref_hab'] ?>" target="_blank">Voir</a></td>
         </tr>
     <?php endforeach; ?>
     <?php else :?>

@@ -212,6 +212,23 @@ class Modele{
         return $exe->fetchAll();
     }
 
+    //Maisons
+    public function selectWhereMaison($ref_hab){
+        $requete = "SELECT * FROM maison WHERE ref_hab = :ref_hab;";
+        $data = array(":ref_hab"=>$ref_hab);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
+
+    //Appartements
+    public function selectWhereAppartement($ref_hab){
+        $requete = "SELECT * FROM appartement WHERE ref_hab = :ref_hab;";
+        $data = array(":ref_hab"=>$ref_hab);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
 
     //Reservations
     public function selectAllReservation(){

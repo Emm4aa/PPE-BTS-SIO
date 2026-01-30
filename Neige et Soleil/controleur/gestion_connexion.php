@@ -21,6 +21,7 @@ require_once("vue/vue_connexion.php");
                 $_SESSION['ville'] = $unClient['ville_c'];
                 $_SESSION['tel'] = $unClient['tel_c'];
                 $_SESSION['id'] = $unClient['id_c'];
+                $_SESSION['rib'] = $unClient['rib_c'];
 
                 //on recharge la page
                 header("Location: index.php?page=1");
@@ -42,6 +43,7 @@ require_once("vue/vue_connexion.php");
                 $_SESSION['ville'] = $unProprietaire['ville_p'];
                 $_SESSION['tel'] = $unProprietaire['tel_p'];
                 $_SESSION['id'] = $unProprietaire['id_p'];
+                $_SESSION['rib'] = $unProprietaire['rib_p'];
                 //on recharge la page
                 header("Location: index.php?page=1");
                 exit;
