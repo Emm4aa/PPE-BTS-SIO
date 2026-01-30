@@ -6,7 +6,7 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +55,11 @@
         4 => ['admin','proprietaire'],
         5 => ['admin'],
         6 => ['client'],
-        7 => ['proprietaire']
+        7 => ['proprietaire'],
+        11 => ['client'],
+        12 => ['client'],
+        13 => ['proprietaire'],
+        14 => ['proprietaire'],
     ];
 
     $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
@@ -96,6 +100,9 @@
         case 17 : require_once("controleur/gestion_mdp_oublie.php");break;
         case 18 : require_once("controleur/gestion_confirmation_mdp_oublie.php");break;
         case 19 : require_once("controleur/gestion_nouveau_mdp_valide.php");break;
+        case 20 : require_once("controleur/gestion_update_client.php");break;
+        case 21 : require_once("controleur/gestion_update_proprietaire.php");break;
+        case 22 : require_once("controleur/gestion_update_habitation.php");break;
         default : header("Location: controleur/erreur.php");break;
     }
 ?>

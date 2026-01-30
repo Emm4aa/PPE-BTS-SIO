@@ -3,6 +3,8 @@
         $refHab = $_GET['ref_hab'];
 
         $habitation = $unControleur->selectWhereHabitation($refHab);
+        $photoPrincipal = $unControleur->selectPhotoPrincipalHabitation($refHab);
+        $photosSecondaires = $unControleur->selectAllPhotosWhere($refHab);
     }
 ?>
 
@@ -38,7 +40,8 @@
         demain.setDate(demain.getDate() + 1);
         arrivee.min = ajd;
         arrivee.value = ajd;
-        depart.min = demain.toISOString().split('T')[0]; 
+        depart.min = demain.toISOString().split('T')[0];
+        depart.value = demain.toISOString().split('T')[0];
 
         
         arrivee.addEventListener('change', () => {
@@ -81,10 +84,12 @@
             $_SESSION['msg-login-resa'] = "Veuillez vous connecter ou créer un compte pour pouvoir réserver une habitation !";
             header("Location: index.php?page=8");
         }
-    } 
+    }
+    
+    require_once("vue/vue_reservation_habitation.php");
 ?>
 
-<?php 
-     require_once("vue/vue_reservation_habitation.php");
-?>
+
+     
+
 

@@ -29,7 +29,8 @@ class Controleur {
     return $this->unModele->selectWhereIdClient($id_c);
     }
     public function updateClient($id_c) {
-        return $this->unModele->updateClient($id_c);
+        $_POST['id_c'] = $id_c;
+        return $this->unModele->updateClient($_POST);
     }   
 
 
@@ -56,17 +57,17 @@ class Controleur {
         //controler l'email et le mdp
         // return $this->unModele->selectWhereProprietaire($email, $mdp);
     //}
-    public function updateProprietaire($tab){
-        $this->unModele->updateProprietaire($tab);
+    public function updateProprietaire($id_p){
+        $_POST['id_p'] = $id_p;
+        $this->unModele->updateProprietaire($_POST);
     }
 
 
     //Habitations
     public function insertHabitation($tab){
         //controle des donnees du clients
-
         //appel du modele pour realiser l'insertion
-        $this->unModele->insertHabitation($tab);
+       return $this->unModele->insertHabitation($tab);
     }
     public function selectAllHabitation(){
         return $this->unModele->selectAllHabitation();
@@ -106,6 +107,9 @@ class Controleur {
     }
     public function updateHabitation($ref_hab) {
         return $this->unModele->updateHabitation($ref_hab);
+    }
+    public function updateHabitationAnnonce($tab) {
+        $this->unModele->updateHabitationAnnonce($tab);
     }
 
 
@@ -150,8 +154,17 @@ class Controleur {
     public function selectAllPhotoPrincipal(){
         return $this->unModele->selectAllPhotoPrincipal();
     }
+    public function selectAllPhotosWhere($refHab){
+        return $this->unModele->selectAllPhotosWhere($refHab);
+    }
     public function selectPhotoPrincipalHabitation($refHab){
         return $this->unModele->selectPhotoPrincipalHabitation($refHab);
+    }
+    public function insertPhoto($tab){
+        $this->unModele->insertPhoto($tab);
+    }
+    public function deletePhotos($refHab){
+        $this->unModele->deletePhotos($refHab);
     }
 
 }

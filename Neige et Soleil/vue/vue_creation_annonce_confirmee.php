@@ -7,6 +7,9 @@
             Vous recevrez un email de confirmation sous 24H afin de valider définitivement 
             l'ajout de votre habitation.
         </p>
-        <a href="index.php?page=1" id="retourAccueil">Revenir à l'accueil</a>
+        <div class="liensRetoursResaConfirmee">
+            <a href="index.php?page=1" id="retourAccueil">Revenir à l'accueil</a>
+            <a href="index.php?page=7" id="retourEspacePerso">Revenir sur mon espace</a>
+        </div>
     </div>
 </section>

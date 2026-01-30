@@ -1,13 +1,13 @@
 <section>
 <h2><?= $habitation['titre_hab'] ?></h2>
 <div class="galleryReservation">
-    <img class="imgReservation big" src="images/test1.jpg" alt="">
-    <img class="imgReservation small" src="images/test2.jpg" alt="">
-    <img class="imgReservation small" src="images/test3.jpg" alt="">
+    <img class="imgReservation big" src="images/habitations/<?= $photoPrincipal['url_photo'] ?>" alt="">
+    <?php foreach($photosSecondaires as $photo):?>
+    <img class="imgReservation small" src="images/habitations/<?= $photo['url_photo'] ?>" alt="">
+    <?php endforeach; ?>
 </div>
 <div class="typeVilleDescHabitation">
     <h3><?= $habitation['type_hab'] ?>, <?= $habitation['ville_hab'] ?> - <?= $habitation['cp_hab'] ?></h3>
-    <p>Description habitation</p>
     <p><?= $habitation['description_hab'] ?></p>
 </div>
 
@@ -32,6 +32,7 @@
             </div>
         </div>
 
+        <input type="hidden" name="refHab" value="<?= $habitation['ref_hab'] ?>">
         <input type="hidden" name="typeHabitation" value="<?= $habitation['type_hab'] ?>">
         <input type="hidden" name="titreHabitation" value="<?= $habitation['titre_hab']?>">
         <input type="hidden" name="adresseHabitation" value="<?= $habitation['adr_hab'] ?>">

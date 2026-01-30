@@ -18,13 +18,24 @@
             </div>
             <div class="r">
                 <label for="prixMax">Prix max :</label>
-                <input type="number" name="prixMax">
+                <input type="number" name="prixMax" id="prixMax">
             </div>
             <div class="r">
                 <label for="prixMin">Prix min :</label>
-                <input type="number" name="prixMin">
+                <input type="number" name="prixMin" id="prixMin">
             </div>
-            <button type="submit" class="btnRechercheAnnonces" name="rechercher">
+            <script>
+                let prixMax = document.getElementById('prixMax');
+                let prixMin = document.getElementById('prixMin');
+
+                prixMax.addEventListener('input',()=>{
+                    prixMin.max = prixMax.value;
+                })
+                prixMin.addEventListener('input',()=>{
+                    prixMax.min = prixMin.value;
+                })
+            </script>
+            <button type="submit" class="btnRechercheAnnonces" name="rechercher" translate="no">
                 <span class="material-symbols-outlined icon-search" translate="no">search</span>
             </button>
         </form>
@@ -36,9 +47,9 @@
                     $refHab = $uneHabitation['ref_hab'];
                     $photoPcpl = $unControleur->selectPhotoPrincipalHabitation($refHab);
                 ?>
-                <a  href="index.php?page=10&ref_hab=<?= $uneHabitation['ref_hab']?>"  target="_blank">
+                <a href="index.php?page=10&ref_hab=<?= $uneHabitation['ref_hab']?>"  target="_blank">
                     <div class="cardAnnonceHabitation">
-                        <img class="imgHabitation" src="<?= $photoPcpl['url_photo'] ?>" alt="">
+                        <img class="imgHabitation" src="images/habitations/<?= $photoPcpl['url_photo'] ?>" alt="">
                         <p><?= $uneHabitation['type_hab'];?></p>
                         <p><?= $uneHabitation['ville_hab'] ?></p>
                         <p><?= $uneHabitation['tarif_hab_moy'] ?>€ la nuit</p>

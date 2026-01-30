@@ -31,4 +31,6 @@
     }    
 
     require_once("vue/vue_home.php");
+
+    
 ?>

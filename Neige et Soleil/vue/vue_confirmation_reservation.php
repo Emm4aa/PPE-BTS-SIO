@@ -16,41 +16,85 @@
         <p>Annulez maximum 24h avant afin de recevoir un remboursement intégral</p>
     </div>
     <div class="dataConfirmationResa">
-        <h4>Nom</h4>
-        <p><?= $_SESSION['nom'] ?></p>
+        <div>
+            <h4>Nom</h4>
+            <p><?= $_SESSION['nom'] ?></p>
+        </div>
+        <div>
+            <a href="index.php?page=6" class="modifierInfos">modifier</a>
+        </div>
     </div>
     <div class="dataConfirmationResa">
-        <h4>Prénom</h4>
-        <p><?= $_SESSION['prenom'] ?></p>
+        <div>
+            <h4>Prénom</h4>
+            <p><?= $_SESSION['prenom'] ?></p>
+        </div>
+        <div>
+            <a href="index.php?page=6" class="modifierInfos">modifier</a>
+        </div>
     </div>
     <div class="dataConfirmationResa">
-        <h4>Email</h4>
-        <p><?= $_SESSION['email'] ?></p>
+        <div>
+            <h4>Email</h4>
+            <p><?= $_SESSION['email'] ?></p>
+        </div>
+        <div>
+            <a href="index.php?page=6" class="modifierInfos">modifier</a>
+        </div>
     </div>
     <div class="dataConfirmationResa">
-        <h4>Tel</h4>
-        <p><?= $_SESSION['tel'] ?></p>
+        <div>
+            <h4>Tel</h4>
+            <p><?= $_SESSION['tel'] ?></p>
+        </div>
+        <div>
+            <a href="index.php?page=6" class="modifierInfos">modifier</a>
+        </div>
     </div>
     <div class="dataConfirmationResa">
-        <h4>Dates</h4>
-        <p>Arrivée : <?= htmlspecialchars($data['arrivee'])?> / Départ : <?= htmlspecialchars($data['depart'])?></p>
+        <div>
+            <h4>Dates</h4>
+            <p>Début : <?= htmlspecialchars($data['arrivee'])?> / Fin : <?= htmlspecialchars($data['depart'])?></p>
+        </div>
+        <div>
+            <a href="index.php?page=10&ref_hab=<?= htmlspecialchars($data['refHab']) ?>" class="modifierInfos">modifier</a>
+        </div>
     </div>
     <div class="dataConfirmationResa">
-        <h4>Voyageurs</h4>
-        <p><?= htmlspecialchars($data['voyageurs']) ?></p>
+        <div>
+            <h4>Voyageurs</h4>
+            <p><?= htmlspecialchars($data['voyageurs']) ?></p>
+        </div>
+        <div>
+            <a href="index.php?page=10&ref_hab=<?= htmlspecialchars($data['refHab']) ?>" class="modifierInfos">modifier</a>
+        </div>
     </div>
     <div class="dataConfirmationResa">
-        <h4>Détail du prix</h4>
-        <p><?= htmlspecialchars($data['nbJours']) ?> nuits x <?= htmlspecialchars($data['prixParNuit']) ?>€</p>
+        <div>
+            <h4>Détail du prix</h4>
+            <p><?= htmlspecialchars($data['nbJours']) ?> nuits x <?= htmlspecialchars($data['prixParNuit']) ?>€</p>
+        </div>
     </div>
     <div class="dataConfirmationResa">
-        <h4>Total</h4>
-        <p><?= htmlspecialchars($data['prixTotalHidden']) ?>€</p>
+        <div>
+            <h4>Total</h4>
+            <p><?= htmlspecialchars($data['prixTotalHidden']) ?>€</p>
+        </div>
     </div>
     <form action="" method="post" id="formBtConfirmationResa">
+        <button type="submit" name="annuler" id="btAnnulationResa">
+            <span class="material-symbols-outlined">close</span>
+        </button>
         <button type="submit" name="confirmer" id="btConfirmationResa">
             <span class="material-symbols-outlined">check</span>
         </button>
+
+        <input type="hidden" name="nb_perso" value="<?= htmlspecialchars($data['voyageurs']) ?>">
+        <input type="hidden" name="date_debut" value="<?= htmlspecialchars($data['arrivee']) ?>">
+        <input type="hidden" name="date_fin" value="<?= htmlspecialchars($data['depart']) ?>">
+        <input type="hidden" name="id_c" value="<?= $_SESSION['id'] ?>">
+        <input type="hidden" name="ref_hab" value="<?= htmlspecialchars($data['refHab']) ?>">
+
     </form>
 </div>
 </section>

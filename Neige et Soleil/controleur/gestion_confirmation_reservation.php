@@ -9,8 +9,14 @@
     require_once("vue/vue_confirmation_reservation.php");
 
     if(isset($_POST['confirmer'])){
+        $unControleur->insertReservation($_POST);
         header("Location: index.php?page=12");
         exit;
     }
-    
-?>
+
+    if(isset($_POST['annuler'])){
+        $refHab = $_POST['ref_hab'];
+
+        header("Location:index.php?page=10&ref_hab=".$refHab);
+        exit; 
+    }

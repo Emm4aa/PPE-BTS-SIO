@@ -5,7 +5,7 @@
             <tr>
                 <td>Type de compte</td>
                 <td>
-                    <select name="" id="">
+                    <select name="type" id="">
                         <option value="">sélectionner un type</option>
                         <option value="proprietaire">Propriétaire</option>
                         <option value="client">Client</option>
@@ -49,10 +49,19 @@
                 <td><input type="text" name="RIB"></td>
             </tr>
         </table>
-        <a href="index.php?page=16">
-        <button type="submit" name="cree" id="cree">
-            <span class="material-symbols-outlined">check</span>
-        </button>
-        </a>
+        <?php if(!empty($_SESSION['msg-erreurs'])): ?>
+            <?php foreach($_SESSION['msg-erreurs'] as $uneErreur) :?>
+            <h4 style="color:red"><?= $uneErreur ?></h4>
+            <?php endforeach; ?>
+            <?php unset($_SESSION['msg-erreurs']); ?>
+        <?php endif; ?>
+        <div class="conteneurBtAjouterAnnulerCreationAnnonce">
+            <button type="submit" name="annuler" id="annuler">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <button type="submit" name="ajouter" id="ajouter">
+                <span class="material-symbols-outlined">check</span>
+            </button>
+        </div>
     </form>
 </section>
