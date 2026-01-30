@@ -112,6 +112,16 @@ class Controleur {
         $this->unModele->updateHabitationAnnonce($tab);
     }
 
+    //Maisons
+    public function selectWhereMaison($ref_hab){
+        return $this->unModele->selectWhereMaison($ref_hab);
+    }
+
+    //Appartements
+    public function selectWhereAppartement($ref_hab){
+        return $this->unModele->selectWhereAppartement($ref_hab);
+    }
+
 
     //Reservations
     public function insertReservation($tab){

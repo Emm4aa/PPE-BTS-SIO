@@ -12,7 +12,7 @@
         $unControleur->deleteHabitation($refHab);
         $_SESSION['msg-supp-habitation'] = "Votre habitation a été supprimée avec succés✅";
     }
-
+    
     $habProprio = $unControleur->selectHabitationWhereProprietaire($_SESSION['id']);
     
     require_once("vue/vue_compte_proprietaire.php");

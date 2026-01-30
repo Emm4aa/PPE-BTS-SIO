@@ -37,8 +37,9 @@ create table habitation(
 
 create table contrat(
     ref_c int(20) not null auto_increment,
-    status_c varchar(30) not null,
-    annee_c int(4) not null,
+    status_c enum("En validation","En cours","Annule","Resilie"),
+    annee_signature date not null,
+    annee_fin date not null,
     id_p int(5) not null,
     ref_hab int(5) not null,
     primary key (ref_c),
@@ -60,11 +61,6 @@ create table client(
     primary key (id_c)
 );
 
-create table region(
-    code_reg int(5) not null,
-    nom_reg varchar(50) not null,
-    primary key (code_reg)
-);
 
 drop table reservation;
 create table reservation(
@@ -158,6 +154,13 @@ where 2=0;
 alter table archiveReservation
 add primary key (ref_res);
 
+create table archiveContrat as 
+select c.*, curdate() archiDate from contrat c 
+where 2=0;
+
+alter table archiveContrat
+add primary key (ref_c);
+
 create table if not exists photos(
     id_photo int not null auto_increment,
     ref_hab int not null,
@@ -248,6 +251,27 @@ call archiRes;
 end // 
 delimiter ;
 
+DROP PROCEDURE IF EXISTS archiCon;
+DELIMITER //
+CREATE PROCEDURE archiCon()
+BEGIN
+    INSERT INTO archiveContrat
+    SELECT c.*, CURDATE()
+    FROM contrat c
+    WHERE c.status_c = 'Annule' or 'Resilie';
+END //
+DELIMITER ;
+
+drop trigger if exists histoCon;
+delimiter //
+create trigger histoCon
+after update on contrat
+for each row 
+begin 
+call archiCon;
+end // 
+delimiter ;
+
 set global event_scheduler = on;
 
 drop event if exists deleteRes;
@@ -259,5 +283,17 @@ begin
 delete from reservation
 where etat_res = 'Validee'
 and ref_res in (select ref_res from archivereservation);
+end//
+delimiter ;
+
+drop event if exists deleteCon;
+delimiter //
+create or replace event deleteCon
+on schedule every 1 minute
+do 
+begin 
+delete from contrat
+where status_c = 'Annule' or 'Resilie'
+and ref_c in (select ref_c from archiveContrat);
 end//
 delimiter ;
