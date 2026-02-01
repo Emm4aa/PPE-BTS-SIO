@@ -79,7 +79,7 @@
                 </a>
 
             </td>
-            <td><a href="generateurContrat.php?ref_hab=<?= $hab['ref_hab'] ?>" target="_blank">Voir</a></td>
+            <td><a href="generateurContratProprietaire.php?ref_hab=<?= $hab['ref_hab'] ?>" target="_blank">Voir</a></td>
         </tr>
     <?php endforeach; ?>
     <?php else :?>

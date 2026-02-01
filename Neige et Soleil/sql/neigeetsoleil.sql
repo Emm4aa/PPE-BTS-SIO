@@ -62,7 +62,6 @@ create table client(
 );
 
 
-drop table reservation;
 create table reservation(
     ref_res int(5) not null auto_increment,
     date_res date not null,
@@ -122,8 +121,7 @@ create table station(
     num_sta int(5) not null auto_increment,
     nom_sta varchar(50) not null,
     code_reg int(5) not null,
-    primary key (num_sta),
-    foreign key (code_reg) references region(code_reg)
+    primary key (num_sta)
 );
 
 create table activite(

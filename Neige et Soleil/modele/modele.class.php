@@ -275,7 +275,7 @@ class Modele{
         $data = array(":ref_res"=>$ref_res);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
-        return $exe->fetch();
+        return $exe->fetchAll();
     }
     public function selectReservationWhereClient($id_c){
         $requete = "SELECT * FROM reservation WHERE id_c = :id_c";

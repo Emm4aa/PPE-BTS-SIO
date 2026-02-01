@@ -41,7 +41,7 @@ class PDF extends FPDF{
                                 "\nMontant de location hebdomadaire saison basse : ".($maison['tarif_hab_bas']).
                                 "\nMontant de location hebdomadaire saison moyenne : ".($maison['tarif_hab_moy']).
                                 "\nMontant de location hebdomadaire saison haute : ".($maison['tarif_hab_hau']).
-                                "\nSurface : ".($maison['surface']).
+                                "\nSurface : ".($maison['surface']."m2").
                                 "\nCaractéristiques : ".($maison['carac_m'])),1,"L");
             }    
         }
@@ -54,7 +54,7 @@ class PDF extends FPDF{
                                 "\nMontant de location hebdomadaire saison basse : ".($appartement['tarif_hab_bas']).
                                 "\nMontant de location hebdomadaire saison moyenne : ".($appartement['tarif_hab_moy']).
                                 "\nMontant de location hebdomadaire saison haute : ".($appartement['tarif_hab_hau']).
-                                "\nSurface : ".($appartement['surface']).
+                                "\nSurface : ".($appartement['surface']."m2").
                                 "\nEtage : ".($appartement['etage_ap']).
                                 "\nType d'appartement : ".($appartement['type_ap'])),1,"L");
             }

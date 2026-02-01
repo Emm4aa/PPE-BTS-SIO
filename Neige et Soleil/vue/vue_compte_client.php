@@ -74,6 +74,7 @@
                             <span class="material-symbols-outlined" id="btReservationValidee">check</span>
                         <?php endif; ?>
                     </td>
+                    <td><a href="generateurContratClient.php?ref_res=<?= $resa['ref_res'] ?>" target="_blank">Voir</a></td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
