@@ -27,6 +27,9 @@ create table habitation(
     tarif_hab_hau float(5) not null,
     surface varchar(10) not null,
     id_p int(5) not null,
+    description_hab varchar(200) not null,
+    titre_hab varchar(60) not null,
+    capacite_hab int(2) not null,
     primary key (ref_hab),
     foreign key (id_p) references proprietaire(id_p)
 );
@@ -88,6 +91,9 @@ create table appartement(
     tarif_hab_hau float(5) not null,
     surface varchar(10) not null,
     id_p int(5) not null,
+    description_hab varchar(200) not null,
+    titre_hab varchar(60) not null,
+    capacite_hab int(2) not null,
     etage_ap int(2) not null,
     type_ap varchar(3),
     primary key (ref_hab)
@@ -104,6 +110,9 @@ create table maison(
     tarif_hab_hau float(5) not null,
     surface varchar(10) not null,
     id_p int(5) not null,
+    description_hab varchar(200) not null,
+    titre_hab varchar(60) not null,
+    capacite_hab int(2) not null,
     carac_m varchar(50) not null,
     primary key (ref_hab)
 ) ENGINE = InnoDB CHARSET = utf8mb4;
