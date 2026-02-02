@@ -861,3 +861,43 @@ form button{
     color: black;
     background-color: #42b72a;
 }
+
+.btVoirContrat{
+    all: unset;
+}
+.btVoirContrat span {
+    cursor: pointer;
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: black;
+    color: white;
+    transition: 0.2s ease;     /* animation propre */
+}
+.btVoirContrat span:hover {
+    color: black;
+    background-color: #f1dd18;
+}
+
+.btModifier{
+    all: unset;
+}
+.btModifier span {
+    cursor: pointer;
+    display: inline-flex;      /* permet le background */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;              /* espace autour de l’icône */
+    border-radius: 50%;        /* rond si tu veux */
+    background-color: black;
+    color: white;
+    transition: 0.2s ease;     /* animation propre */
+}
+.btModifier span:hover {
+    color: black;
+    background-color: #f1dd18;
+}
+
+

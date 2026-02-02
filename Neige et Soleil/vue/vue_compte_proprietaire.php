@@ -37,7 +37,9 @@
             <td id="bottom"><?= htmlspecialchars($leProprietaire['tel_p']) ?></td>
         </tr>
     </table>
-    <a href="index.php?page=21" id="btModifierInfosPersoClient">modifier</a>
+    <a href="index.php?page=21" class="btModifier">
+        <span class="material-symbols-outlined" translate="no">edit</span>
+    </a>
 </div>
 <div class="infos_activites">
     <?php if(isset($_SESSION['msg-update-habitation'])):?>
@@ -79,7 +81,11 @@
                 </a>
 
             </td>
-            <td><a href="generateurContratProprietaire.php?ref_hab=<?= $hab['ref_hab'] ?>" target="_blank">Voir</a></td>
+            <td>
+                <a href="generateurContratProprietaire.php?ref_hab=<?= $hab['ref_hab'] ?>" class="btVoirContrat" target="_blank">
+                    <span class="material-symbols-outlined" translate="no">visibility</span>
+                </a>
+            </td>
         </tr>
     <?php endforeach; ?>
     <?php else :?>

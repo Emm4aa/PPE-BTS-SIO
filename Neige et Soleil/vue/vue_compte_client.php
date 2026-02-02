@@ -37,7 +37,9 @@
             <td id="bottom"><?= ($leClient == null)?"":$leClient['tel_c'];?></td>
         </tr>
     </table>
-    <a href="index.php?page=20" id="btModifierInfosPersoClient">modifier</a>
+    <a href="index.php?page=20" class="btModifier">
+        <span class="material-symbols-outlined" translate="no">edit</span>
+    </a>
 </div>
 <div class="infos_activites">
     <?php if(isset($_SESSION['msg-annul-reservation'])):?>
@@ -55,6 +57,7 @@
                     <th>Fin</th>
                     <th>Etat</th>
                     <th>Option</th>
+                    <th>Contrat</th>
                 </tr>
             <?php foreach($resaClient as $resa): ?>
                 <tr>
@@ -74,7 +77,11 @@
                             <span class="material-symbols-outlined" id="btReservationValidee">check</span>
                         <?php endif; ?>
                     </td>
-                    <td><a href="generateurContratClient.php?ref_res=<?= $resa['ref_res'] ?>" target="_blank">Voir</a></td>
+                    <td>
+                        <a href="generateurContratClient.php?ref_res=<?= $resa['ref_res'] ?>" class="btVoirContrat" target="_blank">
+                            <span class="material-symbols-outlined" translate="no">visibility</span>
+                        </a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
