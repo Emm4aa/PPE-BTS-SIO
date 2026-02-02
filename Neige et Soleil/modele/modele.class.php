@@ -307,6 +307,7 @@ class Modele{
             ":etage_ap"=>$tab['etage_ap'],
             "type_ah"=>$tab['type_ap']
             );
+    }
     public function selectWhereAppartement($ref_hab){
         $requete = "SELECT * FROM appartement WHERE ref_hab = :ref_hab;";
         $data = array(":ref_hab"=>$ref_hab);
