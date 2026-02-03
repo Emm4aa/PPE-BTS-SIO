@@ -36,6 +36,7 @@
             <li><a href="index.php?page=3">Propriétaires</a></li>
             <li><a href="index.php?page=4">Habitations</a></li>
             <li><a href="index.php?page=5">Réservations</a></li>
+            <li><a href="index.php?page=23">Stats</a></li>
             <li><a href="index.php?page=9">Déconnexion</a></li>
         <?php endif;?>
         <?php if(!isset($_SESSION['email'])):?>
@@ -60,6 +61,7 @@
         12 => ['client'],
         13 => ['proprietaire'],
         14 => ['proprietaire'],
+        23 => ['admin']
     ];
 
     $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
@@ -103,6 +105,7 @@
         case 20 : require_once("controleur/gestion_update_client.php");break;
         case 21 : require_once("controleur/gestion_update_proprietaire.php");break;
         case 22 : require_once("controleur/gestion_update_habitation.php");break;
+        case 23 : require_once("controleur/gestion_statistiques.php");break;
         default : header("Location: controleur/erreur.php");break;
     }
 ?>

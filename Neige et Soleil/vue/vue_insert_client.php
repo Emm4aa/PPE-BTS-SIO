@@ -40,9 +40,13 @@
 		</tr>
 	</table><br>
 	<div>
-		<input class="btnForm" type="submit" name="annuler" value="annuler">
-		<input class="btnForm" type="submit" <?= ($leClient==null)?'name="valider" id="valider" 
+		<button class="btAnnulerSupprimer" type="submit" name="annuler">
+			<span class="material-symbols-outlined">close</span>
+		</button>
+		<button class="btValider" type="submit" <?= ($leClient==null)?'name="valider" id="valider" 
 		value="valider"' : 'name="modifier" id="modifier" value="modifier"'?>>
+			<span class="material-symbols-outlined">check</span>
+		</button>
 	</div> 
 	<?= ($leClient==null)? '' : ' <input type="hidden" name="id_c" value="'.$leClient['id_c'].'">'; ?>
 </form>

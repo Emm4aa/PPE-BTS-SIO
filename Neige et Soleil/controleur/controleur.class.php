@@ -148,6 +148,9 @@ class Controleur {
     public function updateReservation($tab) {
         $this->unModele->updateReservation($tab);
     }
+    public function selectCountReservationValidee(){
+        return $this->unModele->selectCountReservationValidee();
+    }
 
 
 
@@ -175,6 +178,14 @@ class Controleur {
     }
     public function deletePhotos($refHab){
         $this->unModele->deletePhotos($refHab);
+    }
+
+
+
+
+    //contrats
+    public function selectCountContratByProprio(){
+        return $this->unModele->selectCountContratByProprio();
     }
 
 }

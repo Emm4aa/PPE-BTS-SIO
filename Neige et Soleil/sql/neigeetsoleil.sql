@@ -295,3 +295,16 @@ where status_c = 'Annule' or 'Resilie'
 and ref_c in (select ref_c from archiveContrat);
 end//
 delimiter ;
+
+
+
+
+
+
+/*** Création de la table USER ***/
+CREATE TABLE user (
+    id_u int auto_increment,
+    login_u varchar(255) not null,
+    mdp_u varchar(255) not null,
+    role_u varchar(20) not null,
+)

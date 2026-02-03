@@ -3,8 +3,12 @@
 <form class="listes" method="post">
 	<label for="filtre">Filtrer par :</label> 
 	<input type="text" name="filtre">
-	<input class="btnForm" type="submit" name="filtrer" value="filtrer">
-	<input class="btnForm" type="submit" name="effacer" value="effacer">
+	<button class="btValider" type="submit" name="filtrer">
+		<span class="material-symbols-outlined">check</span>
+	</button>
+	<button class="btAnnulerSupprimer" type="submit" name="effacer">
+		<span class="material-symbols-outlined">close</span>
+	</button>
 </form><br>
 
 <table>

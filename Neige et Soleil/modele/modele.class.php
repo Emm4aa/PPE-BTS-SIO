@@ -309,6 +309,12 @@ class Modele{
         $exe->execute($data);
         return $exe->fetchAll();
     }
+    public function selectCountReservationValidee(){
+        $requete = "SELECT id_c, count(*) as nb_validee FROM reservation WHERE etat_res = 'validee' GROUP BY id_c;";
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute();
+        return $exe->fetchAll();
+    }
 
 
 
@@ -366,5 +372,22 @@ class Modele{
         $req = $this->unPdo->prepare($sql);
         $req->execute([":ref_hab" => $refHab]);
     }
+
+
+
+
+
+
+
+
+/* Contrat */
+    public function selectCountContratByProprio(){
+        $sql = "SELECT id_p,count(*) AS nb_contrats FROM contrat GROUP BY id_p;";
+        $req = $this->unPdo->prepare($sql);
+        $req->execute();
+        return $req->fetchAll();
+    }
 }
+
+
 ?>
