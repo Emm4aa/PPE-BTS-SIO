@@ -13,6 +13,7 @@ create table proprietaire(
     ville_p varchar(50) not null,
     tel_p varchar(10) not null,
     rib_p varchar(30) not null,
+    nb_contrats int(3),
     primary key (id_p)
 );
 
@@ -41,8 +42,8 @@ create table habitation(
 create table contrat(
     ref_c int(20) not null auto_increment,
     status_c enum("En validation","En cours","Annule","Resilie"),
-    annee_signature date not null,
-    annee_fin date not null,
+    annee_signature date,
+    annee_fin date,
     id_p int(5) not null,
     ref_hab int(5) not null,
     primary key (ref_c),
@@ -303,4 +304,25 @@ delete from contrat
 where status_c = 'Annule' or 'Resilie'
 and ref_c in (select ref_c from archiveContrat);
 end//
+delimiter ;
+
+drop trigger if exists insert_contrat;
+delimiter //
+create trigger insert_contrat
+after insert on habitation 
+for each row
+begin 
+insert into contrat values (null,'En validation',null,null,new.id_p,new.ref_hab);
+end //
+delimiter ;
+
+drop event if exists updateNbContratP;
+delimiter //
+create event updateNbContratP
+on schedule every 1 minute
+do 
+begin 
+update proprietaire set nb_contrat = (select count(ref_c) from contrat)
+where id_p in (select id_p from contrat);
+end //
 delimiter ;
