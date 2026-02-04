@@ -24,6 +24,14 @@ if (isset($_POST['ajouter'])){
         $titre_hab = $_POST['titre_hab'];
         $capacite_hab = $_POST['capacite_hab'];
 
+        $regexAdresse = '/^[0-9]{1,5} [A-Za-zÀ-ÖØ-öø-ÿ\' .-]{3,}$/u';
+        $regexCp = '/^[0-9]{5}$/';
+        $regexVille = '/^[A-Za-zÀ-ÖØ-öø-ÿ\' -]{2,}$/u';
+        $regexTarifs = '/^[0-9]{1,5}([.,][0-9]{0,2})?$/';
+        $regexSurface = '/^[1-9][0-9]{0,2}$/';
+        $regexCapacite = '/^[1-9][0-9]{0,1}$/';
+
+
         $champs = [$type_hab, $adr_hab, $cp_hab, $ville_hab,
                    $tarif_hab_bas, $tarif_hab_moyen, $tarif_hab_haut,
                    $surface, $description_hab, $titre_hab, $capacite_hab
@@ -32,6 +40,24 @@ if (isset($_POST['ajouter'])){
         foreach ($champs as $champ) {
                 if ($champ === "") {
                         $erreurs[] = "Veuillez remplir tous les champs";break;
+                }
+        }
+
+        $regles = [
+                        "adr_hab" => [$regexAdresse, "Veuillez rentrer une adresse valide"],
+                        "cp_hab" => [$regexCp,      "Veuillez rentrer un code postal valide"],
+                        "ville_hab" => [$regexVille,   "Veuillez rentrer un nom de ville valide"],
+                        "tarif_hab_bas" => [$regexTarifs, "Veuillez rentrer un tarif bas valide"],
+                        "tarif_hab_moy" => [$regexTarifs, "Veuillez rentrer un tarif moyenvalide"],
+                        "tarif_hab_hau" => [$regexTarifs, "Veuillez rentrer un tarif haut valide"],
+                        "surface"  => [$regexSurface, "Veuillez rentrer une surface valide"],
+                        "capacite_hab"  => [$regexCapacite, "Veuillez rentrer une capacité valide"],
+        ];
+
+        foreach($regles as $champ => [$regex, $msg]){
+                if(!preg_match($regex, trim($_POST[$champ]))){
+                        $erreurs[] = $msg;
+                        break;
                 }
         }
 

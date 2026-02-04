@@ -5,7 +5,7 @@
             <tr>
                 <td>Type de compte</td>
                 <td>
-                    <select name="type" id="">
+                    <select name="type" id="" required>
                         <option value="">sélectionner un type</option>
                         <option value="proprietaire">Propriétaire</option>
                         <option value="client">Client</option>
@@ -14,39 +14,39 @@
             </tr>
             <tr>
                 <td>Nom</td>
-                <td><input type="text" name="nom"></td>
+                <td><input type="text" name="nom" required></td>
             </tr>
             <tr>
                 <td>Prenom</td>
-                <td><input type="text" name="prenom"></td>
+                <td><input type="text" name="prenom" required></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td><input type="email" name="email"></td>
+                <td><input type="email" name="email" required></td>
             </tr>
             <tr>
                 <td>Mot de passe</td>
-                <td><input type="text" name="mdp"></td>
+                <td><input type="text" name="mdp" required></td>
             </tr>
             <tr>
                 <td>Adresse</td>
-                <td><input type="text" name="adresse"></td>
+                <td><input type="text" name="adresse" required></td>
             </tr>
             <tr>
                 <td>Code postal</td>
-                <td><input type="text" name="cp"></td>
+                <td><input type="text" name="cp" required></td>
             </tr>
             <tr>
                 <td>Ville</td>
-                <td><input type="text" name="ville"></td>
+                <td><input type="text" name="ville" required></td>
             </tr>
             <tr>
                 <td>Tél</td>
-                <td><input type="text" name="tel"></td>
+                <td><input type="text" name="tel" required></td>
             </tr>
             <tr>
                 <td>RIB</td>
-                <td><input type="text" name="RIB"></td>
+                <td><input type="text" name="RIB" required></td>
             </tr>
         </table>
         <?php if(!empty($_SESSION['msg-erreurs'])): ?>

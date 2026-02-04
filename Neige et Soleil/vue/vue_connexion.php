@@ -9,7 +9,7 @@
                 <tr>
                     <td></td>
                     <td>    
-                        <select name="statut">
+                        <select name="statut" required>
                             <option value="">Sélectionner un status </option>
                             <option value="client">Client</option>
                             <option value="proprietaire">Proprietaire</option>
@@ -19,11 +19,11 @@
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><input type="text" name="email"></td>
+                    <td><input type="email" name="email" required></td>
                 </tr>
                 <tr>
                     <td>Mdp</td>
-                    <td><input type="password" name="mdp"></td>
+                    <td><input type="password" name="mdp" required></td>
                 </tr>
             </table>
                 <button class="btnForm" type="submit" name="Connexion" value="Connexion" id="Connexion">

@@ -27,6 +27,10 @@ if (isset($_POST['ajouter'])){
         $titre_hab = $_POST['titre_hab'];
         $capacite_hab = $_POST['capacite_hab'];
 
+        $regexTarifs = '/^[0-9]{1,5}([.,][0-9]{0,2})?$/';
+        $regexCapacite = '/^[1-9][0-9]{0,1}$/';
+
+
         $champs = [$tarif_hab_bas, $tarif_hab_moyen, $tarif_hab_haut,
                    $description_hab, $titre_hab, $capacite_hab
                   ];
@@ -36,6 +40,22 @@ if (isset($_POST['ajouter'])){
                         $erreurs[] = "Veuillez remplir tous les champs";break;
                 }
         }
+
+        $regles = [
+                        "tarif_hab_bas" => [$regexTarifs, "Veuillez rentrer un tarif bas valide"],
+                        "tarif_hab_moy" => [$regexTarifs, "Veuillez rentrer un tarif moyenvalide"],
+                        "tarif_hab_hau" => [$regexTarifs, "Veuillez rentrer un tarif haut valide"],
+                        "capacite_hab"  => [$regexCapacite, "Veuillez rentrer une capacité valide"],
+        ];
+
+        foreach($regles as $champ => [$regex, $msg]){
+                if(!preg_match($regex, trim($_POST[$champ]))){
+                        $erreurs[] = $msg;
+                        break;
+                }
+        }
+
+
 
         $nbPhotos = count(array_filter($photos['name']));
 

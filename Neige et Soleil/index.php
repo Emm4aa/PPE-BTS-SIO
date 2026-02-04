@@ -113,7 +113,7 @@
 
 <!-- Footer -->
 <footer>
-    <p>&copy;Site neige et soleil - Touts droits réservés - Mentions légales</p>
+    <p>&copy;Site neige et soleil - Tous droits réservés - Mentions légales</p>
 </footer>
 
 </body>

@@ -40,6 +40,12 @@
 			    <td><input type="text" name="rib_p" value="<?= ($leProprietaire == null)?"":$leProprietaire['rib_p'];?>"></td>
 		    </tr>
 	    </table><br>
+		<?php if(isset($_SESSION['msg-erreurs'])): ?>
+			<?php foreach($_SESSION['msg-erreurs'] as $uneErreur) :?>
+            <h4 style="color:red"><?= $uneErreur ?></h4>
+            <?php endforeach; ?>
+		<?php unset($_SESSION['msg-erreurs']);?>
+		<?php endif;?>
         <div>
             <button name="annuler" class="btAnnulerSupprimer">
                 <span class="material-symbols-outlined">close</span>

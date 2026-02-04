@@ -246,6 +246,32 @@ class Modele{
     }
 
     //Maisons
+
+    public function insertMaison($tab){
+        $requete = "INSERT INTO maison
+                        (type_hab, adr_hab, cp_hab, ville_hab, tarif_hab_bas, tarif_hab_moy, 
+                        tarif_hab_hau, surface, id_p, description_hab, titre_hab, 
+                        capacite_hab,carac_m)
+                    VALUES (:type_hab,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
+                            :tarif_hab_moy,:tarif_hab_hau,:surface,:id_p,:description_hab,
+                            :titre_hab,:capacite_hab,:carac_m);";
+        $exe = $this->unPdo->prepare($requete);
+        $data = array(
+            ":type_hab"=>$tab['type_hab'],
+            ":adr_hab"=>$tab['adr_hab'],
+            ":cp_hab"=>$tab['cp_hab'],
+            ":ville_hab"=>$tab['ville_hab'],
+            ":tarif_hab_bas"=>$tab['tarif_hab_bas'],
+            ":tarif_hab_moy"=>$tab['tarif_hab_moy'],
+            ":tarif_hab_hau"=>$tab['tarif_hab_hau'],
+            ":surface"=>$tab['surface'],
+            ":id_p"=>$tab['id_p'],
+            ":description_hab"=>$tab['description_hab'],
+            ":titre_hab"=>$tab['titre_hab'],
+            ":capacite_hab"=>$tab['capacite_hab'],
+            ":carac_m"=>$tab['carac_m']
+            );
+    }
     public function selectWhereMaison($ref_hab){
         $requete = "SELECT * FROM maison WHERE ref_hab = :ref_hab;";
         $data = array(":ref_hab"=>$ref_hab);
@@ -255,6 +281,33 @@ class Modele{
     }
 
     //Appartements
+
+    public function insertAppartement($tab){
+        $requete = "INSERT INTO appartement
+                        (type_hab, adr_hab, cp_hab, ville_hab, tarif_hab_bas, tarif_hab_moy, 
+                        tarif_hab_hau, surface, id_p, description_hab, titre_hab, 
+                        capacite_hab,etage_ap,type_ap)
+                    VALUES (:type_hab,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
+                            :tarif_hab_moy,:tarif_hab_hau,:surface,:id_p,:description_hab,
+                            :titre_hab,:capacite_hab,:etage_ap,:type_ap);";
+        $exe = $this->unPdo->prepare($requete);
+        $data = array(
+            ":type_hab"=>$tab['type_hab'],
+            ":adr_hab"=>$tab['adr_hab'],
+            ":cp_hab"=>$tab['cp_hab'],
+            ":ville_hab"=>$tab['ville_hab'],
+            ":tarif_hab_bas"=>$tab['tarif_hab_bas'],
+            ":tarif_hab_moy"=>$tab['tarif_hab_moy'],
+            ":tarif_hab_hau"=>$tab['tarif_hab_hau'],
+            ":surface"=>$tab['surface'],
+            ":id_p"=>$tab['id_p'],
+            ":description_hab"=>$tab['description_hab'],
+            ":titre_hab"=>$tab['titre_hab'],
+            ":capacite_hab"=>$tab['capacite_hab'],
+            ":etage_ap"=>$tab['etage_ap'],
+            "type_ah"=>$tab['type_ap']
+            );
+    }
     public function selectWhereAppartement($ref_hab){
         $requete = "SELECT * FROM appartement WHERE ref_hab = :ref_hab;";
         $data = array(":ref_hab"=>$ref_hab);

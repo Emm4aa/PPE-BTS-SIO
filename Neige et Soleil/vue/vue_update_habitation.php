@@ -5,15 +5,15 @@
         <table>
             <tr>
                 <td><label for="tarif_hab_bas">tarif bas</label></td>
-                <td><input type="text" name="tarif_hab_bas" value="<?= htmlspecialchars($habitation['tarif_hab_bas']) ?>"></td>
+                <td><input type="number" name="tarif_hab_bas" value="<?= htmlspecialchars($habitation['tarif_hab_bas']) ?>"></td>
             </tr>
             <tr>
                 <td><label for="tarif_hab_moy">tarif moy</label></td>
-                <td><input type="text" name="tarif_hab_moy" value="<?= htmlspecialchars($habitation['tarif_hab_moy']) ?>"></td>
+                <td><input type="number" name="tarif_hab_moy" value="<?= htmlspecialchars($habitation['tarif_hab_moy']) ?>"></td>
             </tr>
             <tr>
                 <td><label for="tarif_hab_haut">tarif haut</label></td>
-                <td><input type="text" name="tarif_hab_hau" value="<?= htmlspecialchars($habitation['tarif_hab_hau']) ?>"></td>
+                <td><input type="number" name="tarif_hab_hau" value="<?= htmlspecialchars($habitation['tarif_hab_hau']) ?>"></td>
             </tr>
             <tr>
                 <td>Photos</td>
@@ -39,7 +39,7 @@
             </tr>
             <tr>
                 <td>Capacité</td>
-                <td><input type="number" name="capacite_hab" value="<?= htmlspecialchars($habitation['capacite_hab']) ?>"></td>
+                <td><input type="number" name="capacite_hab" value="<?= htmlspecialchars($habitation['capacite_hab']) ?>" min="1"></td>
             </tr>
         </table>
         <?php if(!empty($_SESSION['erreurs'])): ?>
@@ -56,6 +56,7 @@
             <button type="submit" name="ajouter" id="ajouter">
                 <span class="material-symbols-outlined">check</span>
             </button>
+
         </div>
     </form>
 </section>
