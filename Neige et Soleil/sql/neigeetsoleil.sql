@@ -2,20 +2,33 @@ drop database if exists neigeetsoleil;
 create database neigeetsoleil;
 use neigeetsoleil;
 
+/*** Creation de la table utilisateur pour gérer la connexion ***/
+drop table if exists utilisateur;
+CREATE TABLE utilisateur (
+    id_user INT AUTO_INCREMENT,
+    nom VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    mdp VARCHAR(255) NOT NULL,
+    tel VARCHAR(15) NOT NULL,
+    role ENUM('client', 'proprietaire', 'admin') NOT NULL DEFAULT 'client',
+    PRIMARY KEY (id_user)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+/*** maj table proprietaire ***/
+drop table if exists proprietaire;
 create table proprietaire(
-    id_p int(5) not null auto_increment,
-    nom_p varchar(20) not null,
-    prenom_p varchar(20) not null,
-    email_p varchar(70) not null,
-    mdp_p varchar(50) not null,
-    adr_p varchar(120) not null,
-    cp_p int(5) not null,
-    ville_p varchar(50) not null,
-    tel_p varchar(10) not null,
-    rib_p varchar(30) not null,
-    nb_contrats int(3),
-    primary key (id_p)
-);
+    id_p int not null,
+    adresse varchar(100),
+    cp varchar(10),
+    ville varchar(50),
+    RIB varchar(50),
+    nb_contrat int default 0,
+
+    primary key(id_p),
+
+    constraint fk_proprietaire_user foreign key(id_p) references utilisateur(id_user) on delete cascade
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 create table habitation(
     ref_hab int(5) not null auto_increment,
@@ -51,19 +64,19 @@ create table contrat(
     foreign key (ref_hab) references habitation(ref_hab)
 );
 
+/*** maj table client ***/
+drop table if exists client;
 create table client(
-    id_c int(5) not null auto_increment,
-    nom_c varchar(25) not null,
-    prenom_c varchar(25) not null,
-    email_c varchar(70) not null,
-    mdp_c varchar(50) not null,
-    adr_c varchar(120) not null,
-    cp_c int(5) not null,
-    ville_c varchar(50) not null,
-    tel_c varchar(10) not null,
-    rib_c varchar(30) not null,
-    primary key (id_c)
-);
+    id_c int not null,
+    adresse varchar(100),
+    cp varchar(10),
+    ville varchar(50),
+    RIB varchar(50),
+
+    primary key(id_c),
+
+    constraint fk_client_user foreign key(id_c) references utilisateur(id_user) on delete cascade
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 
 create table reservation(
@@ -143,15 +156,13 @@ create table activite(
     foreign key (num_sta) references station(num_sta)
 );
 
+/*** maj table admin ***/
+drop table if exists admin;
 create table admin (
-    Id_a int(5) not null auto_increment,
-    nom_a varchar(50) not null,
-    prenom_a varchar(50) not null,
-    email_a varchar(100) not null,
-    mdp_a varchar(200) not null, 
-    role_a varchar(50) not null,
-    primary key(Id_a)
-);
+    id_a int not null,
+    primary key(id_a),
+    constraint fk_admin_user foreign key (id_a) references utilisateur(id_user) on delete cascade
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 
 
@@ -316,68 +327,27 @@ insert into contrat values (null,'En validation',null,null,new.id_p,new.ref_hab)
 end //
 delimiter ;
 
-drop event if exists updateNbContratP;
+drop trigger if exists updateNbContratInsert;
 delimiter //
-create event updateNbContratP
-on schedule every 1 minute
-do 
+create trigger updateNbContratInsert
+after insert on contrat
+for each row
 begin 
-update proprietaire set nb_contrat = (select count(ref_c) from contrat)
-where id_p in (select id_p from contrat);
+update proprietaire set nb_contrat = nb_contrat + 1 
+where id = new.id_p;
 end //
 delimiter ;
 
-
-/*** Creation de la table utilisateur pour gérer la connexion ***/
-drop table if exists utilisateur;
-CREATE TABLE utilisateur (
-    id_user INT AUTO_INCREMENT,
-    nom VARCHAR(50) NOT NULL,
-    prenom VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    mdp VARCHAR(255) NOT NULL,
-    tel VARCHAR(15) NOT NULL,
-    role ENUM('client', 'proprietaire', 'admin') NOT NULL DEFAULT 'client',
-    PRIMARY KEY (id_user)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-
-/*** maj table admin ***/
-drop table if exists admin;
-create table admin (
-    id_a int not null,
-    primary key(id_a),
-    constraint fk_admin_user foreign key (id_a) references utilisateur(id_user) on delete cascade
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-
-/*** maj table client ***/
-drop table if exists client;
-create table client(
-    id_c int not null,
-    adresse varchar(100),
-    cp varchar(10),
-    ville varchar(50),
-    RIB varchar(50),
-
-    primary key(id_c),
-
-    constraint fk_client_user foreign key(id_c) references utilisateur(id_user) on delete cascade
-)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-
-
-/*** maj table proprietaire ***/
-drop table if exists proprietaire;
-create table proprietaire(
-    id_p int not null,
-    adresse varchar(100),
-    cp varchar(10),
-    ville varchar(50),
-    RIB varchar(50),
-    nb_contrat int default 0,
-
-    primary key(id_p),
-
-    constraint fk_proprietaire_user foreign key(id_p) references utilisateur(id_user) on delete cascade
-)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+drop trigger if exists updateNbContratDelete;
+delimiter //
+create trigger updateNbContratDelete
+after delete on contrat
+for each row
+begin 
+update proprietaire set nb_contrat = nb_contrat - 1 
+where id = old.id_p;
+end //
+delimiter ;
 
 
 /* fonction capitalisation */
