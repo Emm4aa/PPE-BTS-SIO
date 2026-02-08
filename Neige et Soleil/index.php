@@ -52,7 +52,7 @@
     $pageProtege = [
         2 => ['admin'],
         3 => ['admin'],
-        4 => ['admin','proprietaire'],
+        4 => ['admin'],
         5 => ['admin'],
         6 => ['client'],
         7 => ['proprietaire'],
@@ -60,7 +60,9 @@
         12 => ['client'],
         13 => ['proprietaire'],
         14 => ['proprietaire'],
-        23 => ['admin']
+        20 => ['client'],
+        21 => ['proprietaire'],
+        22 => ['proprietaire']
     ];
 
     $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;

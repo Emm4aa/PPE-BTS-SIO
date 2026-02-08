@@ -43,8 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
 <?php
 $lesReservations = $unControleur->selectAllReservation();
 $lesClients = $unControleur->selectAllClients();
