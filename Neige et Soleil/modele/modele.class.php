@@ -418,12 +418,11 @@ class Modele{
                         (type_hab, adr_hab, cp_hab, ville_hab, tarif_hab_bas, tarif_hab_moy, 
                         tarif_hab_hau, surface, id_p, description_hab, titre_hab, 
                         capacite_hab,carac_m)
-                    VALUES (:type_hab,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
+                    VALUES (maison,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
                             :tarif_hab_moy,:tarif_hab_hau,:surface,:id_p,:description_hab,
                             :titre_hab,:capacite_hab,:carac_m);";
         $exe = $this->unPdo->prepare($requete);
         $data = array(
-            ":type_hab"=>$tab['type_hab'],
             ":adr_hab"=>$tab['adr_hab'],
             ":cp_hab"=>$tab['cp_hab'],
             ":ville_hab"=>$tab['ville_hab'],
@@ -453,12 +452,11 @@ class Modele{
                         (type_hab, adr_hab, cp_hab, ville_hab, tarif_hab_bas, tarif_hab_moy, 
                         tarif_hab_hau, surface, id_p, description_hab, titre_hab, 
                         capacite_hab,etage_ap,type_ap)
-                    VALUES (:type_hab,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
+                    VALUES (appartement,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
                             :tarif_hab_moy,:tarif_hab_hau,:surface,:id_p,:description_hab,
                             :titre_hab,:capacite_hab,:etage_ap,:type_ap);";
         $exe = $this->unPdo->prepare($requete);
         $data = array(
-            ":type_hab"=>$tab['type_hab'],
             ":adr_hab"=>$tab['adr_hab'],
             ":cp_hab"=>$tab['cp_hab'],
             ":ville_hab"=>$tab['ville_hab'],
