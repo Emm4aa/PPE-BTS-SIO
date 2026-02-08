@@ -102,7 +102,6 @@ if (isset($_POST['ajouter'])){
                         "titre_hab" => $titre_hab,
                         "capacite_hab" => $capacite_hab
                 ]);
-
                 
                 foreach ($photos['name'] as $i => $name) {
 

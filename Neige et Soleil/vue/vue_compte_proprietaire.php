@@ -1,4 +1,5 @@
 <section>
+
     <h1>Mon compte</h1>
 <div class="vue_compte">
 <div class="infos_perso">
@@ -10,31 +11,31 @@
     <table>
         <tr>
             <th id="top">Nom</th>
-            <td id="top"><?= htmlspecialchars($leProprietaire['nom_p']) ?></td>
+            <td id="top"><?= ($utilisateur == null)?"":$utilisateur['nom'];?></td>
         </tr>
         <tr>
             <th>Prenom</th>
-            <td><?= htmlspecialchars($leProprietaire['prenom_p']) ?></td>
+            <td><?= ($utilisateur == null)?"":$utilisateur['prenom'];?></td>
         </tr>
         <tr>
             <th>Adresse</th>
-            <td><?= htmlspecialchars($leProprietaire['adr_p']) ?></td>
+            <td><?= ($leProprietaire == null)?"":$leProprietaire['adresse'];?></td>
         </tr>
         <tr>
             <th>Code postal</th>
-            <td><?= htmlspecialchars($leProprietaire['cp_p']) ?></td>
+            <td><?= ($leProprietaire == null)?"":$leProprietaire['cp'];?></td>
         </tr>
         <tr>
             <th>Ville</th>
-            <td><?= htmlspecialchars($leProprietaire['ville_p']) ?></td>
+            <td><?= ($leProprietaire == null)?"":$leProprietaire['ville'];?></td>
         </tr>
         <tr>
             <th>Email</th>
-            <td><?= htmlspecialchars($leProprietaire['email_p']) ?></td>
+            <td><?= ($utilisateur == null)?"":$utilisateur['email'];?></td>
         </tr>
         <tr>
             <th id="bottom">Téléphone</th>
-            <td id="bottom"><?= htmlspecialchars($leProprietaire['tel_p']) ?></td>
+            <td id="bottom"><?= ($utilisateur == null)?"":$utilisateur['tel'];?></td>
         </tr>
     </table>
     <a href="index.php?page=21" class="btModifier">
@@ -89,7 +90,7 @@
         </tr>
     <?php endforeach; ?>
     <?php else :?>
-        <p>Aucune habitation enregistré</p>
+        <p>Aucune habitation enregistrée</p>
     <?php endif; ?>
     </table>
     <a href="index.php?page=13" id="btAjouterHabitation" translate="no">

@@ -326,3 +326,104 @@ update proprietaire set nb_contrat = (select count(ref_c) from contrat)
 where id_p in (select id_p from contrat);
 end //
 delimiter ;
+
+
+/*** Creation de la table utilisateur pour gérer la connexion ***/
+drop table if exists utilisateur;
+CREATE TABLE utilisateur (
+    id_user INT AUTO_INCREMENT,
+    nom VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    mdp VARCHAR(255) NOT NULL,
+    tel VARCHAR(15) NOT NULL,
+    role ENUM('client', 'proprietaire', 'admin') NOT NULL DEFAULT 'client',
+    PRIMARY KEY (id_user)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+/*** maj table admin ***/
+drop table if exists admin;
+create table admin (
+    id_a int not null,
+    primary key(id_a),
+    constraint fk_admin_user foreign key (id_a) references utilisateur(id_user) on delete cascade
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+/*** maj table client ***/
+drop table if exists client;
+create table client(
+    id_c int not null,
+    adresse varchar(100),
+    cp varchar(10),
+    ville varchar(50),
+    RIB varchar(50),
+
+    primary key(id_c),
+
+    constraint fk_client_user foreign key(id_c) references utilisateur(id_user) on delete cascade
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+
+/*** maj table proprietaire ***/
+drop table if exists proprietaire;
+create table proprietaire(
+    id_p int not null,
+    adresse varchar(100),
+    cp varchar(10),
+    ville varchar(50),
+    RIB varchar(50),
+    nb_contrat int default 0,
+
+    primary key(id_p),
+
+    constraint fk_proprietaire_user foreign key(id_p) references utilisateur(id_user) on delete cascade
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+
+/* fonction capitalisation */
+drop function if exists capitalisation;
+
+delimiter //
+create function capitalisation(chaine varchar(50))
+returns varchar(50)
+begin
+declare x VARCHAR(1);
+declare y varchar(49);
+set x = substring(chaine,1,1);
+set y = substring(chaine,2);
+set x = upper(x);
+set y = lower(y);
+
+return concat(x,y);
+
+end//
+
+delimiter ;
+
+
+/* Trigger forme noms et prenoms insert utilisateur*/
+drop trigger if exists formeNomsPrenomsUtilisateurInsert;
+
+delimiter //
+create trigger formeNomsPrenomsUtilisateurInsert
+before insert on utilisateur
+for each row
+begin
+set new.nom = upper(new.nom), new.prenom = capitalisation(new.prenom);
+end//
+
+delimiter ;
+
+/* Trigger forme noms et prenoms update utilisateur*/
+drop trigger if exists formeNomsPrenomsUtilisateurUpdate;
+
+delimiter //
+create trigger formeNomsPrenomsUtilisateurUpdate
+before insert on utilisateur
+for each row
+begin
+set new.nom = upper(new.nom), new.prenom = capitalisation(new.prenom);
+end//
+
+delimiter ;
+

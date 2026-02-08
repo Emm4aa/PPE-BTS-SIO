@@ -10,6 +10,7 @@ class Modele{
 
         try {
             $this->unPdo = new PDO($url,$user,$mdp);
+            $this->unPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "connexion a la base de données impossible";
             echo $e->getMessage();
@@ -17,98 +18,263 @@ class Modele{
     }
 
 
-    //Clients
-    public function selectAllClient(){
-        $requete = "SELECT * FROM client;";
+
+    //Utilisateurs
+    public function selectAllUtilisateurs(){
+        $requete = "SELECT * FROM utilisateur;";
         $exe = $this->unPdo->prepare($requete);
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereClient($email,$mdp){
-        $requete = "SELECT * FROM client where email_c = :email and mdp_c = :mdp;";
+    public function selectWhereUtilisateur($email,$mdp){
+        $requete = "SELECT * FROM utilisateur where email = :email and mdp = :mdp;";
         $data = array(":email"=>$email,":mdp"=>$mdp);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
     }
-    public function selectWhereIdClient($id_c){
-        $requete = "SELECT * FROM client where id_c = :id_c";
-        $data = array(":id_c"=>$id_c);
+    public function selectWhereIdUtilisateur($id){
+        $requete = "SELECT * FROM utilisateur where id_user = :id";
+        $data = array(":id"=>$id);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
     }
-    public function insertClient($tab){
-        $requete = "INSERT INTO client VALUES (null,:nom_c,:prenom_c,:email_c,:mdp_c,:adr_c,:cp_c,:ville_c,:tel_c,:rib_c);";
-        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":email_c"=>$tab['email_c'],":mdp_c"=>$tab['mdp_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'],":ville_c"=>$tab['ville_c'],":tel_c"=>$tab['tel_c'],":rib_c"=>$tab['rib_c']);
+    public function insertUtilisateur($tab){
+        $requete = "INSERT INTO utilisateur (nom,prenom,email,mdp,tel,role) VALUES (:nom,:prenom,:email,:mdp,:tel,:role);";
+        $data = array(":nom"=>$tab['nom'],":prenom"=>$tab['prenom'],":email"=>$tab['email'],":mdp"=>$tab['mdp'],":tel"=>$tab['tel'],":role"=>$tab['role']);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
-    }
-    public function updateClient($tab){
-        $requete = "UPDATE client SET nom_c = :nom_c, prenom_c = :prenom_c, email_c = :email_c, mdp_c = :mdp_c, adr_c = :adr_c, cp_c = :cp_c, ville_c = :ville_c, tel_c = :tel_c, rib_c = :rib_c where id_c = :id_c;";
-        $data = array(":nom_c"=>$tab['nom_c'],":prenom_c"=>$tab['prenom_c'],":mdp_c"=>$tab['mdp_c'],":email_c"=>$tab['email_c'],":adr_c"=>$tab['adr_c'],":cp_c"=>$tab['cp_c'], ":ville_c"=>$tab['ville_c'], ":tel_c"=>$tab['tel_c'], ":rib_c"=>$tab['rib_c'], ":id_c"=>$tab['id_c']);
-        $exe = $this->unPdo->prepare($requete);
-        $exe->execute($data);
-    }
-    public function deleteClient($id_c){
-        $requete = "DELETE FROM client where id_c = :id_c;";
-        $exe = $this->unPdo->prepare($requete);
-        $data = array(":id_c"=>$id_c);
-        $exe->execute($data);    
-    }
-    public function selectLikeClient($filtre){
-        $requete = "select * from client where nom_c like :filtre or prenom_c like :filtre or email_c like :filtre or tel_c like :filtre;";
-        $data = array(":filtre"=>"%".$filtre."%");
-        $exe = $this->unPdo->prepare($requete);
-        $exe->execute($data);
-        return $exe->fetchAll();
+        return $this->unPdo->lastInsertId();
     }
 
 
 
 
-    //Propriétaires
-    public function selectAllProprietaire(){
-        $requete = "SELECT * FROM proprietaire;";
+
+
+
+
+    /*** Clients ***/
+    public function insertClient($tab) {
+        try {
+            $this->unPdo->beginTransaction();
+
+            $reqUser= "INSERT INTO utilisateur (nom, prenom, email, mdp, tel, role) 
+                       VALUES (:nom, :prenom, :email, :mdp, :tel, 'client')";
+            $stmtUser = $this->unPdo->prepare($reqUser);
+            $stmtUser->execute([
+                ":nom" => $tab['nom'],
+                ":prenom" => $tab['prenom'],
+                ":email" => $tab['email'],
+                ":mdp" => $tab['mdp'],
+                ":tel" => $tab['tel']
+            ]);
+
+            $lastId = $this->unPdo->lastInsertId();
+
+            $reqClient = "INSERT INTO client (id_c, adresse, cp, ville, RIB) 
+                          VALUES (:id, :adresse, :cp, :ville, :rib)";
+            $stmtClient = $this->unPdo->prepare($reqClient);
+            $stmtClient->execute([
+                ":id" => $lastId,
+                ":adresse" => $tab['adresse'],
+                ":cp" => $tab['cp'],
+                ":ville" => $tab['ville'],
+                ":rib" => $tab['rib']
+            ]);
+
+            $this->unPdo->commit();
+            return $lastId;
+
+        } catch (Exception $e) {
+            $this->unPdo->rollBack(); 
+            echo $e->getMessage();
+            die;
+        }
+    }
+
+
+    public function updateClient($tab) {
+        try {
+            $this->unPdo->beginTransaction();
+
+            $reqUser= "UPDATE utilisateur SET nom = :nom, prenom = :prenom, email = :email,
+                       mdp = :mdp, tel = :tel WHERE id_user = :id_user;";
+            $stmtUser = $this->unPdo->prepare($reqUser);
+            $stmtUser->execute([
+                ":nom" => $tab['nom'],
+                ":prenom" => $tab['prenom'],
+                ":email" => $tab['email'],
+                ":mdp" => $tab['mdp'],
+                ":tel" => $tab['tel'],
+                ":id_user" => $tab['id_user']
+            ]);
+
+            $reqClient = "UPDATE client SET adresse = :adresse, cp = :cp, ville = :ville,
+                         RIB = :rib WHERE id_c = :id_c;";
+            $stmtClient = $this->unPdo->prepare($reqClient);
+            $stmtClient->execute([
+                ":adresse" => $tab['adresse'],
+                ":cp" => $tab['cp'],
+                ":ville" => $tab['ville'],
+                ":rib" => $tab['rib'],
+                ":id_c" => $tab['id_user']
+            ]);
+
+            $this->unPdo->commit();
+
+        } catch (Exception $e) {
+            $this->unPdo->rollBack(); 
+            echo $e->getMessage();
+            die;
+        }
+    }
+    
+    public function selectAllClients() {
+        $requete = "SELECT * FROM utilisateur U
+                    INNER JOIN client C ON U.id_user = C.id_c
+                    ORDER BY C.id_c ASC";
         $exe = $this->unPdo->prepare($requete);
         $exe->execute();
         return $exe->fetchAll();
     }
-    public function selectWhereProprietaire($email,$mdp){
-        $requete = "SELECT * FROM proprietaire where email_p = :email and mdp_p = :mdp;";
-        $data = array(":email"=>$email, ":mdp"=>$mdp);
+    public function selectWhereIdClient($id) {
+        $requete = "SELECT * FROM utilisateur U
+                    INNER JOIN client C ON U.id_user = C.id_c
+                    WHERE U.id_user = :id;";
+        $data = array(":id"=>$id);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
     }
-    public function selectWhereIdProprietaire($id_p){
-        $requete = "SELECT * FROM proprietaire where id_p = :id_p;";
-        $data = array(":id_p"=>$id_p);
+    public function deleteClient($id) {
+        $requete = "DELETE FROM utilisateur WHERE id_user = :id;";
+        $data = array(":id"=>$id);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+    }
+    public function selectLikeClient($filtre) {
+        $requete = "SELECT * FROM utilisateur U
+                    INNER JOIN client C ON U.id_user = C.id_c
+                    WHERE U.nom LIKE :filtre 
+                    OR U.prenom LIKE :filtre 
+                    OR C.ville LIKE :filtre
+                    OR C.cp LIKE :filtre;";
+        $data = array(":filtre" => "%" . $filtre . "%");  
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
+
+
+
+    //Propriétaires
+
+     public function insertProprietaire($tab) {
+        try {
+            $this->unPdo->beginTransaction();
+
+            $reqUser= "INSERT INTO utilisateur (nom, prenom, email, mdp, tel, role) 
+                       VALUES (:nom, :prenom, :email, :mdp, :tel, 'proprietaire')";
+            $stmtUser = $this->unPdo->prepare($reqUser);
+            $stmtUser->execute([
+                ":nom" => $tab['nom'],
+                ":prenom" => $tab['prenom'],
+                ":email" => $tab['email'],
+                ":mdp" => $tab['mdp'],
+                ":tel" => $tab['tel']
+            ]);
+
+            $lastId = $this->unPdo->lastInsertId();
+
+            $reqProprio = "INSERT INTO proprietaire (id_p, adresse, cp, ville, RIB) 
+                          VALUES (:id, :adresse, :cp, :ville, :rib)";
+            $stmtProprio = $this->unPdo->prepare($reqProprio);
+            $stmtProprio->execute([
+                ":id" => $lastId,
+                ":adresse" => $tab['adresse'],
+                ":cp" => $tab['cp'],
+                ":ville" => $tab['ville'],
+                ":rib" => $tab['rib']
+            ]);
+
+            $this->unPdo->commit();
+            return $lastId;
+
+        } catch (Exception $e) {
+            $this->unPdo->rollBack(); 
+            return null;
+        }
+    }
+    
+    public function updateProprietaire($tab) {
+        try {
+            $this->unPdo->beginTransaction();
+
+            $reqUser= "UPDATE utilisateur SET nom = :nom, prenom = :prenom, email = :email,
+                       mdp = :mdp, tel = :tel WHERE id_user = :id_user;";
+            $stmtUser = $this->unPdo->prepare($reqUser);
+            $stmtUser->execute([
+                ":nom" => $tab['nom'],
+                ":prenom" => $tab['prenom'],
+                ":email" => $tab['email'],
+                ":mdp" => $tab['mdp'],
+                ":tel" => $tab['tel'],
+                ":id_user" => $tab['id_user']
+            ]);
+
+            $reqProprio = "UPDATE proprietaire SET adresse = :adresse, cp = :cp, 
+                          ville = :ville, RIB = :rib WHERE id_p = :id_p;";
+            $stmtProprio = $this->unPdo->prepare($reqProprio);
+            $stmtProprio->execute([
+                ":adresse" => $tab['adresse'],
+                ":cp" => $tab['cp'],
+                ":ville" => $tab['ville'],
+                ":rib" => $tab['rib'],
+                ":id_p" => $tab['id_user']
+            ]);
+
+            $this->unPdo->commit();
+
+        } catch (Exception $e) {
+            $this->unPdo->rollBack(); 
+            echo $e->getMessage();
+            die;
+        }
+    }
+
+    public function selectAllProprietaire() {
+        $requete = "SELECT * FROM utilisateur U
+                    INNER JOIN proprietaire P ON U.id_user = P.id_p
+                    ORDER BY P.id_p ASC";
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute();
+        return $exe->fetchAll();
+    }
+    public function selectWhereIdProprietaire($id) {
+        $requete = "SELECT * FROM utilisateur U
+                    INNER JOIN proprietaire P ON U.id_user = P.id_p
+                    WHERE U.id_user = :id;";
+        $data = array(":id"=>$id);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetch();
     }
-    public function insertProprietaire($tab){
-        $requete = "INSERT INTO proprietaire VALUES (null,:nom_p,:prenom_p,:email_p,:mdp_p,:adr_p,:cp_p,:ville_p,:tel_p,:rib_p);";
-        $exe = $this->unPdo->prepare($requete);
-        $data = array(":nom_p"=>$tab['nom_p'],":prenom_p"=>$tab['prenom_p'],":email_p"=>$tab['email_p'],":mdp_p"=>$tab['mdp_p'],":adr_p"=>$tab['adr_p'],":cp_p"=>$tab['cp_p'],":ville_p"=>$tab['ville_p'],":tel_p"=>$tab['tel_p'],":rib_p"=>$tab['rib_p']);
-        $exe->execute($data);
-    }
-    public function updateProprietaire($tab){
-        $requete = "UPDATE proprietaire SET nom_p = :nom_p, prenom_p = :prenom_p, email_p = :email_p, mdp_p = :mdp_p, adr_p = :adr_p, cp_p = :cp_p, ville_p = :ville_p, tel_p = :tel_p, rib_p = :rib_p where id_p = :id_p;";
-        $data = array(":nom_p"=>$tab['nom_p'],":prenom_p"=>$tab['prenom_p'],":email_p"=>$tab['email_p'],":mdp_p"=>$tab['mdp_p'],":adr_p"=>$tab['adr_p'],":cp_p"=>$tab['cp_p'],":ville_p"=>$tab['ville_p'],":tel_p"=>$tab['tel_p'],":rib_p"=>$tab['rib_p'],":id_p"=>$tab['id_p']);
+    public function deleteProprietaire($id) {
+        $requete = "DELETE FROM utilisateur WHERE id_user = :id;";
+        $data = array(":id"=>$id);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
-    public function deleteProprietaire($id_p){
-        $requete = "DELETE FROM proprietaire where id_p = :id_p;";
-        $exe = $this->unPdo->prepare($requete);
-        $data = array(":id_p"=>$id_p);
-        $exe->execute($data);    
-    }
-    public function selectLikeProprietaire($filtre){
-        $requete = "select * from proprietaire where nom_p like :filtre or prenom_p like :filtre or email_p like :filtre or tel_p like :filtre;";
-        $data = array(":filtre"=>"%".$filtre."%");
+    public function selectLikeProprietaire($filtre) {
+        $requete = "SELECT * FROM utilisateur U
+                    INNER JOIN proprietaire P ON U.id_user = P.id_p
+                    WHERE U.nom LIKE :filtre 
+                    OR U.prenom LIKE :filtre 
+                    OR P.ville LIKE :filtre
+                    OR P.cp LIKE :filtre;";
+        $data = array(":filtre" => "%" . $filtre . "%");  
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetchAll();
@@ -213,8 +379,8 @@ class Modele{
         return $this->unPdo->lastInsertId();
     }
     public function updateHabitation($tab){
-        $requete = "UPDATE habitation SET type_hab = :type_hab, adr_hab = :adr_hab, cp_hab = :cp_hab, ville_hab = :ville_hab, tarif_hab_bas = :tarif_hab_bas, tarif_hab_moy = :tarif_hab_moy, tarif_hab_hau = :tarif_hab_hau, surface = :surface, id_p = :id_p where ref_hab = :ref_hab;";
-        $data = array(":type_hab"=>$tab['type_hab'],":adr_hab"=>$tab['adr_hab'],":cp_hab"=>$tab['cp_hab'],":ville_hab"=>$tab['ville_hab'],":tarif_hab_bas"=>$tab['tarif_hab_bas'],":tarif_hab_moy"=>$tab['tarif_hab_moy'],":tarif_hab_hau"=>$tab['tarif_hab_hau'],":surface"=>$tab['surface'],":id_p"=>$tab['id_p'],":ref_hab"=>$tab['ref_hab']);
+        $requete = "UPDATE habitation SET type_hab = :type_hab, adr_hab = :adr_hab, cp_hab = :cp_hab, ville_hab = :ville_hab, tarif_hab_bas = :tarif_hab_bas, tarif_hab_moy = :tarif_hab_moy, tarif_hab_hau = :tarif_hab_hau, surface = :surface, id_p = :id_p, description_hab = :description_hab, titre_hab = :titre_hab, capacite_hab = :capacite_hab where ref_hab = :ref_hab;";
+        $data = array(":type_hab"=>$tab['type_hab'],":adr_hab"=>$tab['adr_hab'],":cp_hab"=>$tab['cp_hab'],":ville_hab"=>$tab['ville_hab'],":tarif_hab_bas"=>$tab['tarif_hab_bas'],":tarif_hab_moy"=>$tab['tarif_hab_moy'],":tarif_hab_hau"=>$tab['tarif_hab_hau'],":surface"=>$tab['surface'],":id_p"=>$tab['id_p'],":description_hab"=>$tab['description_hab'],":titre_hab"=>$tab['titre_hab'],":capacite_hab"=>$tab['capacite_hab'],":ref_hab"=>$tab['ref_hab']);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
@@ -328,7 +494,7 @@ class Modele{
         $data = array(":ref_res"=>$ref_res);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
-        return $exe->fetchAll();
+        return $exe->fetch();
     }
     public function selectReservationWhereClient($id_c){
         $requete = "SELECT * FROM reservation WHERE id_c = :id_c";

@@ -1,5 +1,6 @@
 <section>
-    <h1>Mon compte</h1>
+    
+<h1>Mon compte</h1>
 <div class="vue_compte">
 <div class="infos_perso">
     <?php if(isset($_SESSION['msg-update'])):?>
@@ -10,31 +11,31 @@
     <table>
         <tr>
             <th id="top">Nom</th>
-            <td id="top"><?= ($leClient == null)?"":$leClient['nom_c'];?></td>
+            <td id="top"><?= ($utilisateur == null)?"":$utilisateur['nom'];?></td>
         </tr>
         <tr>
             <th>Prenom</th>
-            <td><?= ($leClient == null)?"":$leClient['prenom_c'];?></td>
+            <td><?= ($utilisateur == null)?"":$utilisateur['prenom'];?></td>
         </tr>
         <tr>
             <th>Adresse</th>
-            <td><?= ($leClient == null)?"":$leClient['adr_c'];?></td>
+            <td><?= ($leClient == null)?"":$leClient['adresse'];?></td>
         </tr>
         <tr>
             <th>Code postal</th>
-            <td><?= ($leClient == null)?"":$leClient['cp_c'];?></td>
+            <td><?= ($leClient == null)?"":$leClient['cp'];?></td>
         </tr>
         <tr>
             <th>Ville</th>
-            <td><?= ($leClient == null)?"":$leClient['ville_c'];?></td>
+            <td><?= ($leClient == null)?"":$leClient['ville'];?></td>
         </tr>
         <tr>
             <th>Email</th>
-            <td><?= ($leClient == null)?"":$leClient['email_c'];?></td>
+            <td><?= ($utilisateur == null)?"":$utilisateur['email'];?></td>
         </tr>
         <tr>
             <th id="bottom">Téléphone</th>
-            <td id="bottom"><?= ($leClient == null)?"":$leClient['tel_c'];?></td>
+            <td id="bottom"><?= ($utilisateur == null)?"":$utilisateur['tel'];?></td>
         </tr>
     </table>
     <a href="index.php?page=20" class="btModifier">

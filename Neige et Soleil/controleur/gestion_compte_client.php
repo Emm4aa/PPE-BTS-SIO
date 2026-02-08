@@ -1,7 +1,10 @@
 <?php 
 
-$idClient = $_SESSION['id'];
-$leClient = $unControleur->selectWhereIdClient($idClient);
+$id = $_SESSION['id'];
+
+$utilisateur = $unControleur->selectWhereIdUtilisateur($id);
+$leClient = $unControleur->selectWhereIdClient($id);
+
 
 if(isset($_GET['action']) && isset($_GET['ref_res'])){
     $refRes = $_GET['ref_res'];
@@ -9,7 +12,7 @@ if(isset($_GET['action']) && isset($_GET['ref_res'])){
     $_SESSION['msg-annul-reservation'] = "Votre réservation a été annulée avec succés✅";
 }
 
-$resaClient = $unControleur->selectReservationWhereClient($_SESSION['id']);
+$resaClient = $unControleur->selectReservationWhereClient($id);
 
 require_once("vue/vue_compte_client.php");
 

@@ -1,4 +1,5 @@
 <section>
+    
     <h1>Ajoutez une habitation !</h1>
 
     <form class="insert" action="" method="post" enctype="multipart/form-data" id="formInsertHabitation">
@@ -19,7 +20,7 @@
             </tr>
             <tr>
                 <td><label for="cp_hab">Code postal</label></td>
-                <td><input type="text" name="cp_hab" required></td>
+                <td><input type="number" name="cp_hab" required></td>
             </tr>
             <tr>
                 <td><label for="ville_hab">Ville</label></td>

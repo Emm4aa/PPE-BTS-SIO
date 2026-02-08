@@ -2,6 +2,8 @@
 
     if(isset($_POST['ajouter'])){
 
+        $erreurs = [];
+
         $type = $_POST['type'];
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
@@ -11,7 +13,7 @@
         $cp = $_POST['cp'];
         $ville = $_POST['ville'];
         $tel = $_POST['tel'];
-        $rib = $_POST['RIB'];
+        $rib = $_POST['rib'];
 
         $regexNom = '/^[A-Za-zÀ-ÖØ-öø-ÿ\' -]{2,}$/u';
         $regexPrenom = '/^[A-Za-zÀ-ÖØ-öø-ÿ\' -]{2,}$/u';
@@ -61,30 +63,32 @@
         }else{
                 if($type == 'client'){
                         $unControleur->insertClient([
-                                "nom_c" => $nom,
-                                "prenom_c" => $prenom,
-                                "email_c" => $email,
-                                "mdp_c" => $mdp,
-                                "adr_c" => $adresse,
-                                "cp_c" => $cp,
-                                "ville_c" => $ville,
-                                "tel_c" => $tel,
-                                "rib_c" => $rib
+                                "nom" => $nom,
+                                "prenom" => $prenom,
+                                "email" => $email,
+                                "mdp" => $mdp,
+                                "tel" => $tel,
+                                "adresse" => $adresse,
+                                "cp" => $cp,
+                                "ville" => $ville,
+                                "rib" => $rib
                                 ]);
+        
                         header("Location: index.php?page=16");
                         exit;
+                        
                 }
                 if($type == 'proprietaire'){
                         $unControleur->insertProprietaire([
-                                "nom_p" => $nom,
-                                "prenom_p" => $prenom,
-                                "email_p" => $email,
-                                "mdp_p" => $mdp,
-                                "adr_p" => $adresse,
-                                "cp_p" => $cp,
-                                "ville_p" => $ville,
-                                "tel_p" => $tel,
-                                "rib_p" => $rib
+                                "nom" => $nom,
+                                "prenom" => $prenom,
+                                "email" => $email,
+                                "mdp" => $mdp,
+                                "tel" => $tel,
+                                "adresse" => $adresse,
+                                "cp" => $cp,
+                                "ville" => $ville,
+                                "rib" => $rib
                                 ]);
                         header("Location: index.php?page=16");
                         exit;

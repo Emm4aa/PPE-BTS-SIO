@@ -1,35 +1,122 @@
-<section>
-
-<h1> Gestion des clients </h1>
-
-<div class="conteneurGestion">
 <?php
-$lesHabitations = $unControleur->selectAllHabitation();
-$lesclients = $unControleur->selectAllClient();
-$lesProprietaires = $unControleur->selectAllProprietaire();
+
+$lesclients = $unControleur->selectAllClients();
+$leClient = null;
+$erreurs = [];
+
 
 if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
-	$leClient = null;
-
+	
 	if(isset($_GET['action']) && isset($_GET['id_c'])){
-			$action = $_GET['action']; 
-			$id_c = $_GET['id_c'];
+		$action = $_GET['action']; 
+		$id_c = $_GET['id_c'];
 
-			switch($action){
-				case "sup"  : $unControleur->deleteClient($id_c); break;
-				case "edit" : $leClient = $unControleur->selectWhereIdClient($id_c);break;
-			}
+		switch($action){
+			case "sup"  : $unControleur->deleteClient($id_c);
+						  header("Location: index.php?page=2");
+						  exit;
+						  break;
+			case "edit" : $leClient = $unControleur->selectWhereIdClient($id_c);break;
 		}
+	}
 }
-		
+
+
+
+
+if(isset($_POST['valider']) || isset($_POST['modifier'])){
+
+	$nom = $_POST['nom'];
+	$prenom = $_POST['prenom'];
+	$email = $_POST['email'];
+	$mdp = $_POST['mdp'];
+	$adresse = $_POST['adresse'];
+	$cp = $_POST['cp'];
+	$ville = $_POST['ville'];
+	$tel = $_POST['tel'];
+	$rib = $_POST['rib'];
+
+	$regexNom = '/^[A-Za-zÀ-ÖØ-öø-ÿ\' -]{2,}$/u';
+	$regexPrenom = '/^[A-Za-zÀ-ÖØ-öø-ÿ\' -]{2,}$/u';
+	$regexEmail = '/^[A-Za-zÀ-ÖØ-öø-ÿ0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/u';
+	$regexMdp = '/^[^ ]{3,}$/u';
+	$regexAdresse = '/^[0-9]{1,5} [A-Za-zÀ-ÖØ-öø-ÿ\' .-]{3,}$/u';
+	$regexCp = '/^[0-9]{5}$/';
+	$regexVille = '/^[A-Za-zÀ-ÖØ-öø-ÿ\' -]{2,}$/u';
+	$regexTel = '/^[0-9]{10}$/';
+	$regexRib = '/^[0-9A-Z]{27}$/';
+
+	$champs = [$nom,$prenom,$email,$mdp,$adresse,$cp,$ville,$tel,$rib];
+}
+	
+	
 if(isset($_POST['valider'])){
-	$unControleur->insertClient($_POST); 
+	
+	foreach($champs as $champ){
+		if($champ == ""){
+			$erreurs[] = "Veuillez remplir touts les champs";break;
+        }
+    }
+	$regles = [
+				"nom" => [$regexNom, "Veuillez rentrer un nom valide"],
+                "prenom" => [$regexPrenom, "Veuillez rentrer un prénom valide"],
+                "email" => [$regexEmail, "Veuillez rentrer un email valide"],
+                "mdp" => [$regexMdp, "Veuillez rentrer un mot de passe valide"],
+                "adresse" => [$regexAdresse, "Veuillez rentrer une adresse valide"],
+                "cp" => [$regexCp, "Veuillez rentrer un code postal valide"],
+                "ville" => [$regexVille, "Veuillez rentrer un nom de ville valide"],
+                "tel" => [$regexTel, "Veuillez rentrer un numéro de téléphone valide"],
+                "rib" => [$regexRib, "Veuillez rentrer un RIB valide"]
+			];
+    foreach($regles as $champ => [$regex, $msg]){
+		if(!preg_match($regex, trim($_POST[$champ]))){
+			$erreurs[] = $msg;break;
+		}
+    }
+
+	if(!empty($erreurs)){
+                $_SESSION['msg-erreurs'] = $erreurs;
+        }else{
+			$unControleur->insertClient($_POST);
+	}
 }
+	
+	
 if(isset($_POST['modifier'])){
-	$unControleur->updateClient($_POST); 
-	//recharger la page 
-	header("Location: index.php?page=2");
+
+	foreach($champs as $champ){
+		if($champ == ""){
+			$erreurs[] = "Veuillez remplir touts les champs";break;
+        }
+    }
+	$regles = [
+				"nom" => [$regexNom, "Veuillez rentrer un nom valide"],
+                "prenom" => [$regexPrenom, "Veuillez rentrer un prénom valide"],
+                "email" => [$regexEmail, "Veuillez rentrer un email valide"],
+                "mdp" => [$regexMdp, "Veuillez rentrer un mot de passe valide"],
+                "adresse" => [$regexAdresse, "Veuillez rentrer une adresse valide"],
+                "cp" => [$regexCp, "Veuillez rentrer un code postal valide"],
+                "ville" => [$regexVille, "Veuillez rentrer un nom de ville valide"],
+                "tel" => [$regexTel, "Veuillez rentrer un numéro de téléphone valide"],
+                "rib" => [$regexRib, "Veuillez rentrer un RIB valide"]
+			];
+    foreach($regles as $champ => [$regex, $msg]){
+		if(!preg_match($regex, trim($_POST[$champ]))){
+			$erreurs[] = $msg;break;
+		}
+    }
+
+	if(!empty($erreurs)){
+            $_SESSION['msg-erreurs'] = $erreurs;
+    }else{
+		$unControleur->updateClient($_POST); 
+		header("Location: index.php?page=2");
+		exit;
+	}
 }
+
+
+		
 if(isset($_POST['annuler']) || isset($_POST['effacer'])){
 	header("Location: index.php?page=2");
 	exit;
@@ -38,11 +125,8 @@ if (isset($_POST['filtrer'])){
 	$filtre = $_POST['filtre']; 
 	$lesClients = $unControleur->selectLikeClient($filtre); 
 } else {
-		$lesClients = $unControleur->selectAllClient(); 
+		$lesClients = $unControleur->selectAllClients(); 
 }
 
-require_once ("vue/vue_insert_client.php");
-require_once("vue/vue_select_client.php");
+require_once("vue/vue_client.php");
 ?>
-</div>
-</section>

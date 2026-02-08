@@ -29,6 +29,10 @@
                 <td><input type="text" name="mdp" required></td>
             </tr>
             <tr>
+                <td>Tél</td>
+                <td><input type="text" name="tel" required></td>
+            </tr>
+            <tr>
                 <td>Adresse</td>
                 <td><input type="text" name="adresse" required></td>
             </tr>
@@ -41,12 +45,8 @@
                 <td><input type="text" name="ville" required></td>
             </tr>
             <tr>
-                <td>Tél</td>
-                <td><input type="text" name="tel" required></td>
-            </tr>
-            <tr>
                 <td>RIB</td>
-                <td><input type="text" name="RIB" required></td>
+                <td><input type="text" name="rib" required></td>
             </tr>
         </table>
         <?php if(!empty($_SESSION['msg-erreurs'])): ?>

@@ -58,7 +58,7 @@
             <?php endforeach; ?>
         <?php endif; ?>
         <?php if(empty($lesHabitations)):?>
-            <h3>Aucune habitation disponible pour ces critéres</h3>
+            <h3>Aucune habitation disponible</h3>
         <?php endif; ?>
     </div>
 </section>

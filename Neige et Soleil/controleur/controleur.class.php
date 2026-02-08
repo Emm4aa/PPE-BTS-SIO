@@ -8,22 +8,30 @@ class Controleur {
 
     }
 
+    //Utilisateurs
+    public function selectAllUtilisateurs(){
+        return $this->unModele->selectAllUtilisateurs();
+    }
+    public function selectWhereUtilisateur($email,$mdp){
+        return $this->unModele->selectWhereUtilisateur($email,$mdp);
+    }
+    public function selectWhereIdUtilisateur($id){
+    return $this->unModele->selectWhereIdUtilisateur($id);
+    }
+
 
     //Clients
     public function insertClient($tab){
         $this->unModele->insertClient($tab);
     }
-    public function selectAllClient(){
-        return $this->unModele->selectAllClient();
+    public function selectAllClients(){
+        return $this->unModele->selectAllClients();
     }
     public function selectLikeClient($filtre){
     return $this->unModele->selectLikeClient($filtre);
     }
     public function deleteClient($id_c){
         $this->unModele->deleteClient($id_c);
-    }
-    public function selectWhereClient($email,$mdp){
-    return $this->unModele->selectWhereClient($email,$mdp);
     }
     public function selectWhereIdClient($id_c){
     return $this->unModele->selectWhereIdClient($id_c);
@@ -46,9 +54,6 @@ class Controleur {
     }
     public function deleteProprietaire($id_p){
         $this->unModele->deleteProprietaire($id_p);
-    }
-    public function selectWhereProprietaire($email,$mdp){
-        return $this->unModele->selectWhereProprietaire($email,$mdp);
     }
     public function selectWhereIdProprietaire($id_p){
          return $this->unModele->selectWhereIdProprietaire($id_p);
@@ -105,8 +110,8 @@ class Controleur {
     public function selectHabitationWhereProprietaire($id_p){
         return $this->unModele->selectHabitationWhereProprietaire($id_p);
     }
-    public function updateHabitation($ref_hab) {
-        return $this->unModele->updateHabitation($ref_hab);
+    public function updateHabitation($tab) {
+        return $this->unModele->updateHabitation($tab);
     }
     public function updateHabitationAnnonce($tab) {
         $this->unModele->updateHabitationAnnonce($tab);

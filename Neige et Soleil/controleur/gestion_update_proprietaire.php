@@ -1,6 +1,7 @@
 <?php
-    $idProprietaire = $_SESSION['id'];
-    $leProprietaire = $unControleur->selectWhereIdProprietaire($idProprietaire);
+    $id = $_SESSION['id'];
+    $utilisateur = $unControleur->selectWhereIdUtilisateur($id);
+    $leProprietaire = $unControleur->selectWhereIdProprietaire($id);
 
 
     if(isset($_POST['annuler'])){
@@ -9,15 +10,18 @@
     }
     if (isset($_POST['valider'])) {
 
-        $nom = $_POST['nom_p'];
-        $prenom = $_POST['prenom_p'];
-        $email = $_POST['email_p'];
-        $mdp = $_POST['mdp_p'];
-        $adresse = $_POST['adr_p'];
-        $cp = $_POST['cp_p'];
-        $ville = $_POST['ville_p'];
-        $tel = $_POST['tel_p'];
-        $rib = $_POST['rib_p'];
+        $erreurs = [];
+
+        $id_user = $_POST['id_user'];
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $email = $_POST['email'];
+        $mdp = $_POST['mdp'];
+        $adresse = $_POST['adresse'];
+        $cp = $_POST['cp'];
+        $ville = $_POST['ville'];
+        $tel = $_POST['tel'];
+        $rib = $_POST['rib'];
 
         $regexNom = '/^[A-Za-zÀ-ÖØ-öø-ÿ\' -]{2,}$/u';
         $regexPrenom = '/^[A-Za-zÀ-ÖØ-öø-ÿ\' -]{2,}$/u';
@@ -40,15 +44,15 @@
         }
 
         $regles = [
-                        "nom_p" => [$regexNom,     "Veuillez rentrer un nom valide"],
-                        "prenom_p" => [$regexPrenom,  "Veuillez rentrer un prénom valide"],
-                        "email_p" => [$regexEmail,   "Veuillez rentrer un email valide"],
-                        "mdp_p" => [$regexMdp,     "Veuillez rentrer un mot de passe valide"],
-                        "adr_p" => [$regexAdresse, "Veuillez rentrer une adresse valide"],
-                        "cp_p" => [$regexCp,      "Veuillez rentrer un code postal valide"],
-                        "ville_p" => [$regexVille,   "Veuillez rentrer un nom de ville valide"],
-                        "tel_p" => [$regexTel,     "Veuillez rentrer un numéro de téléphone valide"],
-                        "rib_p" => [$regexRib,     "Veuillez rentrer un RIB valide"]
+                        "nom" => [$regexNom,     "Veuillez rentrer un nom valide"],
+                        "prenom" => [$regexPrenom,  "Veuillez rentrer un prénom valide"],
+                        "email" => [$regexEmail,   "Veuillez rentrer un email valide"],
+                        "mdp" => [$regexMdp,     "Veuillez rentrer un mot de passe valide"],
+                        "adresse" => [$regexAdresse, "Veuillez rentrer une adresse valide"],
+                        "cp" => [$regexCp,      "Veuillez rentrer un code postal valide"],
+                        "ville" => [$regexVille,   "Veuillez rentrer un nom de ville valide"],
+                        "tel" => [$regexTel,     "Veuillez rentrer un numéro de téléphone valide"],
+                        "rib" => [$regexRib,     "Veuillez rentrer un RIB valide"]
         ];
 
         foreach($regles as $champ => [$regex, $msg]){
@@ -61,7 +65,7 @@
         if(!empty($erreurs)){
             $_SESSION['msg-erreurs'] = $erreurs;
         }else{
-            $unControleur->updateProprietaire($idProprietaire);
+            $unControleur->updateProprietaire($id_user);
             $_SESSION['msg-update'] = "Vos informations ont bien été mises à jour ✅";
             header("Location: index.php?page=7");
             exit;

@@ -1,6 +1,7 @@
 <?php 
-    $idProprietaire = $_SESSION['id'];
-    $leProprietaire = $unControleur->selectWhereIdProprietaire($idProprietaire);
+    $id = $_SESSION['id'];
+    $utilisateur = $unControleur->selectWhereIdUtilisateur($id);
+    $leProprietaire = $unControleur->selectWhereIdProprietaire($id);
 
     if(isset($_POST['ajouter'])){
             $habitation = null;
