@@ -125,10 +125,17 @@ class Controleur {
     public function selectWhereMaison($ref_hab){
         return $this->unModele->selectWhereMaison($ref_hab);
     }
+    public function insertMaison($tab){
+        return $this->unModele->insertMaison($tab);
+    }
+    
 
     //Appartements
     public function selectWhereAppartement($ref_hab){
         return $this->unModele->selectWhereAppartement($ref_hab);
+    }
+    public function insertAppartement($tab){
+        return $this->unModele->insertAppartement($tab);
     }
 
 

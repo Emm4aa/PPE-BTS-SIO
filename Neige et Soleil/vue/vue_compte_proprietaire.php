@@ -93,7 +93,7 @@
         <p>Aucune habitation enregistrée</p>
     <?php endif; ?>
     </table>
-    <a href="index.php?page=13" id="btAjouterHabitation" translate="no">
+    <a href="index.php?page=23" id="btAjouterHabitation" translate="no">
         <span class="material-symbols-outlined">add</span>
     </a>
 </div>
