@@ -16,7 +16,11 @@ class Controleur {
         return $this->unModele->selectWhereUtilisateur($email,$mdp);
     }
     public function selectWhereIdUtilisateur($id){
-    return $this->unModele->selectWhereIdUtilisateur($id);
+        return $this->unModele->selectWhereIdUtilisateur($id);
+    }
+
+    public function selectWhereEmailUtilisateur($email){
+        return $this->unModele->selectWhereEmailUtilisateur($email);
     }
 
 
@@ -193,4 +197,15 @@ class Controleur {
         return $this->unModele->selectCountContratByProprio();
     }
 
+
+    //mdp oublié
+    public function verifCode($email,$mdp){
+        return $this->unModele->verifCode($email,$mdp);
+    }
+    public function resetCode($email,$mdp){
+        $this->unModele->verifCode($email,$mdp);
+    }
+    public function updateMdp($email,$newMdp){
+        $this->unModele->verifCode($email,$newMdp);
+    }
 }

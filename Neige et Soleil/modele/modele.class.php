@@ -33,6 +33,13 @@ class Modele{
         $exe->execute($data);
         return $exe->fetch();
     }
+    public function selectWhereEmailUtilisateur($email){
+        $requete = "SELECT * FROM utilisateur where email = :email;";
+        $data = array(":email"=>$email);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetch();
+    }
     public function selectWhereIdUtilisateur($id){
         $requete = "SELECT * FROM utilisateur where id_user = :id";
         $data = array(":id"=>$id);
@@ -597,16 +604,59 @@ class Modele{
 
 
 
-
-
-/* Contrat */
+    /* Contrat */
     public function selectCountContratByProprio(){
         $sql = "SELECT id_p,count(*) AS nb_contrats FROM contrat GROUP BY id_p;";
         $req = $this->unPdo->prepare($sql);
         $req->execute();
         return $req->fetchAll();
     }
+
+
+
+
+
+/* Reinitialisation mdp */
+    public function verifCode($email,$code){
+        $sql = "SELECT * FROM reset_mdp 
+                    WHERE email = :email AND code = :code 
+                    AND created_at > DATE_SUB(NOW(), INTERVAL 15 MINUTE)";
+        $data = array(":email"=>$email, ":code"=>$code);
+        $req = $this->unPdo->prepare($sql);
+        $req->execute($data);
+        return $req->fetch();
+    }
+
+    public function resetCode($email,$code){
+        $sql = "REPLACE INTO reset_mdp(email, code, created_at) VALUES (:email,:code,now());";
+        $data = array(":email"=>$email,":code"=>$code);
+        $req = $this->unPdo->prepare($sql);
+        $req->execute($data);
+    }
+
+    public function updateMdp($email,$newMdp){
+        try{
+            $this->unPdo->beginTransaction();
+
+            $sql = "UPDATE utilisateur SET mdp = :newMdp WHERE email = :email;";
+            $data = array(":newMdp"=>$newMdp, ":email"=>$email);
+            $req = $this->unPdo->prepare($sql);
+            $req->execute($data);
+
+            $sql = "DELETE FROM reset_mdp WHERE email = :email;";
+            $data = array(":email"=>$email);
+            $req = $this->unPdo->prepare($sql);
+            $req->execute($data);
+
+            $this->unPdo->commit();
+
+        }catch(Exception $e){
+            $this->unPdo->rollBack(); 
+            echo $e->getMessage();
+            die;
+        }
+    }
+
+
 }
-
-
 ?>

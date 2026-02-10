@@ -397,3 +397,11 @@ end//
 
 delimiter ;
 
+/*Table recuperation mdp oubliés*/
+drop table if exists reset_mdp;
+create table reset_mdp(
+    email varchar(100) not null,
+    code varchar(6) not null,
+    created_at datetime default now(),
+    primary key(email)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
