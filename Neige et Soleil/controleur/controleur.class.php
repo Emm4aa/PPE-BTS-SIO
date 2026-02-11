@@ -210,9 +210,9 @@ class Controleur {
         return $this->unModele->verifCode($email,$mdp);
     }
     public function resetCode($email,$mdp){
-        $this->unModele->verifCode($email,$mdp);
+        $this->unModele->resetCode($email,$mdp);
     }
     public function updateMdp($email,$newMdp){
-        $this->unModele->verifCode($email,$newMdp);
+        $this->unModele->updateMdp($email,$newMdp);
     }
 }

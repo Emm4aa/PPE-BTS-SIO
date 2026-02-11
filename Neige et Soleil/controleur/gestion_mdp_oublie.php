@@ -16,7 +16,7 @@ $erreurs = [];
     }
 
     if(isset($_POST['verifier'])){
-        $email = $_POST['email'];
+        $email = trim($_POST['email']);
         $compte_exist = $unControleur->selectWhereEmailUtilisateur($email);
 
         $regexEmail = '/^[A-Za-zÀ-ÖØ-öø-ÿ0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/u';
@@ -38,6 +38,16 @@ $erreurs = [];
         else{
             $code = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
             $unControleur->resetCode($email,$code);
+
+            $mail = new PHPMailer(true);
+            $mail->CharSet = 'UTF-8';
+
+            $mail->SMTPOptions = array('ssl' => array(
+                                                'verify_peer' => false,
+                                                'verify_peer_name' => false,
+                                                'allow_self_signed' => true
+                                                )
+                                            );
             try {
                 // Paramètres Serveur (Exemple Gmail)
                 $mail->isSMTP();
