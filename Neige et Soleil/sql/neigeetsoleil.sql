@@ -334,7 +334,7 @@ after insert on contrat
 for each row
 begin 
 update proprietaire set nb_contrat = nb_contrat + 1 
-where id = new.id_p;
+where id_p = new.id_p;
 end //
 delimiter ;
 
@@ -345,7 +345,7 @@ after delete on contrat
 for each row
 begin 
 update proprietaire set nb_contrat = nb_contrat - 1 
-where id = old.id_p;
+where id_p = old.id_p;
 end //
 delimiter ;
 

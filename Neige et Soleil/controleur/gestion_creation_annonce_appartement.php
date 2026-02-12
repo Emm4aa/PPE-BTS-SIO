@@ -111,7 +111,7 @@ if (isset($_POST['ajouter'])){
                 $extension = strtolower(pathinfo($name, PATHINFO_EXTENSION));
                 $newName = uniqid("photo_") . "." . $extension;
 
-                move_uploaded_file($photos['tmp_name'][$i], "images/habitations/" . $newName);
+                move_uploaded_file($photos['tmp_name'][$i], "images/appartements/" . $newName);
 
                 $isPrincipal = ($i === 0) ? 1 : 0;
 

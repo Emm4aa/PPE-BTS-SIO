@@ -17,15 +17,15 @@
                 <td><input type="text" name="ville_hab" required></td>
             </tr>
             <tr>
-                <td><label for="tarif_hab_bas">tarif bas</label></td>
+                <td><label for="tarif_hab_bas">Tarif bas</label></td>
                 <td><input type="number" min="1" name="tarif_hab_bas" required></td>
             </tr>
             <tr>
-                <td><label for="tarif_hab_moy">tarif moy</label></td>
+                <td><label for="tarif_hab_moy">Tarif moy</label></td>
                 <td><input type="number" min="1" name="tarif_hab_moy" required></td>
             </tr>
             <tr>
-                <td><label for="tarif_hab_haut">tarif haut</label></td>
+                <td><label for="tarif_hab_haut">Tarif haut</label></td>
                 <td><input type="number" min="1" name="tarif_hab_hau" required></td>
             </tr>
             <tr>
