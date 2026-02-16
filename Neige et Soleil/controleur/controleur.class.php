@@ -128,6 +128,10 @@ class Controleur {
     public function insertMaison($tab){
         return $this->unModele->insertMaison($tab);
     }
+
+    public function deleteMaison($ref_hab){
+        return $this->unModele->deleteMaison($ref_hab);
+    }
     
 
     //Appartements
@@ -138,6 +142,9 @@ class Controleur {
         return $this->unModele->insertAppartement($tab);
     }
 
+    public function deleteAppartement($ref_hab){
+        return $this->unModele->deleteAppartement($ref_hab);
+    }
 
     //Reservations
     public function insertReservation($tab){

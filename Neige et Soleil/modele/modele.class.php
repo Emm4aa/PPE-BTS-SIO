@@ -420,29 +420,33 @@ class Modele{
 
     //Maisons
 
-    public function insertMaison($tab){
-        $requete = "INSERT INTO maison
-                        (type_hab, adr_hab, cp_hab, ville_hab, tarif_hab_bas, tarif_hab_moy, 
-                        tarif_hab_hau, surface, id_p, description_hab, titre_hab, 
-                        capacite_hab,carac_m)
-                    VALUES (maison,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
-                            :tarif_hab_moy,:tarif_hab_hau,:surface,:id_p,:description_hab,
-                            :titre_hab,:capacite_hab,:carac_m);";
+    public function insertMaison($tab) {
+        $requete = "INSERT INTO maison (type_hab, adr_hab, cp_hab, ville_hab, tarif_hab_bas, tarif_hab_moy, tarif_hab_hau, surface, id_p, description_hab, titre_hab, capacite_hab, carac_m) 
+                VALUES ('maison', :adr_hab, :cp_hab, :ville_hab, :tarif_hab_bas, :tarif_hab_moy, :tarif_hab_hau, :surface, :id_p, :description_hab, :titre_hab, :capacite_hab, :carac_m)";
+        
         $exe = $this->unPdo->prepare($requete);
-        $data = array(
-            ":adr_hab"=>$tab['adr_hab'],
-            ":cp_hab"=>$tab['cp_hab'],
-            ":ville_hab"=>$tab['ville_hab'],
-            ":tarif_hab_bas"=>$tab['tarif_hab_bas'],
-            ":tarif_hab_moy"=>$tab['tarif_hab_moy'],
-            ":tarif_hab_hau"=>$tab['tarif_hab_hau'],
-            ":surface"=>$tab['surface'],
-            ":id_p"=>$tab['id_p'],
-            ":description_hab"=>$tab['description_hab'],
-            ":titre_hab"=>$tab['titre_hab'],
-            ":capacite_hab"=>$tab['capacite_hab'],
-            ":carac_m"=>$tab['carac_m']
-            );
+
+        $exe->execute([
+            ":adr_hab" => $tab['adr_hab'],
+            ":cp_hab" => $tab['cp_hab'],
+            ":ville_hab" => $tab['ville_hab'],
+            ":tarif_hab_bas" => $tab['tarif_hab_bas'],
+            ":tarif_hab_moy" => $tab['tarif_hab_moy'],
+            ":tarif_hab_hau" => $tab['tarif_hab_hau'],
+            ":surface" => $tab['surface'],
+            ":id_p" => $tab['id_p'],
+            ":description_hab" => $tab['description_hab'],
+            ":titre_hab" => $tab['titre_hab'],
+            ":capacite_hab" => $tab['capacite_hab'],
+            ":carac_m" => $tab['carac_m']
+        ]);
+
+        $requeteId = "SELECT MAX(ref_hab) as dernier_id FROM habitation";
+        $exeId = $this->unPdo->prepare($requeteId);
+        $exeId->execute();
+        $resultat = $exeId->fetch();
+
+        return $resultat['dernier_id'];
     }
     public function selectWhereMaison($ref_hab){
         $requete = "SELECT * FROM maison WHERE ref_hab = :ref_hab;";
@@ -452,6 +456,14 @@ class Modele{
         return $exe->fetchAll();
     }
 
+    public function deleteMaison($ref_hab){
+        $requete = "DELETE FROM contrat where ref_hab = :ref_hab;
+                    DELETE FROM maison where ref_hab = :ref_hab;";
+        $exe = $this->unPdo->prepare($requete);
+        $data = array(":ref_hab"=>$ref_hab);
+        $exe->execute($data);    
+    }
+
     //Appartements
 
     public function insertAppartement($tab){
@@ -459,11 +471,13 @@ class Modele{
                         (type_hab, adr_hab, cp_hab, ville_hab, tarif_hab_bas, tarif_hab_moy, 
                         tarif_hab_hau, surface, id_p, description_hab, titre_hab, 
                         capacite_hab,etage_ap,type_ap)
-                    VALUES (appartement,:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
+                    VALUES ('appartement',:adr_hab,:cp_hab,:ville_hab,:tarif_hab_bas,
                             :tarif_hab_moy,:tarif_hab_hau,:surface,:id_p,:description_hab,
                             :titre_hab,:capacite_hab,:etage_ap,:type_ap);";
+
         $exe = $this->unPdo->prepare($requete);
-        $data = array(
+
+        $exe->execute([
             ":adr_hab"=>$tab['adr_hab'],
             ":cp_hab"=>$tab['cp_hab'],
             ":ville_hab"=>$tab['ville_hab'],
@@ -476,15 +490,31 @@ class Modele{
             ":titre_hab"=>$tab['titre_hab'],
             ":capacite_hab"=>$tab['capacite_hab'],
             ":etage_ap"=>$tab['etage_ap'],
-            "type_ah"=>$tab['type_ap']
-            );
-    }
+            "type_ap"=>$tab['type_ap']
+            ]);
+
+            $requeteId = "SELECT MAX(ref_hab) as dernier_id FROM habitation";
+            $exeId = $this->unPdo->prepare($requeteId);
+            $exeId->execute();
+            $resultat = $exeId->fetch();
+
+            return $resultat['dernier_id'];
+        }
+    
     public function selectWhereAppartement($ref_hab){
         $requete = "SELECT * FROM appartement WHERE ref_hab = :ref_hab;";
         $data = array(":ref_hab"=>$ref_hab);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
         return $exe->fetchAll();
+    }
+
+    public function deleteAppartement($ref_hab){
+        $requete = "DELETE FROM contrat where ref_hab = :ref_hab;
+                    DELETE FROM appartement where ref_hab = :ref_hab;";
+        $exe = $this->unPdo->prepare($requete);
+        $data = array(":ref_hab"=>$ref_hab);
+        $exe->execute($data);    
     }
 
     //Reservations
