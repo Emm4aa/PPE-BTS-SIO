@@ -9,7 +9,7 @@ if(isset($_GET['action']) && isset($_GET['ref_hab'])){
         $action = $_GET['action'];
         
         if($action == "modif"){
-                $habitation = $unControleur->selectWhereHabitation($refHab);
+                $habitation = $unControleur->selectWhereMaison($refHab);
                 $photosHabitation = $unControleur->selectAllPhotosWhere($refHab);
         }
 }
@@ -26,13 +26,14 @@ if (isset($_POST['ajouter'])){
         $description_hab = $_POST['description_hab'];
         $titre_hab = $_POST['titre_hab'];
         $capacite_hab = $_POST['capacite_hab'];
+        $carac_m = $_POST['carac_m'];
 
         $regexTarifs = '/^[0-9]{1,5}([.,][0-9]{0,2})?$/';
         $regexCapacite = '/^[1-9][0-9]{0,1}$/';
 
 
         $champs = [$tarif_hab_bas, $tarif_hab_moyen, $tarif_hab_haut,
-                   $description_hab, $titre_hab, $capacite_hab
+                   $description_hab, $titre_hab, $capacite_hab,$carac_m
                   ];
 
         foreach ($champs as $champ) {
@@ -83,17 +84,18 @@ if (isset($_POST['ajouter'])){
 
         if (!empty($erreurs)) { 
                 $_SESSION['erreurs'] = $erreurs; 
-                header("Location:index.php?page=22&action=modif&ref_hab=".$refHab); 
+                header("Location:index.php?page=26&action=modif&ref_hab=".$refHab); 
                 exit; 
         }else{
                 //update habitations
-                $unControleur->updateHabitationAnnonce([
+                $unControleur->updateMaisonAnnonce([
                         "tarif_hab_bas" => $tarif_hab_bas,
                         "tarif_hab_moy" => $tarif_hab_moyen,
                         "tarif_hab_hau" => $tarif_hab_haut,
                         "description_hab" => $description_hab,
                         "titre_hab" => $titre_hab,
                         "capacite_hab" => $capacite_hab,
+                        "carac_m" => $carac_m,
                         "ref_hab" => $refHab
                 ]);
 
@@ -129,6 +131,6 @@ if(isset($_POST['annuler'])){
         exit;
 }
 
-        require_once("vue/vue_update_habitation.php");
+        require_once("vue/vue_update_maison.php");
  
 ?>

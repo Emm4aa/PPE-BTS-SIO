@@ -1,18 +1,18 @@
 <section>
-    <h1>Modifiez votre habitation !</h1>
+    <h1>Modifiez votre appartement !</h1>
 
     <form class="insert" action="" method="post" enctype="multipart/form-data" id="formInsertHabitation">
         <table>
             <tr>
-                <td><label for="tarif_hab_bas">tarif bas</label></td>
+                <td><label for="tarif_hab_bas">Tarif saison basse</label></td>
                 <td><input type="number" name="tarif_hab_bas" value="<?= htmlspecialchars($habitation['tarif_hab_bas']) ?>"></td>
             </tr>
             <tr>
-                <td><label for="tarif_hab_moy">tarif moy</label></td>
+                <td><label for="tarif_hab_moy">Tarif saison moyenne</label></td>
                 <td><input type="number" name="tarif_hab_moy" value="<?= htmlspecialchars($habitation['tarif_hab_moy']) ?>"></td>
             </tr>
             <tr>
-                <td><label for="tarif_hab_haut">tarif haut</label></td>
+                <td><label for="tarif_hab_haut">Tarif saison haute</label></td>
                 <td><input type="number" name="tarif_hab_hau" value="<?= htmlspecialchars($habitation['tarif_hab_hau']) ?>"></td>
             </tr>
             <tr>
@@ -40,6 +40,14 @@
             <tr>
                 <td>Capacité</td>
                 <td><input type="number" name="capacite_hab" value="<?= htmlspecialchars($habitation['capacite_hab']) ?>" min="1"></td>
+            </tr>
+            <tr>
+                <td>Etage</td>
+                <td><input type="number" name="etage_ap" value="<?= htmlspecialchars($habitation['etage_ap']) ?>"></td>
+            </tr>
+            <tr>
+                <td>Type d'appartement</td>
+                <td><input type="text" name="type_ap" value="<?= htmlspecialchars($habitation['type_ap']) ?>"></td>
             </tr>
         </table>
         <?php if(!empty($_SESSION['erreurs'])): ?>

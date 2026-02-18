@@ -96,7 +96,6 @@
         case 10 : require_once("controleur/gestion_reservation_habitation.php");break;
         case 11 : require_once("controleur/gestion_confirmation_reservation.php");break;
         case 12 : require_once("controleur/gestion_reservation_confirmee.php");break;
-        //case 13 : require_once("controleur/gestion_creation_annonce.php");break;
         case 14 : require_once("controleur/gestion_creation_annonce_confirmee.php");break;
         case 15 : require_once("controleur/gestion_creation_compte.php");break;
         case 16 : require_once("controleur/gestion_creation_compte_confirmee.php");break;
@@ -105,10 +104,11 @@
         case 19 : require_once("controleur/gestion_nouveau_mdp_valide.php");break;
         case 20 : require_once("controleur/gestion_update_client.php");break;
         case 21 : require_once("controleur/gestion_update_proprietaire.php");break;
-        case 22 : require_once("controleur/gestion_update_habitation.php");break;
         case 23 : require_once("controleur/gestion_choix_creation_annonce.php");break;
         case 24 : require_once("controleur/gestion_creation_annonce_maison.php");break;
         case 25 : require_once("controleur/gestion_creation_annonce_appartement.php");break;
+        case 26 : require_once("controleur/gestion_update_maison.php");break;
+        case 27 : require_once("controleur/gestion_update_appartement.php");break;
         default : header("Location: controleur/erreur.php");break;
     }
 ?>

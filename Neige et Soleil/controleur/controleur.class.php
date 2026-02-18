@@ -132,6 +132,10 @@ class Controleur {
     public function deleteMaison($ref_hab){
         return $this->unModele->deleteMaison($ref_hab);
     }
+
+    public function updateMaisonAnnonce($tab){
+        $this->unModele->updateMaisonAnnonce($tab);
+    }
     
 
     //Appartements
@@ -144,6 +148,10 @@ class Controleur {
 
     public function deleteAppartement($ref_hab){
         return $this->unModele->deleteAppartement($ref_hab);
+    }
+
+    public function updateAppartementAnnonce($tab){
+        $this->unModele->updateAppartementAnnonce($tab);
     }
 
     //Reservations

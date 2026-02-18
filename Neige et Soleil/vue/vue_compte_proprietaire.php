@@ -77,10 +77,17 @@
                     onclick="return confirm('Voulez vous supprimer cette habitation ?')">
                     <span class="material-symbols-outlined" translate="no">close</span>
                 </a>
-                <a href="index.php?page=22&action=modif&ref_hab=<?= $hab['ref_hab'] ?>" id="btModifierHabitation">
-                    <span class="material-symbols-outlined" translate="no">edit</span>
-                </a>
-
+                <?php 
+                if ($hab['type_hab'] == 'maison') {
+                    echo '<a href="index.php?page=26&action=modif&ref_hab=' . $hab['ref_hab'] . '" id="btModifierHabitation">
+                            <span class="material-symbols-outlined" translate="no">edit</span>
+                        </a>';
+                } elseif ($hab['type_hab'] == 'appartement') {
+                    echo '<a href="index.php?page=27&action=modif&ref_hab=' . $hab['ref_hab'] . '" id="btModifierHabitation">
+                            <span class="material-symbols-outlined" translate="no">edit</span>
+                        </a>';
+                } 
+                ?>
             </td>
             <td>
                 <a href="generateurContratProprietaire.php?ref_hab=<?= $hab['ref_hab'] ?>" class="btVoirContrat" target="_blank">

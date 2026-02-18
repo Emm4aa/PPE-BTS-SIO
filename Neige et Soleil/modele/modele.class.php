@@ -453,7 +453,7 @@ class Modele{
         $data = array(":ref_hab"=>$ref_hab);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
-        return $exe->fetchAll();
+        return $exe->fetch();
     }
 
     public function deleteMaison($ref_hab){
@@ -462,6 +462,21 @@ class Modele{
         $exe = $this->unPdo->prepare($requete);
         $data = array(":ref_hab"=>$ref_hab);
         $exe->execute($data);    
+    }
+
+    public function updateMaisonAnnonce($tab){
+        $requete = "UPDATE maison SET tarif_hab_bas = :tarif_hab_bas, tarif_hab_moy = :tarif_hab_moy, tarif_hab_hau = :tarif_hab_hau, description_hab = :description_hab, titre_hab = :titre_hab, capacite_hab = :capacite_hab, carac_m = :carac_m WHERE ref_hab = :ref_hab;";
+        $data = array(":tarif_hab_bas"=>$tab['tarif_hab_bas'],
+                      ":tarif_hab_moy"=>$tab['tarif_hab_moy'],
+                      ":tarif_hab_hau"=>$tab['tarif_hab_hau'],
+                      ":description_hab"=>$tab['description_hab'],
+                      ":titre_hab"=>$tab['titre_hab'],
+                      ":capacite_hab"=>$tab['capacite_hab'],
+                      ":carac_m"=>$tab['carac_m'],
+                      ":ref_hab"=>$tab['ref_hab']
+                      );
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
     }
 
     //Appartements
@@ -506,7 +521,7 @@ class Modele{
         $data = array(":ref_hab"=>$ref_hab);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
-        return $exe->fetchAll();
+        return $exe->fetch();
     }
 
     public function deleteAppartement($ref_hab){
@@ -515,6 +530,22 @@ class Modele{
         $exe = $this->unPdo->prepare($requete);
         $data = array(":ref_hab"=>$ref_hab);
         $exe->execute($data);    
+    }
+
+    public function updateAppartementAnnonce($tab){
+        $requete = "UPDATE appartement SET tarif_hab_bas = :tarif_hab_bas, tarif_hab_moy = :tarif_hab_moy, tarif_hab_hau = :tarif_hab_hau, description_hab = :description_hab, titre_hab = :titre_hab, capacite_hab = :capacite_hab, etage_ap = :etage_ap, type_ap = :type_ap WHERE ref_hab = :ref_hab;";
+        $data = array(":tarif_hab_bas"=>$tab['tarif_hab_bas'],
+                      ":tarif_hab_moy"=>$tab['tarif_hab_moy'],
+                      ":tarif_hab_hau"=>$tab['tarif_hab_hau'],
+                      ":description_hab"=>$tab['description_hab'],
+                      ":titre_hab"=>$tab['titre_hab'],
+                      ":capacite_hab"=>$tab['capacite_hab'],
+                      ":etage_ap"=>$tab['etage_ap'],
+                      ":type_ap"=>$tab['type_ap'],
+                      ":ref_hab"=>$tab['ref_hab']
+                      );
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
     }
 
     //Reservations
