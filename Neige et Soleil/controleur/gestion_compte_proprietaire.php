@@ -3,11 +3,6 @@
     $utilisateur = $unControleur->selectWhereIdUtilisateur($id);
     $leProprietaire = $unControleur->selectWhereIdProprietaire($id);
 
-    if(isset($_POST['ajouter'])){
-            $habitation = null;
-            require_once("vue/vue_insert_hab.php");
-        }
-
     if(isset($_GET['action']) && isset($_GET['ref_hab'])){
         $refHab = $_GET['ref_hab'];
         $unControleur->deleteMaison($refHab);

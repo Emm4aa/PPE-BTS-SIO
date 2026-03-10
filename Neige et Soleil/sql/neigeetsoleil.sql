@@ -166,19 +166,11 @@ create table admin (
 
 
 
-create table archiveReservation as 
-select r.*, curdate() archiDate from reservation r 
-where 2=0;
+create table archiveReservation like reservation;
+alter table archivereservation add column datehisto date;
 
-alter table archiveReservation
-add primary key (ref_res);
-
-create table archiveContrat as 
-select c.*, curdate() archiDate from contrat c 
-where 2=0;
-
-alter table archiveContrat
-add primary key (ref_c);
+create table archiveContrat like contrat;
+alter table archiveContrat add column datehisto date;
 
 create table if not exists photos(
     id_photo int not null auto_increment,
@@ -248,38 +240,16 @@ before delete on appartement for each row BEGIN
 end //
 delimiter ;
 
-
-DROP PROCEDURE IF EXISTS archiRes;
-DELIMITER //
-CREATE PROCEDURE archiRes()
-BEGIN
-    INSERT INTO archiveReservation
-    SELECT r.*, CURDATE()
-    FROM reservation r
-    WHERE r.etat_res = 'Validee';
-END //
-DELIMITER ;
-
 drop trigger if exists histoRes;
 delimiter //
 create trigger histoRes
-after update on reservation
+before update on reservation
 for each row 
 begin 
-call archiRes;
+    INSERT INTO archiveReservation
+        values(old.ref_res,old.date_res,old.nb_perso,old.date_debut,old.date_fin,'Validee',old.id_c,old.ref_hab,curdate());
 end // 
 delimiter ;
-
-DROP PROCEDURE IF EXISTS archiCon;
-DELIMITER //
-CREATE PROCEDURE archiCon()
-BEGIN
-    INSERT INTO archiveContrat
-    SELECT c.*, CURDATE()
-    FROM contrat c
-    WHERE c.status_c = 'Annule' or 'Resilie';
-END //
-DELIMITER ;
 
 drop trigger if exists histoCon;
 delimiter //
@@ -287,34 +257,9 @@ create trigger histoCon
 after update on contrat
 for each row 
 begin 
-call archiCon;
+    insert into archiveContrat
+        values(old.ref_c,old.status_c,old.annee_signature,old.annee_fin,old.id_p,old.ref_hab);
 end // 
-delimiter ;
-
-set global event_scheduler = on;
-
-drop event if exists deleteRes;
-delimiter //
-create or replace event deleteRes
-on schedule every 1 minute
-do 
-begin 
-delete from reservation
-where etat_res = 'Validee'
-and ref_res in (select ref_res from archivereservation);
-end//
-delimiter ;
-
-drop event if exists deleteCon;
-delimiter //
-create or replace event deleteCon
-on schedule every 1 minute
-do 
-begin 
-delete from contrat
-where status_c = 'Annule' or 'Resilie'
-and ref_c in (select ref_c from archiveContrat);
-end//
 delimiter ;
 
 drop trigger if exists insert_contrat;

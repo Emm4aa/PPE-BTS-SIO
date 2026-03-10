@@ -570,7 +570,7 @@ class Modele{
         return $exe->fetchAll(); 
     }
     public function insertReservation($tab){
-        $requete = "INSERT INTO reservation VALUES (null,curdate(),:nb_perso,:date_debut,:date_fin,'en demande',:id_c,:ref_hab);";
+        $requete = "INSERT INTO reservation VALUES (null,curdate(),:nb_perso,:date_debut,:date_fin,'En attente',:id_c,:ref_hab);";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":nb_perso"=>$tab['nb_perso'],":date_debut"=>$tab['date_debut'],":date_fin"=>$tab['date_fin'],":id_c"=>$tab['id_c'],":ref_hab"=>$tab['ref_hab']);
         $exe->execute($data);
@@ -580,6 +580,10 @@ class Modele{
         $data = array(":nb_perso"=>$tab['nb_perso'],":date_debut"=>$tab['date_debut'],":date_fin"=>$tab['date_fin'],":etat_res"=>$tab['etat_res'], ":ref_res"=>$tab['ref_res'], ":id_c"=>$tab['id_c'], ":ref_hab"=>$tab['ref_hab'],":ref_res"=>$tab['ref_res']);
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
+
+        if($tab['etat_res'] == 'Validee'){
+            $this->deleteReservation($tab['ref_res']);
+        }
     }
     public function deleteReservation($ref_res){
         $requete = "DELETE FROM reservation where ref_res = :ref_res;";
