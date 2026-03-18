@@ -295,7 +295,7 @@ set global event_scheduler = on;
 
 drop event if exists deleteRes;
 delimiter //
-create or replace event deleteRes
+create event deleteRes
 on schedule every 1 minute
 do 
 begin 
@@ -307,7 +307,7 @@ delimiter ;
 
 drop event if exists deleteCon;
 delimiter //
-create or replace event deleteCon
+create event deleteCon
 on schedule every 1 minute
 do 
 begin 
@@ -405,3 +405,20 @@ create table reset_mdp(
     created_at datetime default now(),
     primary key(email)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+
+/* trigger insert admin */
+drop trigger if exists tr_insertAdmin;
+
+delimiter //
+create trigger tr_insertAdmin
+after insert on utilisateur
+for each row
+begin
+    if 
+        new.role = 'admin'
+    then
+        insert into admin values (new.id_user);
+    end if;
+end //
+delimiter ;

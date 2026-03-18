@@ -901,3 +901,162 @@ form button{
 }
 
 
+
+
+
+
+
+
+
+/* vue compte proprietaire */
+.infos_activites {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.conteneurCardsHab{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+.cardHab {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+}
+.tabCardHab {
+    width: 100%;
+    border: none;
+}
+.tabCardHab td {
+    border: none;
+    padding: 4px 6px;
+    font-size: 14px;
+}
+.tabCardHab td:first-child {
+    color: #888;
+    font-weight: 500;
+}
+
+.tabCardHab td:last-child {
+    font-weight: 600;
+    color: #222;
+}
+.cardHab > div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+.cardHab a {
+    color: #555;
+    transition: color 0.2s;
+    text-decoration: none;
+}
+.cardHab a:hover {
+    color: #000;
+}
+
+#btSupprimerHabitation:hover {
+    color: red;
+}
+
+#btModifierHabitation:hover {
+    color: dodgerblue;
+}
+
+.btVoirContrat:hover {
+    color: green;
+}
+
+
+
+
+
+/* vue compte client */
+.infos_activites {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.conteneurCardsResa{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.cardResa {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.tabCardResa {
+    width: 100%;
+    border: none;
+}
+.tabCardResa td {
+    border: none;
+    padding: 4px 6px;
+    font-size: 14px;
+}
+.tabCardResa td:first-child {
+    color: #888;
+    font-weight: 500;
+}
+
+.tabCardResa td:last-child {
+    font-weight: 600;
+    color: #222;
+}
+.cardResa > div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+.cardResa a {
+    color: #555;
+    transition: color 0.2s;
+    text-decoration: none;
+}
+.cardResa a:hover {
+    color: #000;
+}
+
+
+
+/* vue choix creation annonce */
+.conteneurBtChoixCreaAnnonce{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.btChoixCreaAnnonce{
+    background-color: black;
+    padding: 0.5rem;
+    border-radius: 20px;
+    color: white;
+    transition: all 0.2s ease;
+}
+.btChoixCreaAnnonce:hover{
+    color: black;
+    background-color: #f1dd18;
+}
+
+

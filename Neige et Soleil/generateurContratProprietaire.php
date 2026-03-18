@@ -36,31 +36,27 @@ class PDF extends FPDF{
         $this->Cell(0,15,iconv('UTF-8', 'ISO-8859-1',"Informations habitation"),0,1,"C");
 
         if (!empty($maisonProprio)) {
-            foreach ($maisonProprio as $maison){
-                $this->MultiCell(0,10,iconv('UTF-8', 'ISO-8859-1',"Type : ".($maison['type_hab']).
-                                "\nAdresse : ".($maison['adr_hab']).
-                                "\nCode postal : ".($maison['cp_hab']).
-                                "\nVille : ".($maison['ville_hab']).
-                                "\nMontant de location hebdomadaire saison basse : ".($maison['tarif_hab_bas']).
-                                "\nMontant de location hebdomadaire saison moyenne : ".($maison['tarif_hab_moy']).
-                                "\nMontant de location hebdomadaire saison haute : ".($maison['tarif_hab_hau']).
-                                "\nSurface : ".($maison['surface']."m2").
-                                "\nCaractéristiques : ".($maison['carac_m'])),1,"L");
-            }    
+                $this->MultiCell(0,10,iconv('UTF-8', 'ISO-8859-1',"Type : ".($maisonProprio['type_hab']).
+                                "\nAdresse : ".($maisonProprio['adr_hab']).
+                                "\nCode postal : ".($maisonProprio['cp_hab']).
+                                "\nVille : ".($maisonProprio['ville_hab']).
+                                "\nMontant de location hebdomadaire saison basse : ".($maisonProprio['tarif_hab_bas']).
+                                "\nMontant de location hebdomadaire saison moyenne : ".($maisonProprio['tarif_hab_moy']).
+                                "\nMontant de location hebdomadaire saison haute : ".($maisonProprio['tarif_hab_hau']).
+                                "\nSurface : ".($maisonProprio['surface']."m2").
+                                "\nCaractéristiques : ".($maisonProprio['carac_m'])),1,"L"); 
         }
         elseif (!empty($appartementProprio)) {
-            foreach ($appartementProprio as $appartement){
-                $this->MultiCell(0,10,iconv('UTF-8', 'ISO-8859-1',"Type : ".($appartement['type_hab']).
-                                "\nAdresse : ".($appartement['adr_hab']).
-                                "\nCode postal : ".($appartement['cp_hab']).
-                                "\nVille : ".($appartement['ville_hab']).
-                                "\nMontant de location hebdomadaire saison basse : ".($appartement['tarif_hab_bas']).
-                                "\nMontant de location hebdomadaire saison moyenne : ".($appartement['tarif_hab_moy']).
-                                "\nMontant de location hebdomadaire saison haute : ".($appartement['tarif_hab_hau']).
-                                "\nSurface : ".($appartement['surface']."m2").
-                                "\nEtage : ".($appartement['etage_ap']).
-                                "\nType d'appartement : ".($appartement['type_ap'])),1,"L");
-            }
+                $this->MultiCell(0,10,iconv('UTF-8', 'ISO-8859-1',"Type : ".($appartementProprio['type_hab']).
+                                "\nAdresse : ".($appartementProprio['adr_hab']).
+                                "\nCode postal : ".($appartementProprio['cp_hab']).
+                                "\nVille : ".($appartementProprio['ville_hab']).
+                                "\nMontant de location hebdomadaire saison basse : ".($appartementProprio['tarif_hab_bas']).
+                                "\nMontant de location hebdomadaire saison moyenne : ".($appartementProprio['tarif_hab_moy']).
+                                "\nMontant de location hebdomadaire saison haute : ".($appartementProprio['tarif_hab_hau']).
+                                "\nSurface : ".($appartementProprio['surface']."m2").
+                                "\nEtage : ".($appartementProprio['etage_ap']).
+                                "\nType d'appartement : ".($appartementProprio['type_ap'])),1,"L");
         } 
         else {
             $this->Cell(0, 10, "Aucune information trouvee pour l'habitation ref : " . $refHab, 1, 1);

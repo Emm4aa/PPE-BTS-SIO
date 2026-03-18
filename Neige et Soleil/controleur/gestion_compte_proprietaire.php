@@ -18,4 +18,5 @@
     $habProprio = $unControleur->selectHabitationWhereProprietaire($_SESSION['id']);
     
     require_once("vue/vue_compte_proprietaire.php");
+    
 ?>

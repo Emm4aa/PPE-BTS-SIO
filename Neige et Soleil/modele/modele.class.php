@@ -296,6 +296,7 @@ class Modele{
         $exe->execute();
         return $exe->fetchAll();
     }
+
     public function selectWhereHabitation($ref_hab){
         $requete = "SELECT * FROM habitation where ref_hab = :ref_hab;";
         $data = array(":ref_hab"=>$ref_hab);
@@ -448,6 +449,7 @@ class Modele{
 
         return $resultat['dernier_id'];
     }
+
     public function selectWhereMaison($ref_hab){
         $requete = "SELECT * FROM maison WHERE ref_hab = :ref_hab;";
         $data = array(":ref_hab"=>$ref_hab);
@@ -570,7 +572,7 @@ class Modele{
         return $exe->fetchAll(); 
     }
     public function insertReservation($tab){
-        $requete = "INSERT INTO reservation VALUES (null,curdate(),:nb_perso,:date_debut,:date_fin,'en demande',:id_c,:ref_hab);";
+        $requete = "INSERT INTO reservation VALUES (null,curdate(),:nb_perso,:date_debut,:date_fin,'En attente',:id_c,:ref_hab);";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":nb_perso"=>$tab['nb_perso'],":date_debut"=>$tab['date_debut'],":date_fin"=>$tab['date_fin'],":id_c"=>$tab['id_c'],":ref_hab"=>$tab['ref_hab']);
         $exe->execute($data);
@@ -632,7 +634,6 @@ class Modele{
         $exe->execute($data);
         return $exe->fetchAll();
     }
-
     public function selectPhotoPrincipalHabitation($refHab){
         $requete = "SELECT url_photo FROM photos WHERE ref_hab = :ref_hab 
                     AND is_principal = TRUE;";

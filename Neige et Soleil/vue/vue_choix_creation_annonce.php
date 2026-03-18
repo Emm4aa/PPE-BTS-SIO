@@ -1,7 +1,8 @@
 <section>
     <h1>Quel type d'habitation voulez-vous ajouter?</h1>
 
-    <a href="index.php?page=24"><button>Maison</button></a>
-    <br>
-    <a href="index.php?page=25"><button>Appartement</button></a>
+    <div class="conteneurBtChoixCreaAnnonce">
+        <a class="btChoixCreaAnnonce" href="index.php?page=24">Maison</a>
+        <a class="btChoixCreaAnnonce" href="index.php?page=25">Appartement</a>
+    </div>
 </section>

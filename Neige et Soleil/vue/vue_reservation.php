@@ -2,7 +2,6 @@
     <h1> Gestion des réservation </h1>
     <div class="conteneurGestion">
 
-        
         <div class="vueInsert">
             <h3>Ajouter/Modifier réservation</h3>
             <form class="insert" method="post">
