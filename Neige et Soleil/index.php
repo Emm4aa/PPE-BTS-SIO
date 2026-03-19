@@ -109,6 +109,8 @@
         case 25 : require_once("controleur/gestion_creation_annonce_appartement.php");break;
         case 26 : require_once("controleur/gestion_update_maison.php");break;
         case 27 : require_once("controleur/gestion_update_appartement.php");break;
+        case 28 : require_once("controleur/gestion_maison.php");break;
+        case 29 : require_once("controleur/gestion_appartement.php");break;
         default : header("Location: controleur/erreur.php");break;
     }
 ?>

@@ -122,6 +122,10 @@ class Controleur {
     }
 
     //Maisons
+    public function selectAllMaison(){
+        return $this->unModele->selectAllMaison();
+    }
+
     public function selectWhereMaison($ref_hab){
         return $this->unModele->selectWhereMaison($ref_hab);
     }
@@ -136,9 +140,17 @@ class Controleur {
     public function updateMaisonAnnonce($tab){
         $this->unModele->updateMaisonAnnonce($tab);
     }
+
+    public function updateMaison($tab){
+        $this->unModele->updateMaison($tab);
+    }
     
 
     //Appartements
+    public function selectAllAppartement(){
+        return $this->unModele->selectAllAppartement();
+    }
+
     public function selectWhereAppartement($ref_hab){
         return $this->unModele->selectWhereAppartement($ref_hab);
     }
@@ -152,6 +164,10 @@ class Controleur {
 
     public function updateAppartementAnnonce($tab){
         $this->unModele->updateAppartementAnnonce($tab);
+    }
+
+    public function updateAppartement($tab){
+        $this->unModele->updateAppartement($tab);
     }
 
     //Reservations
