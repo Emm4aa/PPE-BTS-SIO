@@ -458,12 +458,12 @@ class Modele{
     }
 
     public function updateMaison($tab){
-        $requete = "UPDATE maison SET type_hab = :type_hab, adr_hab = :adr_hab, cp_hab = :cp_hab, ville_hab = :ville_hab, 
+        $requete = "UPDATE maison SET adr_hab = :adr_hab, cp_hab = :cp_hab, ville_hab = :ville_hab, 
             tarif_hab_bas = :tarif_hab_bas, tarif_hab_moy = :tarif_hab_moy, tarif_hab_hau = :tarif_hab_hau, 
             surface = :surface, id_p = :id_p, description_hab = :description_hab, titre_hab = :titre_hab, 
             capacite_hab = :capacite_hab, carac_m = :carac_m where ref_hab = :ref_hab;";
 
-        $data = array(":type_hab"=>$tab['type_hab'],":adr_hab"=>$tab['adr_hab'],":cp_hab"=>$tab['cp_hab'],
+        $data = array(":adr_hab"=>$tab['adr_hab'],":cp_hab"=>$tab['cp_hab'],
         ":ville_hab"=>$tab['ville_hab'],":tarif_hab_bas"=>$tab['tarif_hab_bas'],":tarif_hab_moy"=>$tab['tarif_hab_moy'],
         ":tarif_hab_hau"=>$tab['tarif_hab_hau'],":surface"=>$tab['surface'],":id_p"=>$tab['id_p'],
         ":description_hab"=>$tab['description_hab'],":titre_hab"=>$tab['titre_hab'],":capacite_hab"=>$tab['capacite_hab'],
@@ -557,12 +557,12 @@ class Modele{
         }
     
         public function updateAppartement($tab){
-        $requete = "UPDATE appartement SET type_hab = :type_hab, adr_hab = :adr_hab, cp_hab = :cp_hab, ville_hab = :ville_hab, 
+        $requete = "UPDATE appartement SET adr_hab = :adr_hab, cp_hab = :cp_hab, ville_hab = :ville_hab, 
             tarif_hab_bas = :tarif_hab_bas, tarif_hab_moy = :tarif_hab_moy, tarif_hab_hau = :tarif_hab_hau, surface = :surface, 
             id_p = :id_p, description_hab = :description_hab, titre_hab = :titre_hab, capacite_hab = :capacite_hab, etage_ap = :etage_ap,
             type_ap = :etage_ap where ref_hab = :ref_hab;";
 
-        $data = array(":type_hab"=>$tab['type_hab'],":adr_hab"=>$tab['adr_hab'],":cp_hab"=>$tab['cp_hab'],":ville_hab"=>$tab['ville_hab'],
+        $data = array(":adr_hab"=>$tab['adr_hab'],":cp_hab"=>$tab['cp_hab'],":ville_hab"=>$tab['ville_hab'],
         ":tarif_hab_bas"=>$tab['tarif_hab_bas'],":tarif_hab_moy"=>$tab['tarif_hab_moy'],":tarif_hab_hau"=>$tab['tarif_hab_hau'],
         ":surface"=>$tab['surface'],":id_p"=>$tab['id_p'],":description_hab"=>$tab['description_hab'],":titre_hab"=>$tab['titre_hab'],
         ":capacite_hab"=>$tab['capacite_hab'],":etage_ap"=>$tab['etage_ap'],":type_ap"=>$tab['type_ap'],":ref_hab"=>$tab['ref_hab']);
