@@ -81,6 +81,7 @@ class Controleur {
     public function selectAllHabitation(){
         return $this->unModele->selectAllHabitation();
     }
+    
     public function selectAllHabitationType($type){
         return $this->unModele->selectAllHabitationType($type);
     }

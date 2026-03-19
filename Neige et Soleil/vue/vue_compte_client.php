@@ -42,53 +42,73 @@
         <span class="material-symbols-outlined" translate="no">edit</span>
     </a>
 </div>
+
+
+
+
 <div class="infos_activites">
     <?php if(isset($_SESSION['msg-annul-reservation'])):?>
         <h2 style="color:green"><?= $_SESSION['msg-annul-reservation'] ?></h2>
-    <?php unset($_SESSION['msg-annul-reservation']);?>
+        <?php unset($_SESSION['msg-annul-reservation']);?>
     <?php endif; ?>
+
     <h4>Mes réservations</h4>
-        <?php if(!empty($resaClient)): ?>
-            <table>
-                <tr>
-                    <th>Réf</th>
-                    <th>ID habitation</th>
-                    <th>Nombre personnes</th>
-                    <th>Début</th>
-                    <th>Fin</th>
-                    <th>Etat</th>
-                    <th>Option</th>
-                    <th>Contrat</th>
-                </tr>
-            <?php foreach($resaClient as $resa): ?>
-                <tr>
-                    <td><?= htmlspecialchars($resa['ref_res']);?></td>
-                    <td><?= htmlspecialchars($resa['ref_hab']);?></td>
-                    <td><?= htmlspecialchars($resa['nb_perso']);?></td>
-                    <td><?= htmlspecialchars($resa['date_debut']);?></td>
-                    <td><?= htmlspecialchars($resa['date_fin']);?></td>
-                    <td><?= htmlspecialchars($resa['etat_res']) ?></td>
-                    <td>
-                        <?php if ($resa['etat_res'] == 'en demande' || $resa['date_debut'] >= date('Y-m-d')):?>
+
+    <div class="conteneurCardsResa">
+
+    <?php if(!empty($resaClient)): ?>
+        <?php foreach($resaClient as $resa): ?>
+
+
+            <div class="cardResa">
+                <table class="tabCardResa">
+                    <tr>
+                        <td>Réf</td>
+                        <td><?= htmlspecialchars($resa['ref_res']);?></td>
+                    </tr>
+                    <tr>
+                        <td>Habitation</td>
+                        <td><?= htmlspecialchars($resa['ref_hab']);?></td>
+                    </tr>
+                    <tr>
+                        <td>Personnes</td>
+                        <td><?= htmlspecialchars($resa['nb_perso']);?></td>
+                    </tr>
+                    <tr>
+                        <td>Début</td>
+                        <td><?= htmlspecialchars($resa['date_debut']);?></td>
+                    </tr>
+                    <tr>
+                        <td>Fin</td>
+                        <td><?= htmlspecialchars($resa['date_fin']);?></td>
+                    </tr>
+                    <tr>
+                        <td>Etat</td>
+                        <td><?= htmlspecialchars($resa['etat_res']);?></td>
+                    </tr>
+                </table>
+
+                <div>
+                    <?php if ($resa['etat_res'] == 'en demande' || $resa['date_debut'] >= date('Y-m-d')):?>
                         <a href="index.php?page=6&action=sup&ref_res=<?= $resa['ref_res'] ?>" id="btAnnulerReservation"
-                        onclick="return confirm('Voulez vous annuler cette réservation ?')">
+                            onclick="return confirm('Voulez vous annuler cette réservation ?')">
                             <span class="material-symbols-outlined">close</span>
                         </a>
-                        <?php else: ?>
-                            <span class="material-symbols-outlined" id="btReservationValidee">check</span>
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <a href="generateurContratClient.php?ref_res=<?= $resa['ref_res'] ?>" class="btVoirContrat" target="_blank">
-                            <span class="material-symbols-outlined" translate="no">visibility</span>
-                        </a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-                <p>Aucune résérvation à ce jour</p>
-        <?php endif; ?>
-    </table>
+                    <?php else: ?>
+                        <span class="material-symbols-outlined" id="btReservationValidee">check</span>
+                    <?php endif; ?>
+
+                    <a href="generateurContratClient.php?ref_res=<?= $resa['ref_res'] ?>" class="btVoirContrat" target="_blank">
+                        <span class="material-symbols-outlined" translate="no">visibility</span>
+                    </a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <p>Aucune réservation à ce jour</p>
+    <?php endif; ?>
+
 </div>
-</div>
+
 </section>

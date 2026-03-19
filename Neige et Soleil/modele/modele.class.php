@@ -296,6 +296,7 @@ class Modele{
         $exe->execute();
         return $exe->fetchAll();
     }
+
     public function selectWhereHabitation($ref_hab){
         $requete = "SELECT * FROM habitation where ref_hab = :ref_hab;";
         $data = array(":ref_hab"=>$ref_hab);
@@ -689,7 +690,6 @@ class Modele{
         $exe->execute($data);
         return $exe->fetchAll();
     }
-
     public function selectPhotoPrincipalHabitation($refHab){
         $requete = "SELECT url_photo FROM photos WHERE ref_hab = :ref_hab 
                     AND is_principal = TRUE;";
