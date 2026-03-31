@@ -71,10 +71,10 @@
         <?php endif; ?>
         <input type="hidden" name="id_p" value="<?= $leProprietaire['id_p'] ?>">
         <div class="conteneurBtAjouterAnnulerCreationAnnonce">
-            <button type="submit" name="annuler" id="annuler">
+            <a href="index.php?page=7" class="btAnnulerFormInsert">
                 <span class="material-symbols-outlined">close</span>
-            </button>
-            <button type="submit" name="ajouter" id="ajouter">
+            </a>
+            <button type="submit" name="ajouter" class="btValiderFormInsert">
                 <span class="material-symbols-outlined">check</span>
             </button>
         </div>

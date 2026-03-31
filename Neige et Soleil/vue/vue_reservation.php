@@ -6,7 +6,7 @@
         <div class="conteneurInsert">
             <h3>Ajouter/Modifier réservation</h3>
 
-                <form method="post">
+                <form method="post" class="conteneurFormInsert">
                     <table class="tabFormInsert">
                         <tr>
                             <td>Nombre personnes</td>

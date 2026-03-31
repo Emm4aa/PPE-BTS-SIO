@@ -18,7 +18,9 @@
 <body>
 <!-- Header -->
 <header>
-    <img id="logo" src= "images/logo-neige-soleil.png" alt="logo">
+    <a href="index.php">
+        <img id="logo" src= "images/logo-neige-soleil.png" alt="logo">
+    </a>
     <ul>
         <?php if(isset($_SESSION['email']) && $_SESSION['role'] == 'client'):?>
             <li><a href="index.php">Accueil</a> </li>

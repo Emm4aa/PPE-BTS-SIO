@@ -47,11 +47,11 @@
             <?php endforeach; ?>
 		<?php unset($_SESSION['msg-erreurs']);?>
 		<?php endif;?>
-	    <div>
-            <button name="annuler" class="btAnnulerSupprimer">
+	    <div class="conteneurBtFormInsert">
+            <button name="annuler" class="btAnnulerFormInsert">
                 <span class="material-symbols-outlined">close</span>
             </button>
-            <button name="valider" class="btValider">
+            <button name="valider" class="btValiderFormInsert">
                 <span class="material-symbols-outlined">check</span>
             </button>
 	    </div> 

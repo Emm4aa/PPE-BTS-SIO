@@ -6,7 +6,7 @@
         <div class="conteneurInsert">
             <h3>Ajouter/Modifier maison</h3>
 
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" class="conteneurFormInsert">
                     <table class="tabFormInsert">
 
                         <tr>

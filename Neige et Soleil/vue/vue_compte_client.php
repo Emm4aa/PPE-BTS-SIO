@@ -45,7 +45,6 @@
 
 
 
-
 <div class="infos_activites">
     <?php if(isset($_SESSION['msg-annul-reservation'])):?>
         <h2 style="color:green"><?= $_SESSION['msg-annul-reservation'] ?></h2>

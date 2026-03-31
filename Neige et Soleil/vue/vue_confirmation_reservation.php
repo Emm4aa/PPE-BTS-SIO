@@ -82,10 +82,10 @@
         </div>
     </div>
     <form action="" method="post" id="formBtConfirmationResa">
-        <button type="submit" name="annuler" id="btAnnulationResa">
+        <a href="index.php?page=10&ref_hab=<?= htmlspecialchars($data['refHab']) ?>" class="btAnnulerFormInsert">
             <span class="material-symbols-outlined">close</span>
-        </button>
-        <button type="submit" name="confirmer" id="btConfirmationResa">
+        </a>
+        <button type="submit" name="confirmer" class="btValiderFormInsert">
             <span class="material-symbols-outlined">check</span>
         </button>
 
@@ -98,3 +98,4 @@
     </form>
 </div>
 </section>
+

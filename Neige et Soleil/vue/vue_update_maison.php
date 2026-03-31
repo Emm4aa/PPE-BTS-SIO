@@ -53,11 +53,11 @@
         <?php unset($_SESSION['erreurs']); ?>
         <?php endif; ?>
         <input type="hidden" name="ref_hab" value="<?= $habitation['ref_hab'] ?>">
-        <div class="conteneurBtAjouterAnnulerCreationAnnonce">
-            <button type="submit" name="annuler" id="annuler">
+        <div class="conteneurBtFormInsert">
+            <button type="submit" name="annuler" class="btAnnulerFormInsert">
                 <span class="material-symbols-outlined">close</span>
             </button>
-            <button type="submit" name="ajouter" id="ajouter">
+            <button type="submit" name="ajouter" class="btValiderFormInsert">
                 <span class="material-symbols-outlined">check</span>
             </button>
 

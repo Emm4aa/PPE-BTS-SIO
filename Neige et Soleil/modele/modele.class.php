@@ -631,9 +631,16 @@ class Modele{
         return $exe->fetchAll(); 
     }
     public function insertReservation($tab){
-        $requete = "INSERT INTO reservation VALUES (null,curdate(),:nb_perso,:date_debut,:date_fin,'En attente',:id_c,:ref_hab);";
+        $requete = "INSERT INTO reservation(ref_res, date_res, nb_perso, date_debut, date_fin, etat_res, id_c, ref_hab) 
+                    VALUES (null,curdate(),:nb_perso,:date_debut,:date_fin,'En attente',:id_c,:ref_hab);";
+        $data = array(
+                        ":nb_perso"=>$tab['nb_perso'],
+                        ":date_debut"=>$tab['date_debut'],
+                        ":date_fin"=>$tab['date_fin'],
+                        ":id_c"=>$tab['id_c'],
+                        ":ref_hab"=>$tab['ref_hab']
+                    );
         $exe = $this->unPdo->prepare($requete);
-        $data = array(":nb_perso"=>$tab['nb_perso'],":date_debut"=>$tab['date_debut'],":date_fin"=>$tab['date_fin'],":id_c"=>$tab['id_c'],":ref_hab"=>$tab['ref_hab']);
         $exe->execute($data);
     }
     public function insertReservationAdmin($tab){

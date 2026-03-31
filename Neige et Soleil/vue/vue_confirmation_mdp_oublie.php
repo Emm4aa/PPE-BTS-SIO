@@ -12,7 +12,7 @@
                 <td><input type="text" name="nvMdp"> </td>
             </tr>
         </table>
-        <button name="verifier" id="verifier">
+        <button name="verifier" class="btValiderFormInsert">
             <span class="material-symbols-outlined">check</span>
         </button>
     </form>

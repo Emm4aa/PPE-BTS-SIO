@@ -6,7 +6,7 @@
         <div class="conteneurInsert">
             <h3>Ajouter / Modifier client</h3>
 
-            <form method="post" action="index.php?page=2">
+            <form method="post" action="index.php?page=2" class="conteneurFormInsert">
                 <table class="tabFormInsert">
                     <tr>
                         <td>Nom</td>
@@ -88,6 +88,7 @@
                 <?= ($leClient==null)? '' : '<input type="hidden" name="id_user" value="'.$leClient['id_c'].'">'; ?>
             </form>
         </div> 
+        
 
         <!-- ================= TABLE (DROITE) ================= -->
         <div class="conteneurListe">

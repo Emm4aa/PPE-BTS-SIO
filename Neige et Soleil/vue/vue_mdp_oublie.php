@@ -8,11 +8,11 @@
                 <td><input type="email" name="email"></td>
             </tr>
         </table>
-        <div>
-            <button name="annuler" id="annuler">
+        <div class="conteneurBtFormInsert">
+            <button type="submit" name="annuler" class="btAnnulerFormInsert">
                 <span class="material-symbols-outlined">close</span>
             </button>
-            <button type="submit" name="verifier" id="verifier">
+            <button type="submit" name="verifier" class="btValiderFormInsert">
                 <span class="material-symbols-outlined">check</span>
             </button>
         </div>

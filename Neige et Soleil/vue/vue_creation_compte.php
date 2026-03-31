@@ -55,11 +55,11 @@
             <?php endforeach; ?>
             <?php unset($_SESSION['msg-erreurs']); ?>
         <?php endif; ?>
-        <div class="conteneurBtAjouterAnnulerCreationAnnonce">
-            <button type="submit" name="annuler" id="annuler">
+        <div class="conteneurBtFormInsert">
+            <a href="index.php?page=8" class="btAnnulerFormInsert">
                 <span class="material-symbols-outlined">close</span>
-            </button>
-            <button type="submit" name="ajouter" id="ajouter">
+            </a>
+            <button type="submit" name="ajouter" class="btValiderFormInsert">
                 <span class="material-symbols-outlined">check</span>
             </button>
         </div>

@@ -6,7 +6,7 @@
         <div class="conteneurInsert">
             <h3>Ajouter / Modifier propriétaire</h3>
 
-                <form method="post">
+                <form method="post" class="conteneurFormInsert">
                     <table class="tabFormInsert">
                         <tr>
                             <td>Nom</td>
