@@ -1,28 +1,14 @@
- 
-<head>
-    <meta charset="UTF-8">
-    <title>Gestion des habitations</title>
+<section>
+    <h1 class="titreGest">Gestion des appartements</h1>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-</head>
- 
-
-<div class="container mt-4">
-    <h1 class="mb-4">Gestion des habitations</h1>
-
-    <div class="row">
+    <div class="superConteneurGestion">
 
         <!-- ================= FORMULAIRE (GAUCHE) ================= -->
-        <div class="col-md-4">
-            <div class="card p-3">
-                <h3>Ajouter / Modifier appartement</h3>
-
+        <div class="conteneurInsert">
+            <h3>Ajouter/Modifier appartement</h3>
+                
                 <form method="post" enctype="multipart/form-data">
-                    <table class="table table-borderless">
+                    <table class="tabFormInsert">
 
                         <tr>
                             <td>Adresse</td>
@@ -43,19 +29,19 @@
                         </tr>
 
                         <tr>
-                            <td>Tarif bas</td>
+                            <td>Tarif bas (en euros)</td>
                             <td><input class="form-control" type="number" name="tarif_hab_bas"
                                 value="<?= ($appartement==null)?"":$appartement['tarif_hab_bas']; ?>" required></td>
                         </tr>
 
                         <tr>
-                            <td>Tarif moyen</td>
+                            <td>Tarif moyen (en euros)</td>
                             <td><input class="form-control" type="number" name="tarif_hab_moy"
                                 value="<?= ($appartement==null)?"":$appartement['tarif_hab_moy']; ?>" required></td>
                         </tr>
 
                         <tr>
-                            <td>Tarif haut</td>
+                            <td>Tarif haut (en euros)</td>
                             <td><input class="form-control" type="number" name="tarif_hab_hau"
                                 value="<?= ($appartement==null)?"":$appartement['tarif_hab_hau']; ?>" required></td>
                         </tr>
@@ -138,49 +124,53 @@
                         <?php unset($_SESSION['erreurs']); ?>
                     <?php endif; ?>
 
-                    <div class="d-flex justify-content-between mt-3">
-                        <a href="index.php?page=29" class="btn btn-danger">✖</a>
+                    <div class="conteneurBtFormInsert">
+                        <a href="index.php?page=29" class="btnAnnuler btAnnulerFormInsert">
+                            <span class="material-symbols-outlined">close</span>
+                        </a>
 
-                        <button class="btn btn-success"
+                        <button class="btnValider btValiderFormInsert"
                             type="submit"
                             <?= ($appartement==null)
                                 ? 'name="valider"'
                                 : 'name="modifier"' ?>>
-                            ✔
+                            <span class="material-symbols-outlined">check</span>
                         </button>
                     </div>
-
                     <?= ($appartement==null)?"":'<input type="hidden" name="ref_hab" value="'.$appartement['ref_hab'].'">';?>
                 </form>
-            </div>
         </div>
 
         <!-- ================= TABLE (DROITE) ================= -->
-        <div class="col-md-8">
-            <div class="card p-3">
-                <h3>Liste des appartements</h3>
+        <div class="conteneurListe">
+
+            <div class="conteneurFiltrer">
+                <h3>Filtrer par :</h3>
 
                 <!-- Filtre -->
-                <form method="post" class="d-flex gap-2 mb-3">
-                    <input class="form-control" type="text" name="filtre" placeholder="Filtrer...">
-                    <button class="btn btn-primary" type="submit" name="filtrer">🔍</button>
+                <form method="post" class="listes">
+                    <input class="form-control" type="text" name="filtre">
+                    <button class="btFiltrer" type="submit" name="filtrer">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
                 </form>
+            </div>
 
                 <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                <div class="conteneurTabListe">
+                    <table class="tabListe">
                         <thead class="table-dark">
                             <tr>
                                 <th>Réf</th>
                                 <th>Type</th>
                                 <th>Adresse</th>
-                                <th>CP</th>
+                                <th>Cp</th>
                                 <th>Ville</th>
                                 <th>Tarif min</th>
                                 <th>Tarif moy</th>
                                 <th>Tarif max</th>
                                 <th>Surface</th>
-                                <th>Proprio</th>
+                                <th>Propriétaire</th>
                                 <th>Titre</th>
                                 <th>Capacité</th>
 
@@ -199,50 +189,51 @@
                                     <td><?= $unAppartement['adr_hab'] ?></td>
                                     <td><?= $unAppartement['cp_hab'] ?></td>
                                     <td><?= $unAppartement['ville_hab'] ?></td>
-                                    <td><?= $unAppartement['tarif_hab_bas'] ?></td>
-                                    <td><?= $unAppartement['tarif_hab_moy'] ?></td>
-                                    <td><?= $unAppartement['tarif_hab_hau'] ?></td>
-                                    <td><?= $unAppartement['surface'] ?></td>
+                                    <td><?= $unAppartement['tarif_hab_bas'] ?>€</td>
+                                    <td><?= $unAppartement['tarif_hab_moy'] ?>€</td>
+                                    <td><?= $unAppartement['tarif_hab_hau'] ?>€</td>
+                                    <td><?= $unAppartement['surface'] ?> m<sup>2</sup></td>
                                     <td><?= $unAppartement['id_p'] ?></td>
                                     <td><?= $unAppartement['titre_hab'] ?></td>
-                                    <td><?= $unAppartement['capacite_hab'] ?></td>
+                                    <td><?= $unAppartement['capacite_hab'] ?> personne(s)</td>
 
                                     <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
                                         <td>
                                             <a class="btn btn-sm btn-danger me-1"
                                                href="index.php?page=29&action=sup&ref_hab=<?= $unAppartement['ref_hab'] ?>"
-                                               onclick="return confirm('Supprimer cette habitation ?')">🗑</a>
+                                               onclick="return confirm('Supprimer cette habitation ?')">
+                                                <span class="material-symbols-outlined btDelete">delete</span>
+                                            </a>
 
                                             <a class="btn btn-sm btn-warning"
-                                               href="index.php?page=29&action=edit&ref_hab=<?= $unAppartement['ref_hab'] ?>">✏</a>
+                                               href="index.php?page=29&action=edit&ref_hab=<?= $unAppartement['ref_hab'] ?>">
+                                                <span class="material-symbols-outlined btEdit">edit</span>
+                                            </a>
                                         </td>
                                     <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
-                        <?php endif; ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
-
                 <p>
                     <?= (isset($lesAppartements)) ? "Nombre d'appartement : " . count($lesAppartements) : "" ?>
                 </p>
-
-            </div>
         </div>
-
     </div>
-</div>
 
-<!-- Script limite photos -->
-<script>
-    const photos = document.getElementById('photos');
+    <!-- Script limite photos -->
+    <script>
+        const photos = document.getElementById('photos');
 
-    photos.addEventListener("change", () => {
-        if (photos.files.length > 3) {
-            photos.value = "";
-            alert("Maximum 3 photos autorisées");
-        }
-    });
-</script>
+        photos.addEventListener("change", () => {
+            if (photos.files.length > 3) {
+                photos.value = "";
+                alert("Maximum 3 photos autorisées");
+            }
+        });
+    </script>
+
+</section>
 

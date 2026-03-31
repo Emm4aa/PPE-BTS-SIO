@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // On l'affiche dans l'input (ou n'importe quel autre élément)
         if (capacite) {
             inputCapa.max = capacite;
-			inputCapa.value = 1;
         }
     });
 });
@@ -93,7 +92,7 @@ if(isset($_POST['valider'])){
 	if(!empty($erreurs)){
 		$_SESSION['msg-erreurs'] = $erreurs;
     }else{
-		$unControleur->insertReservation($_POST);
+		$unControleur->insertReservationAdmin($_POST);
 		header("Location:index.php?page=5");
 		exit;
 	}

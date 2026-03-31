@@ -1,30 +1,13 @@
- 
-<head>
-    <meta charset="UTF-8">
-    <title>Gestion des propriétaires</title>
-
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-</head>
-
- 
-
-<div class="container mt-4">
-    <h1 class="mb-4">Gestion des propriétaires</h1>
-
-    <div class="row">
-
+ <section>
+    <h1 class="titreGest">Gestion des propriétaires</h1>
+    
+    <div class="superConteneurGestion">
         <!-- ================= FORMULAIRE (GAUCHE) ================= -->
-        <div class="col-md-4">
-            <div class="card p-3">
-                <h3>Ajouter / Modifier propriétaire</h3>
+        <div class="conteneurInsert">
+            <h3>Ajouter / Modifier propriétaire</h3>
 
                 <form method="post">
-                    <table class="table table-borderless">
-
+                    <table class="tabFormInsert">
                         <tr>
                             <td>Nom</td>
                             <td><input class="form-control" type="text" name="nom"
@@ -89,95 +72,97 @@
                         <?php unset($_SESSION['msg-erreurs']); ?>
                     <?php endif; ?>
 
-                    <div class="d-flex justify-content-between mt-3">
-                        <button class="btn btn-danger" type="submit" name="annuler">✖</button>
-
-                        <button class="btn btn-success"
+                    <div class="conteneurBtFormInsert">
+                        <button class="btnAnnuler btAnnulerFormInsert" type="submit" name="annuler">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                        <button class="btnValider btValiderFormInsert"
                             type="submit"
                             <?= ($leProprietaire==null)
                                 ? 'name="valider"'
                                 : 'name="modifier"' ?>>
-                            ✔
+                            <span class="material-symbols-outlined">check</span>
                         </button>
                     </div>
-
                     <?= ($leProprietaire==null)? '' : '<input type="hidden" name="id_user" value="'.$leProprietaire['id_p'].'">' ?>
                 </form>
-            </div>
         </div>
 
         <!-- ================= TABLE (DROITE) ================= -->
-        <div class="col-md-8">
-            <div class="card p-3">
-                <h3>Liste des propriétaires</h3>
+        <div class="conteneurListe">
+
+            <div class="conteneurFiltrer">
+                <h3>Filtrer par :</h3>
 
                 <!-- Filtre -->
-                <form method="post" action="index.php?page=3#tabListeProprio" class="d-flex gap-2 mb-3">
-                    <input class="form-control" type="text" name="filtre" placeholder="Filtrer...">
-                    <button class="btn btn-primary" type="submit" name="filtrer">🔍</button>
+                <form method="post" action="index.php?page=3#tabListeProprio" class="listes">
+                    <input class="form-control" type="text" name="filtre">
+                    <button class="btFiltrer" type="submit" name="filtrer">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
                 </form>
-
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered" id="tabListeProprio">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Email</th>
-                                <th>Mdp</th>
-                                <th>Adresse</th>
-                                <th>CP</th>
-                                <th>Ville</th>
-                                <th>Tel</th>
-                                <th>RIB</th>
-
-                                <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
-                                    echo "<th>Actions</th>";
-                                } ?>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                        <?php if (isset($lesProprietaires)): ?>
-                            <?php foreach ($lesProprietaires as $unProprietaire): ?>
-                                <tr>
-                                    <td><?= $unProprietaire['id_p'] ?></td>
-                                    <td><?= $unProprietaire['nom'] ?></td>
-                                    <td><?= $unProprietaire['prenom'] ?></td>
-                                    <td><?= $unProprietaire['email'] ?></td>
-                                    <td><?= $unProprietaire['mdp'] ?></td>
-                                    <td><?= $unProprietaire['adresse'] ?></td>
-                                    <td><?= $unProprietaire['cp'] ?></td>
-                                    <td><?= $unProprietaire['ville'] ?></td>
-                                    <td><?= $unProprietaire['tel'] ?></td>
-                                    <td><?= $unProprietaire['RIB'] ?></td>
-
-                                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
-                                        <td>
-                                            <a class="btn btn-sm btn-danger me-1"
-                                               href="index.php?page=3&action=sup&id_p=<?= $unProprietaire['id_p'] ?>"
-                                               onclick="return confirm('Supprimer ce propriétaire ?')">🗑</a>
-
-                                            <a class="btn btn-sm btn-warning"
-                                               href="index.php?page=3&action=edit&id_p=<?= $unProprietaire['id_p'] ?>">✏</a>
-                                        </td>
-                                    <?php endif; ?>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
-
-                <p>
-                    <?= (isset($lesProprietaires)) ? "Nombre de propriétaires : " . count($lesProprietaires) : "" ?>
-                </p>
-
             </div>
-        </div>
 
+            <!-- Table -->
+            <div class="conteneurTabListe">
+                <table class="tabListe">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Email</th>
+                            <th>Mdp</th>
+                            <th>Adresse</th>
+                            <th>CP</th>
+                            <th>Ville</th>
+                            <th>Tel</th>
+                            <th>RIB</th>
+
+                            <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+                                echo "<th>Actions</th>";
+                            } ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php if (isset($lesProprietaires)): ?>
+                        <?php foreach ($lesProprietaires as $unProprietaire): ?>
+                            <tr>
+                                <td><?= $unProprietaire['id_p'] ?></td>
+                                <td><?= $unProprietaire['nom'] ?></td>
+                                <td><?= $unProprietaire['prenom'] ?></td>
+                                <td><?= $unProprietaire['email'] ?></td>
+                                <td><?= $unProprietaire['mdp'] ?></td>
+                                <td><?= $unProprietaire['adresse'] ?></td>
+                                <td><?= $unProprietaire['cp'] ?></td>
+                                <td><?= $unProprietaire['ville'] ?></td>
+                                <td><?= $unProprietaire['tel'] ?></td>
+                                <td><?= $unProprietaire['RIB'] ?></td>
+
+                                <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+                                <td>
+                                    <a class="btn btn-sm btn-danger me-1"
+                                        href="index.php?page=3&action=sup&id_p=<?= $unProprietaire['id_p'] ?>"
+                                        onclick="return confirm('Supprimer ce propriétaire ?')">
+                                        <span class="material-symbols-outlined btDelete">delete</span>
+                                    </a>
+
+                                    <a class="btn btn-sm btn-warning"
+                                        href="index.php?page=3&action=edit&id_p=<?= $unProprietaire['id_p'] ?>">
+                                        <span class="material-symbols-outlined btEdit">edit</span>
+                                    </a>
+                                </td>
+                                <?php endif; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                <?= (isset($lesProprietaires)) ? "Nombre de propriétaires : " . count($lesProprietaires) : "" ?>
+            </p>
+        </div>
     </div>
-</div>
+</section>
 

@@ -1,27 +1,13 @@
-<head>
-    <meta charset="UTF-8">
-    <title>Gestion des réservations</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<section>
+    <h1 class="titreGest">Gestion des réservations</h1>
 
-    <!-- Icons (optionnel) -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-</head>
-
- 
-
-<div class="container mt-4">
-    <h1 class="mb-4">Gestion des réservations</h1>
-
-    <div class="row">
-
+    <div class="superConteneurGestion">
         <!-- ================= FORMULAIRE (GAUCHE) ================= -->
-        <div class="col-md-4">
-            <div class="card p-3">
-                <h3>Ajouter / Modifier</h3>
+        <div class="conteneurInsert">
+            <h3>Ajouter/Modifier réservation</h3>
 
                 <form method="post">
-                    <table class="table table-borderless">
+                    <table class="tabFormInsert">
                         <tr>
                             <td>Nombre personnes</td>
                             <td>
@@ -36,7 +22,7 @@
                         <tr>
                             <td>Début séjour</td>
                             <td>
-                                <input class="form-control" type="date" name="date_debut"
+                                <input class="form-control" type="date" name="date_debut" id="arrivee"
                                     value="<?= ($reservation==null)?"":$reservation['date_debut'] ?>" required>
                             </td>
                         </tr>
@@ -44,7 +30,7 @@
                         <tr>
                             <td>Fin séjour</td>
                             <td>
-                                <input class="form-control" type="date" name="date_fin"
+                                <input class="form-control" type="date" name="date_fin" id="depart"
                                     value="<?= ($reservation==null)?"":$reservation['date_fin'] ?>" required>
                             </td>
                         </tr>
@@ -125,89 +111,93 @@
                         <?php unset($_SESSION['erreurs']); ?>
                     <?php endif; ?>
 
-                    <div class="d-flex justify-content-between mt-3">
-                        <button class="btn btn-danger" type="submit" name="annuler">
-                            ✖
+                    <div class="conteneurBtFormInsert">
+                        <button class="btnAnnuler btAnnulerFormInsert" type="submit" name="annuler">
+                            <span class="material-symbols-outlined">close</span>
                         </button>
-
-                        <button class="btn btn-success"
+                        <button class="btnValider btValiderFormInsert"
                             type="submit"
                             <?= ($reservation==null)
                                 ? 'name="valider"'
                                 : 'name="modifier"' ?>>
-                            ✔
+                            <span class="material-symbols-outlined">check</span>
                         </button>
                     </div>
-
                     <?= ($reservation==null)?"":'<input type="hidden" name="ref_res" value="'.$reservation['ref_res'].'">';?>
                 </form>
-            </div>
+    
         </div>
 
         <!-- ================= TABLE (DROITE) ================= -->
-        <div class="col-md-8">
-            <div class="card p-3">
-                <h3>Liste des réservations</h3>
+        <div class="conteneurListe">
+
+            <div class="conteneurFiltrer">
+                <h3>Filtrer par :</h3>
 
                 <!-- Filtre -->
-                <form method="post" class="d-flex gap-2 mb-3">
-                    <input class="form-control" type="text" name="filtre" placeholder="Filtrer...">
-                    <button class="btn btn-primary" type="submit" name="filtrer">🔍</button>
+                <form method="post" class="listes">
+                    <input class="form-control" type="text" name="filtre">
+                    <button class="btFiltrer" type="submit" name="filtrer">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
                 </form>
-
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Date réservation</th>
-                                <th>Nb pers</th>
-                                <th>Début</th>
-                                <th>Fin</th>
-                                <th>Etat</th>
-                                <th>Client</th>
-                                <th>Habitation</th>
-                                <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
-                                    echo "<th>Actions</th>";
-                                } ?>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                        <?php if (isset($lesReservations)){
-                            foreach ($lesReservations as $uneReservation){
-                                echo "<tr>";
-                                echo "<td>".$uneReservation['ref_res']."</td>";
-                                echo "<td>".$uneReservation['date_res']."</td>";
-                                echo "<td>".$uneReservation['nb_perso']."</td>";
-                                echo "<td>".$uneReservation['date_debut']."</td>";
-                                echo "<td>".$uneReservation['date_fin']."</td>";
-                                echo "<td>".$uneReservation['etat_res']."</td>";
-                                echo "<td>".$uneReservation['id_c']."</td>";
-                                echo "<td>".$uneReservation['ref_hab']."</td>";
-
-                                if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
-                                    echo "<td>";
-                                    echo "<a class='btn btn-sm btn-danger me-1' href='index.php?page=5&action=sup&ref_res=".$uneReservation['ref_res']."'>🗑</a>";
-                                    echo "<a class='btn btn-sm btn-warning' href='index.php?page=5&action=edit&ref_res=".$uneReservation['ref_res']."'>✏</a>";
-                                    echo "</td>";
-                                }
-
-                                echo "</tr>";
-                            }
-                        } ?>
-                        </tbody>
-                    </table>
-                </div>
-
-                <p>
-                    <?= (isset($lesReservations)) ? "Nombre de réservations : " . count($lesReservations) : "" ?>
-                </p>
-
             </div>
-        </div>
 
+            <!-- Table -->
+            <div class="conteneurTabListe">
+                <table class="tabListe">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date réservation</th>
+                            <th>Nb pers</th>
+                            <th>Début</th>
+                            <th>Fin</th>
+                            <th>Etat</th>
+                            <th>Client</th>
+                            <th>Habitation</th>
+                            <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+                                echo "<th>Actions</th>";
+                            } ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (isset($lesReservations)): ?>
+                            <?php foreach ($lesReservations as $uneReservation): ?>
+                                <tr>
+                                    <td><?= $uneReservation['ref_res'] ?></td>
+                                    <td><?= $uneReservation['date_res'] ?></td>
+                                    <td><?= $uneReservation['nb_perso'] ?></td>
+                                    <td><?= $uneReservation['date_debut'] ?></td>
+                                    <td><?= $uneReservation['date_fin'] ?></td>
+                                    <td><?= $uneReservation['etat_res'] ?></td>
+                                    <td><?= $uneReservation['id_c'] ?></td>
+                                    <td><?= $uneReservation['ref_hab'] ?></td>
+
+                                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+                                    <td>
+                                        <a class="btn btn-sm btn-danger me-1" 
+                                            href="index.php?page=5&action=sup&ref_res=<?= $uneReservation['ref_res'] ?>"
+                                            onclick="return confirm('Supprimer cette réservation ?')">
+                                            <span class="material-symbols-outlined btDelete">delete</span>
+                                        </a>
+                                        <a class="btn btn-sm btn-warning" 
+                                            href="index.php?page=5&action=edit&ref_res=<?= $uneReservation['ref_res'] ?>">
+                                            <span class="material-symbols-outlined btEdit">edit</span>
+                                        </a>
+                                    </td>
+                                    <?php endif; ?>
+                                </tr>   
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                <?= (isset($lesReservations)) ? "Nombre de réservations : " . count($lesReservations) : "" ?>
+            </p>
+        </div>
     </div>
-</div>
+
+</section>
  

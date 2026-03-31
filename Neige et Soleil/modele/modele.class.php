@@ -601,6 +601,13 @@ class Modele{
         $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
+    public function selectLikeAppartement($filtre){
+        $requete = "select * from appartement where type_hab like :filtre or adr_hab like :filtre or cp_hab like :filtre or ville_hab like :filtre or tarif_hab_bas like :filtre or tarif_hab_moy like :filtre or tarif_hab_hau like :filtre or surface like :filtre or ;";
+        $data = array(":filtre"=>"%".$filtre."%");
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+        return $exe->fetchAll();
+    }
 
     //Reservations
     public function selectAllReservation(){
@@ -627,6 +634,20 @@ class Modele{
         $requete = "INSERT INTO reservation VALUES (null,curdate(),:nb_perso,:date_debut,:date_fin,'En attente',:id_c,:ref_hab);";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":nb_perso"=>$tab['nb_perso'],":date_debut"=>$tab['date_debut'],":date_fin"=>$tab['date_fin'],":id_c"=>$tab['id_c'],":ref_hab"=>$tab['ref_hab']);
+        $exe->execute($data);
+    }
+    public function insertReservationAdmin($tab){
+        $requete = "INSERT INTO reservation(ref_res, date_res, nb_perso, date_debut, date_fin, etat_res, id_c, ref_hab) 
+                    VALUES (null,curdate(),:nb_perso,:date_debut,:date_fin,:etat_res,:id_c,:ref_hab);";
+        $data = array(
+                        ":nb_perso"=>$tab['nb_perso'],
+                        ":date_debut"=>$tab['date_debut'],
+                        ":date_fin"=>$tab['date_fin'],
+                        ":etat_res"=>$tab['etat_res'],
+                        ":id_c"=>$tab['id_c'],
+                        ":ref_hab"=>$tab['ref_hab']
+                    );
+        $exe = $this->unPdo->prepare($requete);
         $exe->execute($data);
     }
     public function updateReservation($tab){

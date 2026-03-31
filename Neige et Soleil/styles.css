@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+/*Général*/
 *{
     margin: 0;
     padding: 0;
@@ -21,31 +22,6 @@ main{
     flex: 1;
     box-sizing: border-box;
 }
-#sectionSlider{
-    margin: unset;
-    padding: unset;
-    height: 90dvh;
-    width: 100%;
-    box-sizing: border-box;
-}
-.slider{
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-.imgSlide{
-    object-fit:cover;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-.imgSlide.active{
-    opacity: 1;
-}
-
 section{
     display: flex;
     flex-direction: column;
@@ -89,7 +65,6 @@ header a:hover{
     height: auto;
     cursor: pointer;
 }
-
 footer{
     background-color: #112c50;
     padding: 2rem;
@@ -105,7 +80,50 @@ h1{
 h3{
     margin-top: 1rem;
 }
+table{
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+td{
+    padding: 0.3rem;
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+th{
+    padding: 0.3rem;
+    border: solid 1px black;
+    border-collapse: collapse;
+}
 
+
+
+
+
+/*Acceuil*/
+#sectionSlider{
+    margin: unset;
+    padding: unset;
+    height: 90dvh;
+    width: 100%;
+    box-sizing: border-box;
+}
+.slider{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.imgSlide{
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.imgSlide.active{
+    opacity: 1;
+}
 #formConnexion{
     display: flex;
     flex-direction: column;
@@ -158,29 +176,12 @@ h3{
     background-color: #f1dd18;
     cursor: pointer;
 }
-table{
-    border: solid 1px black;
-    border-collapse: collapse;
-}
-td{
-    padding: 0.3rem;
-    border: solid 1px black;
-    border-collapse: collapse;
-}
-th{
-    padding: 0.3rem;
-    border: solid 1px black;
-    border-collapse: collapse;
-}
-
 .listes{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #f2f2f2;
-    padding: 1rem;
-    border-radius: 20px;
+    padding: 0.5rem;
     gap: 0.5rem;
     align-items: center;
 }
@@ -212,7 +213,6 @@ form button{
 #Connexion{
     margin-top: 0.5rem;
 }
-
 
 
 
@@ -1058,5 +1058,164 @@ form button{
     color: black;
     background-color: #f1dd18;
 }
+
+
+
+
+
+
+
+/*Admin gestion client,propriétaire,réservations,habitations */
+.superConteneurGestion{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    gap: 15rem;
+}
+
+
+
+.conteneurInsert{
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tabFormInsert{
+    all: unset;
+    display: table; /* all:unset retire display, il faut le remettre */
+    border: none;
+    border-radius: 20px;
+    padding: 1.5rem;
+    background-color: #f2f2f2;
+    margin: 0.5rem 0 0.5rem 0;
+}
+.tabFormInsert td{
+    border: none;
+    padding: 0.3rem;
+}
+.conteneurBtFormInsert{
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+}
+.btAnnulerFormInsert{
+    all: unset;
+    color: white;
+    background-color: red;
+    padding: 0.4rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.btAnnulerFormInsert:hover{
+    transform: scale(110%) ;
+}
+.btValiderFormInsert{
+    all: unset;
+    color: white;
+    background-color: green;
+    padding: 0.4rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.btValiderFormInsert:hover{
+    transform: scale(110%) ;
+}
+
+
+.conteneurListe{
+    flex: 1;
+    min-width: 0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.conteneurFiltrer{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.btFiltrer{
+    all: unset;
+    color: black;
+    background-color:#f1dd18;
+    padding: 0.4rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.btFiltrer:hover{
+    transform: scale(110%);
+}
+.conteneurTabListe{
+    width: 100%;
+    height: 20rem;
+    overflow: scroll;
+}
+.tabListe{
+    all: unset;
+    display: table;
+    border-collapse: collapse;
+    margin: 0.5rem 0 0.5rem 0; 
+}
+.tabListe td{
+    border: 1px solid #aaaaaa;
+    padding: 0.3rem;
+}
+.tabListe th{
+    border: 1px solid #555555;
+    background-color: black;
+    color: white;
+}
+.tabListe tbody tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+
+
+
+
+.conteneurBtChoixHabitation{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    margin: 5rem 0rem 5rem 0rem;
+}
+.btChoixHabitation{
+    background-color: #f1dd18;
+    padding: 2rem;
+    border-radius: 20px;
+    transition: transform 0.2s ease;
+}
+.btChoixHabitation:hover{
+    transform: scale(110%) ;
+}
+
+
+
+
+
+.btDelete:hover{
+    color: red;
+    transform: scale(125%);
+}
+.btEdit:hover{
+    color: #f1dd18;
+    transform: scale(125%);
+}
+
+
+
+
 
 

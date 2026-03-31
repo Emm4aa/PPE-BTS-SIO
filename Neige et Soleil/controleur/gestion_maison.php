@@ -248,6 +248,7 @@ if(isset($_POST['filtrer'])){
 }
 
 require_once ("vue/vue_maison.php");
+
 ?>
 
 

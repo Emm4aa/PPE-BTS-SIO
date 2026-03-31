@@ -122,6 +122,7 @@ class Controleur {
         $this->unModele->updateHabitationAnnonce($tab);
     }
 
+
     //Maisons
     public function selectAllMaison(){
         return $this->unModele->selectAllMaison();
@@ -144,6 +145,10 @@ class Controleur {
 
     public function updateMaison($tab){
         $this->unModele->updateMaison($tab);
+    }
+
+    public function selectLikeMaison($filtre){
+        $this->unModele->selectLikeMaison($filtre);
     }
     
 
@@ -171,12 +176,23 @@ class Controleur {
         $this->unModele->updateAppartement($tab);
     }
 
+    public function selectLikeAppartement($filtre){
+        $this->unModele->selectLikeAppartement($filtre);
+    }
+
+    
     //Reservations
     public function insertReservation($tab){
         //controle des donnees du clients
 
         //appel du modele pour realiser l'insertion
         $this->unModele->insertReservation($tab);
+    }
+    public function insertReservationAdmin($tab){
+        //controle des donnees du clients
+
+        //appel du modele pour realiser l'insertion
+        $this->unModele->insertReservationAdmin($tab);
     }
     public function selectAllReservation(){
         return $this->unModele->selectAllReservation();
