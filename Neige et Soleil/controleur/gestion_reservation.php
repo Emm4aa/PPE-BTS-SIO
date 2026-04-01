@@ -6,10 +6,15 @@
         const demain = new Date(ajd);
         demain.setDate(demain.getDate() + 1);
         arrivee.min = ajd;
-        arrivee.value = ajd;
-        depart.min = demain.toISOString().split('T')[0];
-        depart.value = demain.toISOString().split('T')[0];
+		depart.min = demain.toISOString().split('T')[0];
 
+		if(!arrive.value){
+			arrivee.value = ajd;	
+		}
+		if(!depart.value){
+			depart.value = demain.toISOString().split('T')[0];
+		}
+            
         
         arrivee.addEventListener('change', () => {
             depart.min = arrivee.value;  
