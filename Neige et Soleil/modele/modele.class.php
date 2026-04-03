@@ -482,11 +482,20 @@ class Modele{
     }
 
     public function deleteMaison($ref_hab){
-        $requete = "DELETE FROM contrat where ref_hab = :ref_hab;
-                    DELETE FROM maison where ref_hab = :ref_hab;";
+        $requete = "UPDATE contrat SET status_c = 'Annule' where ref_hab = :ref_hab";
+        $data = array(":ref_hab"=>$ref_hab);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+
+        $requete = "DELETE FROM contrat where ref_hab = :ref_hab;";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":ref_hab"=>$ref_hab);
-        $exe->execute($data);    
+        $exe->execute($data); 
+
+        $requete = "DELETE FROM maison where ref_hab = :ref_hab;";
+        $exe = $this->unPdo->prepare($requete);
+        $data = array(":ref_hab"=>$ref_hab);
+        $exe->execute($data); 
     }
 
     public function updateMaisonAnnonce($tab){
@@ -512,8 +521,8 @@ class Modele{
         return $exe->fetchAll();
     }
 
-    //Appartements
 
+    //Appartements
     public function selectAllAppartement(){
         $requete = "SELECT * FROM appartement;";
         $exe = $this->unPdo->prepare($requete);
@@ -579,11 +588,20 @@ class Modele{
     }
 
     public function deleteAppartement($ref_hab){
-        $requete = "DELETE FROM contrat where ref_hab = :ref_hab;
-                    DELETE FROM appartement where ref_hab = :ref_hab;";
+        $requete = "UPDATE contrat SET status_c = 'Annule' where ref_hab = :ref_hab";
+        $data = array(":ref_hab"=>$ref_hab);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+
+        $requete = "DELETE FROM contrat where ref_hab = :ref_hab;";
         $exe = $this->unPdo->prepare($requete);
         $data = array(":ref_hab"=>$ref_hab);
-        $exe->execute($data);    
+        $exe->execute($data); 
+
+        $requete = "DELETE FROM appartement where ref_hab = :ref_hab;";
+        $exe = $this->unPdo->prepare($requete);
+        $data = array(":ref_hab"=>$ref_hab);
+        $exe->execute($data); 
     }
 
     public function updateAppartementAnnonce($tab){
@@ -669,6 +687,18 @@ class Modele{
         $data = array(":ref_res"=>$ref_res);
         $exe->execute($data);    
     }
+    public function annulerReservation($ref_res){
+        $requete = "update reservation set etat_res = 'Annulee' where ref_res = :ref_res;";
+        $data = array(":ref_res"=>$ref_res);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+
+        $requete = "delete from reservation where ref_res = :ref_res;";
+        $data = array(":ref_res"=>$ref_res);
+        $exe = $this->unPdo->prepare($requete);
+        $exe->execute($data);
+    }
+
     public function selectLikeReservation($filtre){
         $requete = "select * from reservation where date_res like :filtre or nb_perso like :filtre or etat_res like :filtre or date_debut like :filtre or date_fin like :filtre;";
         $data = array(":filtre"=>"%".$filtre."%");

@@ -112,7 +112,7 @@
                 <span class="material-symbols-outlined" translate="no">visibility</span>
             </a>
         </div>
-    </div>
+    </div>  
     
     <?php endforeach; ?>
     <?php else :?>

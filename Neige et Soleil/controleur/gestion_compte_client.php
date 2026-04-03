@@ -8,7 +8,7 @@ $leClient = $unControleur->selectWhereIdClient($id);
 
 if(isset($_GET['action']) && isset($_GET['ref_res'])){
     $refRes = $_GET['ref_res'];
-    $unControleur->deleteReservation($refRes);
+    $unControleur->annulerReservation($refRes);
     $_SESSION['msg-annul-reservation'] = "Votre réservation a été annulée avec succés✅";
 }
 

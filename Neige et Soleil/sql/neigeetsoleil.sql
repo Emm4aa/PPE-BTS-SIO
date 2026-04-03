@@ -1,4 +1,4 @@
-/*** Création de la bdd ***/
+/***************************************Création de la bdd ********************************/
 drop database if exists neigeetsoleil;
 create database neigeetsoleil;
 use neigeetsoleil;
@@ -6,7 +6,7 @@ use neigeetsoleil;
 
 
 
-/*** Création des tables ***/
+/************************************* Création des tables **********************************/
 drop table if exists utilisateur;
 CREATE TABLE utilisateur (
     id_user INT AUTO_INCREMENT,
@@ -113,6 +113,7 @@ create table reservation(
     etat_res enum("Validee","En attente","Annulee"),
     id_c int(5) not null,
     ref_hab int(5) not null,
+    prix_a_payer float not null default 0,
     primary key (ref_res),
     foreign key (id_c) references client(id_c),
     foreign key (ref_hab) references habitation(ref_hab)
@@ -127,8 +128,8 @@ create table contrat(
     ref_hab int(5) not null,
     primary key (ref_c),
     foreign key (id_p) references proprietaire(id_p),
-    foreign key (ref_hab) references habitation(ref_hab)
-);
+    foreign key (ref_hab) references habitation(ref_hab),
+)ENGINE = InnoDB CHARSET = utf8mb4;;
 
 create table image(
     ref_image int(5) not null auto_increment,
@@ -164,21 +165,7 @@ alter table archiveContrat add column datehisto date;
 
 
 
-
-/*** Triggers ***/
-drop trigger if exists insert_maison;
-delimiter //
-create trigger insert_maison
-before insert on maison for each row BEGIN
-if new.ref_hab is null or new.ref_hab in (select ref_hab from habitation) or new.ref_hab = 0 
-    then
-set new.ref_hab = ifnull((select ref_hab from habitation where ref_hab >= all
-    (select ref_hab from habitation)), 0) +1 ;
-end if;
-insert into habitation values(new.ref_hab,new.type_hab,new.adr_hab,new.cp_hab,new.ville_hab,new.tarif_hab_bas,new.tarif_hab_moy,new.tarif_hab_hau,new.surface,new.id_p,new.description_hab,new.titre_hab,new.capacite_hab);
-end //
-delimiter ;
-
+/**************************************** Triggers ******************************************/
 drop trigger if exists insert_appart;
 delimiter //
 create trigger insert_appart
@@ -186,6 +173,35 @@ before insert on appartement for each row BEGIN
     if new.ref_hab is null or new.ref_hab in (select ref_hab from habitation) or new.ref_hab = 0 
     then
    set new.ref_hab = ifnull((select ref_hab from habitation where ref_hab >= all
+    (select ref_hab from habitation)), 0) +1 ;
+end if;
+insert into habitation values(new.ref_hab,new.type_hab,new.adr_hab,new.cp_hab,new.ville_hab,new.tarif_hab_bas,new.tarif_hab_moy,new.tarif_hab_hau,new.surface,new.id_p,new.description_hab,new.titre_hab,new.capacite_hab);
+end //
+delimiter ;
+
+drop trigger if exists update_appart;
+delimiter //
+create trigger update_appart
+before update on appartement for each row BEGIN
+    update habitation set ref_hab=new.ref_hab,type_hab=new.type_hab,adr_hab=new.adr_hab,cp_hab=new.cp_hab,ville_hab=new.ville_hab,tarif_hab_bas=new.tarif_hab_bas,tarif_hab_moy=new.tarif_hab_moy,tarif_hab_hau=new.tarif_hab_hau,surface=new.surface,id_p=new.id_p,description_hab=new.description_hab,titre_hab=new.titre_hab,capacite_hab=new.capacite_hab where habitation.ref_hab=new.ref_hab;
+end //
+delimiter ;
+
+drop trigger if exists delete_appart;
+delimiter //
+create trigger delete_appart
+before delete on appartement for each row BEGIN
+    delete from habitation where habitation.ref_hab=old.ref_hab;
+end //
+delimiter ;
+
+drop trigger if exists insert_maison;
+delimiter //
+create trigger insert_maison
+before insert on maison for each row BEGIN
+if new.ref_hab is null or new.ref_hab in (select ref_hab from habitation) or new.ref_hab = 0 
+    then
+set new.ref_hab = ifnull((select ref_hab from habitation where ref_hab >= all
     (select ref_hab from habitation)), 0) +1 ;
 end if;
 insert into habitation values(new.ref_hab,new.type_hab,new.adr_hab,new.cp_hab,new.ville_hab,new.tarif_hab_bas,new.tarif_hab_moy,new.tarif_hab_hau,new.surface,new.id_p,new.description_hab,new.titre_hab,new.capacite_hab);
@@ -200,50 +216,12 @@ before update on maison for each row BEGIN
 end //
 delimiter ;
 
-drop trigger if exists update_appart;
-delimiter //
-create trigger update_appart
-before update on appartement for each row BEGIN
-    update habitation set ref_hab=new.ref_hab,type_hab=new.type_hab,adr_hab=new.adr_hab,cp_hab=new.cp_hab,ville_hab=new.ville_hab,tarif_hab_bas=new.tarif_hab_bas,tarif_hab_moy=new.tarif_hab_moy,tarif_hab_hau=new.tarif_hab_hau,surface=new.surface,id_p=new.id_p,description_hab=new.description_hab,titre_hab=new.titre_hab,capacite_hab=new.capacite_hab where habitation.ref_hab=new.ref_hab;
-end //
-delimiter ;
-
 drop trigger if exists delete_maison;
 delimiter //
 create trigger delete_maison
 before delete on maison for each row BEGIN
     delete from habitation where habitation.ref_hab=old.ref_hab;
 end //
-delimiter ;
-
-drop trigger if exists delete_appart;
-delimiter //
-create trigger delete_appart
-before delete on appartement for each row BEGIN
-    delete from habitation where habitation.ref_hab=old.ref_hab;
-end //
-delimiter ;
-
-drop trigger if exists histoRes;
-delimiter //
-create trigger histoRes
-before update on reservation
-for each row 
-begin 
-INSERT INTO archiveReservation
-    values(old.ref_res,old.date_res,old.nb_perso,old.date_debut,old.date_fin,'Validee',old.id_c,old.ref_hab,curdate());
-end // 
-delimiter ;
-
-drop trigger if exists histoCon;
-delimiter //
-create trigger histoCon
-after update on contrat
-for each row 
-begin 
-    insert into archiveContrat
-        values(old.ref_c,old.status_c,old.annee_signature,old.annee_fin,old.id_p,old.ref_hab);
-end // 
 delimiter ;
 
 drop trigger if exists insert_contrat;
@@ -253,6 +231,16 @@ after insert on habitation
 for each row
 begin 
 insert into contrat values (null,'En validation',null,null,new.id_p,new.ref_hab);
+end //
+delimiter ;
+
+drop trigger if exists delete_contrat;
+delimiter //
+create trigger delete_contrat
+after delete on habitation
+for each row
+begin
+delete from contrat where contrat.ref_hab = old.ref_hab;
 end //
 delimiter ;
 
@@ -278,16 +266,6 @@ where id_p = old.id_p;
 end //
 delimiter ;
 
-drop trigger if exists formeNomsPrenomsUtilisateurUpdate;
-delimiter //
-create trigger formeNomsPrenomsUtilisateurUpdate
-before insert on utilisateur
-for each row
-begin
-set new.nom = upper(new.nom), new.prenom = capitalisation(new.prenom);
-end//
-delimiter ;
-
 drop trigger if exists formeNomsPrenomsUtilisateurInsert;
 delimiter //
 create trigger formeNomsPrenomsUtilisateurInsert
@@ -298,8 +276,17 @@ set new.nom = upper(new.nom), new.prenom = capitalisation(new.prenom);
 end//
 delimiter ;
 
-drop trigger if exists tr_insertAdmin;
+drop trigger if exists formeNomsPrenomsUtilisateurUpdate;
+delimiter //
+create trigger formeNomsPrenomsUtilisateurUpdate
+before insert on utilisateur
+for each row
+begin
+set new.nom = upper(new.nom), new.prenom = capitalisation(new.prenom);
+end//
+delimiter ;
 
+drop trigger if exists tr_insertAdmin;
 delimiter //
 create trigger tr_insertAdmin
 after insert on utilisateur
@@ -313,15 +300,67 @@ begin
 end //
 delimiter ;
 
+/* historisation contrats */
+drop trigger if exists histoContratResilieAnnule;
+delimiter //
+create trigger histoContratResilieAnnule
+after update on contrat
+for each row 
+BEGIN
+if new.status_c = 'Resilie' or new.status_c = 'Annule' 
+then
+    insert into archivecontrat
+    values(new.ref_c,new.status_c,new.annee_signature,new.annee_fin,new.id_p,
+            new.ref_hab, curdate()
+          );
+end if;
+end // 
+delimiter ;
+
+/* historisation reservations*/
+drop trigger if exists histoReservationAnnulee;
+delimiter //
+create trigger histoReservationAnnulee
+after update on reservation
+for each row
+begin
+if new.etat_res = 'Annulee'
+then insert into archivereservation
+        values(new.ref_res, new.date_res, new.nb_perso, new.date_debut, new.date_fin,
+                new.etat_res, new.id_c, new.ref_hab, new.prix_a_payer, curdate() 
+               );
+end if;
+end //
+delimiter ;
 
 
 
 
-/* fonctions*/
-drop function if exists capitalisation;
+/****************************************** events ******************************************/
+set global event_scheduler = on;
 
 delimiter //
 
+create event archiveReservationExpiree
+on schedule every 1 day
+starts curdate()
+on completion preserve
+enable
+do
+begin
+insert into archivereservation
+select *, curdate() from reservation where date_fin < curdate();
+delete from reservation where date_fin < curdate();
+
+end //
+end;
+
+
+
+
+/****************************************** fonctions ***************************************/
+drop function if exists capitalisation;
+delimiter //
 create function capitalisation(chaine varchar(50))
 returns varchar(50)
 begin
@@ -332,20 +371,16 @@ set y = substring(chaine,2);
 set x = upper(x);
 set y = lower(y);
 return concat(x,y);
-
 end//
-
 delimiter ;
 
+/***************************************** procedures ***************************************/
 
 
 
 
 
 
-
-
-/*** procedures ***/
 
 
 

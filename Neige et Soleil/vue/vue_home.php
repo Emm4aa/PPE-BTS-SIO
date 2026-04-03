@@ -49,7 +49,11 @@
                 ?>
                 <a href="index.php?page=10&ref_hab=<?= $uneHabitation['ref_hab']?>"  target="_blank">
                     <div class="cardAnnonceHabitation">
+                        <?php if($photoPcpl != null): ?>
                         <img class="imgHabitation" src="images/habitations/<?= $photoPcpl['url_photo'] ?>" alt="">
+                        <?php else : ?>
+                            <img class="imgHabitation" src="" alt="">
+                        <?php endif; ?>
                         <p><?= $uneHabitation['type_hab'];?></p>
                         <p><?= $uneHabitation['ville_hab'] ?></p>
                         <p><?= $uneHabitation['tarif_hab_moy'] ?>€ la nuit</p>

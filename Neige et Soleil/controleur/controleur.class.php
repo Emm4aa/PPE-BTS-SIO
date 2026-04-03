@@ -215,6 +215,9 @@ class Controleur {
     public function selectCountReservationValidee(){
         return $this->unModele->selectCountReservationValidee();
     }
+    public function annulerReservation($ref_res){
+        $this->unModele->annulerReservation($ref_res);
+    }
 
 
 

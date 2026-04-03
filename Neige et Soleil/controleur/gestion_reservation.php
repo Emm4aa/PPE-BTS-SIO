@@ -63,7 +63,7 @@ if(isset($_SESSION['email']) && $_SESSION['role']== 'admin'){
 		$ref_res = $_GET['ref_res'];
 
 		switch($action){
-			case "sup" : $unControleur->deleteReservation($ref_res);
+			case "sup" : $unControleur->annulerReservation($ref_res);
 										header('Location:index.php?page=5');
 										exit;
 										break;
@@ -74,6 +74,7 @@ if(isset($_SESSION['email']) && $_SESSION['role']== 'admin'){
 		}
 	}
 }
+
 
 if(isset($_POST['valider']) || isset($_POST['modifier'])){
 
